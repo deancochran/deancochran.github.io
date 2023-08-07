@@ -14,13 +14,15 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"devDependencies": {
-		"@floating-ui/dom": "^1.5.0",
+		"@aws-sdk/client-s3": "^3.386.0",
+		"@floating-ui/dom": "^1.5.1",
 		"@playwright/test": "^1.28.1",
 		"@skeletonlabs/skeleton": "^1.10.0",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.5.0",
 		"@tailwindcss/forms": "^0.5.4",
 		"@tailwindcss/typography": "^0.5.9",
+		"@types/node": "^20.4.8",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
 		"autoprefixer": "^10.4.14",
@@ -35,6 +37,7 @@
 		"sass": "^1.63.6",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.1",
+		"svelte-preprocess-import-assets": "^1.0.1",
 		"tailwindcss": "^3.3.3",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
@@ -43,6 +46,15 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@mdx-js/mdx": "^2.3.0",
+		"aws-sdk": "^2.1431.0",
+		"btoa": "^1.2.1",
+		"iconify-icon": "^1.0.8",
+		"node-fetch": "^3.3.2",
+		"rehype-slug": "^5.1.0",
+		"remark-toc": "^8.0.1",
+		"remark-unwrap-images": "^3.0.1",
+		"shiki": "^0.14.3",
 		"svelte-add": "^2023.6.28-0.0"
 	}
 }
