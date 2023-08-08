@@ -1,6 +1,6 @@
 <script lang="ts">
 	// Your selected Skeleton theme:
-	import '@skeletonlabs/skeleton/themes/theme-skeleton.css';
+	import '@skeletonlabs/skeleton/themes/theme-sahara.css';
 	
 	// This contains the bulk of Skeletons required styles:
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
@@ -61,11 +61,11 @@
 		<slot />
 		
 	<svelte:fragment slot="pageFooter">
-		<div class="bg-surface grid grid-cols-1 gap-4 p-4">
+		<div class="bg-surface grid grid-cols-1 gap-4 p-4 rounded-none">
 			<div class="col-span-1 flex items-center align-middle justify-center">
 				<hr class=" bg-current rounded-md h-1 w-full" />
 			</div>
-			<div class=" col-span-1 logo-cloud grid-cols-5 gap-2 bg-transparent">
+			<div class=" col-span-1 logo-cloud grid-cols-5 gap-2 bg-transparent rounded-none">
 				<a class="logo-item !bg-transparent hover:variant-ghost-surface rounded-md" href="https://github.com/deancochran">
 					<span> <iconify-icon icon="mdi:github" /></span>
 					<span class="hidden sm:block">Github</span>

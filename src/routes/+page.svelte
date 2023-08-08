@@ -56,7 +56,7 @@
 					<a
 						href="/blog/{post.slug}"
 						in:blur={{ delay: 100 * i, duration: 1000 }}
-						class="relative overflow-hidden snap-center shrink-0 card p-0 w-[55vw] h-[40vh] md:w-[30vw] md:h-[45vh] shadow-lg bg-cover bg-local"
+						class="relative overflow-hidden snap-center shrink-0 card p-0 w-[55vw] h-[40vh] md:w-[40vw] md:h-[45vh] shadow-lg bg-cover bg-local"
 						style="background-image: url({getImgPath(post.img_url)})"	
 
 					>
@@ -74,14 +74,14 @@
 							</section>
 							<footer class="row-span-1 card-footer !p-4 m-0 bg-current opacity-75 flex "> 
 								<div class="w-full h-full grid grid-cols-3 justify-between">
-									<div class="col-span-2 w-full h-full grid grid-row-1 overflow-scroll no-scrollbar whitespace-nowrap rounded-md">
+									<div class="col-span-3 sm:col-span-2 w-full h-full grid grid-row-1 no-scrollbar overflow-auto touch-auto scroll-smooth  whitespace-nowrap rounded-md">
 										<div class="row-span-1 w-full h-full flex align-middle gap-1 rounded-md">
 											{#each post.categories as category, i}
-												<a href='/blog/categories/{category}' class="flex-inline overscroll-contain py-2 min-w-[4px] chip font-bold text-lg variant-filled">{category}</a>
+												<a href='/blog/categories/{category}' class=" flex-inline py-2 min-w-[4px] chip font-bold text-lg variant-filled">{category}</a>
 											{/each}
 										</div>
 									</div>
-									<div class="w-full h-full col-span-1">
+									<div class="w-full h-full hidden sm:flex sm:col-span-1">
 										<h1 class="w-full h-full text-xl font-bold text-surface-100 dark:text-surface-900  flex items-center align-middle justify-end  text-right">
 											{post.date} 
 										</h1>

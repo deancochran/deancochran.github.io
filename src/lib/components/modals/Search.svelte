@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { shortenText } from '$lib/utils/blog/formatting';
 	import { getBlogPosts, type Post } from '$lib/utils/blog/posts';
 	import { InputChip, LightSwitch, modalStore } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
@@ -8,7 +9,7 @@
 		'card bg-surface-100/60 dark:bg-surface-500/30 backdrop-blur-lg overflow-hidden w-full max-w-[800px] shadow-xl mt-8 mb-auto';
 	const cHeader = 'bg-surface-300-600-token flex items-center';
 	const cSearchInput =
-		'bg-transparent border-0 ring-0 focus:ring-0 w-full p-2 m-0 text-lg !rounded-none';
+		'bg-transparent border-0 ring-0 focus:ring-0 w-full p-2 px-4 m-0 text-lg !rounded-none';
 	const cResults = 'overflow-x-auto max-h-[480px] hide-scrollbar';
 	const cResultAnchor =
 		'!rounded-none justify-between hover:!variant-filled-primary focus:!variant-filled-primary outline-0';
@@ -57,9 +58,6 @@
 		}
 	}
 
-	function shortenText(description: string, limit: number) {
-		return description.slice(0, limit) + '... ';
-	}
 </script>
 
 <div bind:this={elemDocSearch} class="modal-search {cBase}">
@@ -97,7 +95,7 @@
 										<!-- <i class="fa-regular fa-file" /> -->
 										<span class=" w-full h-full pt-1 pr-1	"> <iconify-icon icon="ic:round-newspaper" /></span>
 										<span class="flex flex-inline font-bold opacity-75 max-w-full"
-											>{shortenText(post.description, 50)}</span
+											>{shortenText(post.title, 25)}</span
 										>
 									</div>
 									<div class="flex flex-inline items-center text-xs opacity-50">/blog/{post.slug}</div>
