@@ -1,7 +1,7 @@
 
 import { json } from '@sveltejs/kit'
 
-export type Categories = 'sveltekit' | 'svelte'
+export type Categories = 'sveltekit' | 'svelte' | 'typescript' | 'aws' | 'skeleton' | 's3' | 'route53' | 'cloudfront'
 
 async function getBlogPaths() {
 	const paths = import.meta.glob('/src/lib/blog/content/*.md', { eager: true })
@@ -16,7 +16,7 @@ export type Post = {
 	date: string
 	categories: Categories[]
 	published: boolean
-	hero_img:string|undefined
+	img_url:string|undefined
 }
 
 export async function getBlogPosts() {

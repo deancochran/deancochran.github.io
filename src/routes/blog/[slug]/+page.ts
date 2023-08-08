@@ -1,6 +1,7 @@
+import type { Post } from '$lib/utils/blog/posts'
 import { error } from '@sveltejs/kit'
 
-export async function load({ params }) {
+export async function load({ params} ):Promise<{content:any, meta:Post}> {
 	try {
        const post = await import(`../../../lib/blog/content/${params.slug}.md`)
 
