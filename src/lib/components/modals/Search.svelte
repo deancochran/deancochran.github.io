@@ -4,6 +4,8 @@
 	import { InputChip, LightSwitch, modalStore } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
 
+	export let parent;
+
 	// Classes
 	const cBase =
 		'card bg-surface-100/60 dark:bg-surface-500/30 backdrop-blur-lg overflow-hidden w-full max-w-[800px] shadow-xl mt-8 mb-auto';
@@ -12,7 +14,7 @@
 		'bg-transparent border-0 ring-0 focus:ring-0 w-full p-2 px-4 m-0 text-lg !rounded-none';
 	const cResults = 'overflow-x-auto max-h-[480px] hide-scrollbar';
 	const cResultAnchor =
-		'!rounded-none justify-between hover:!variant-filled-primary focus:!variant-filled-primary outline-0';
+		'rounded-none justify-between hover:!variant-filled-primary focus:!variant-filled-primary outline-0';
 	const cFooter = '';
 
 	// Local
@@ -90,7 +92,7 @@
 							}}
 						>
 							<div class="grid grid-cols-1 w-full h-full">
-								<div class="flex w-full h-full col-span-1 justify-between">
+								<div class="flex w-full h-full col-span-1 rounded-none justify-between">
 									<div class="flex flex-inline items-center">
 										<!-- <i class="fa-regular fa-file" /> -->
 										<span class=" w-full h-full pt-1 pr-1	"> <iconify-icon icon="ic:round-newspaper" /></span>

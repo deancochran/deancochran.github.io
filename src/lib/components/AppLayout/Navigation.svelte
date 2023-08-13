@@ -23,26 +23,26 @@
 		};
 		modalStore.trigger(modal);
 	}
-	// Keyboard Shortcut (CTRL/⌘+K) to Focus Search
-	function onWindowKeydown(e: KeyboardEvent): void {
-		if ((e.key == 'Escape' )) {
-			// Prevent default browser behavior of focusing URL bar
-			e.preventDefault();
-			// If modal currently open, close modal (allows to open/close search with CTRL/⌘+K)
-			$modalStore.length ? modalStore.close() : triggerSearch();
-		}
-	}
+	// // Keyboard Shortcut (CTRL/⌘+K) to Focus Search
+	// function onWindowKeydown(e: KeyboardEvent): void {
+	// 	if ((e.key == 'Escape' )) {
+	// 		// Prevent default browser behavior of focusing URL bar
+	// 		e.preventDefault();
+	// 		// If modal currently open, close modal (allows to open/close search with CTRL/⌘+K)
+	// 		$modalStore.length ? modalStore.close() : triggerSearch();
+	// 	}
+	// }
 
 	
 
 
 </script>
 <!-- NOTE: using stopPropagation to override Chrome for Windows search shortcut -->
-<svelte:window on:keydown|stopPropagation={onWindowKeydown} />
+<!-- <svelte:window on:keydown|stopPropagation={onWindowKeydown} /> -->
 <div class="md:inline">
 	<button class="btn variant-soft hover:variant-soft-primary" on:click={triggerSearch}>		
 		<span class=" h3 w-full h-full -mb-1"> <iconify-icon icon="material-symbols:search" /></span>
-		<span class="hidden md:visible h3 text-lg md:inline-block badge variant-soft">Esc</span>
+		<span class="hidden md:visible h3 text-lg md:inline-block">Search</span>
 	</button>
 </div>
 <div class="hidden md:flex">

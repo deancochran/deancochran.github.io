@@ -21,9 +21,9 @@ const mdsvexOptions = {
 			return `{@html \`${html}\` }`
 		}
 	},
-	// layout: {
-	// 	_: './src/lib/blog/mdsvex-layout.svelte'
-	// },
+	layout: {
+		_: "src/lib/components/blog/PostLayout.svelte",
+	},
 	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true }]],
 	rehypePlugins: [rehypeSlug]
 }

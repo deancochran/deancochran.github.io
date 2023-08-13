@@ -107,5 +107,12 @@
 		"track",
 		"width",
 		"zIndex"
-	]
+	],
+	"cSpell.language": "en",
+	"cSpell.words": [
+		"deancochran"
+	],
+	"css.customData": [".vscode/tailwind.json"],
+	"scss.lint.unknownAtRules": "ignore"
+
 }
