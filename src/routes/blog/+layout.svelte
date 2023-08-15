@@ -24,7 +24,6 @@ import { page } from "$app/stores";
 <div class="relative p-4 hidden sm:flex">
     <ol class="breadcrumb">
       {#each crumbs as crumb, i}
-          <!-- If crumb index is less than the breadcrumb length minus 1 -->
           {#if i < crumbs.length - 1}
               <li class="crumb"><a class="anchor font-semibold text-lg" href={crumb.href}>{crumb.label}</a></li>
               <li class="crumb-separato text-lg" aria-hidden>&rsaquo;</li>

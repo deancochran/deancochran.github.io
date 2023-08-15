@@ -49,9 +49,11 @@
 
   import { fly } from "svelte/transition";
   import { MetaTags } from 'svelte-meta-tags';
+  import { page } from "$app/stores";
   
 
-
+  
+  
   export let data;
 </script>
 
@@ -123,14 +125,8 @@
     </AppBar>
   </svelte:fragment>
 
-  {#key data.url}
-    <div
-      in:fly={{ duration: 300, delay: 300 }}
-      out:fly={{ duration: 300 }}
-    >
-      <slot />
-    </div>
-  {/key}
+
+    <slot />
 
   <svelte:fragment slot="pageFooter">
     <div class="bg-surface grid grid-cols-1 gap-4 p-4 rounded-none">

@@ -13,9 +13,13 @@ export function getImgPath(path='/profile.jpeg') {
     return  res
 }
 
-export function shortenText(val:string, limit:number){
-	if(val.length>limit){
-		return val.slice(0,limit-1)+'...'
+export function shortenText(val:string, limit:number|undefined=undefined){
+	if(limit){
+		if(val.length>limit){
+			return val.slice(0,limit-1)+'...'
+		}else{
+			return val
+		}
 	}else{
 		return val
 	}

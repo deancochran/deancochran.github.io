@@ -6,9 +6,12 @@ date: '2023-8-7'
 categories:
   - sveltekit
   - svelte
-  - aws
-  - s3
   - typescript
+  - aws
+  - skeleton
+  - s3
+  - route53
+  - cloudfront
 published: true
 img_url: "/profile_headshot.jpeg"
 ---
