@@ -35,9 +35,7 @@
 
   // storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
 
-  function scrollHandler(event: ComponentEvents<AppShell>["scroll"]) {
-    // console.log(event.currentTarget.scrollTop);
-  }
+  function scrollHandler(event: ComponentEvents<AppShell>["scroll"]) {}
 
   // Registered list of Components for Modals
   const modalComponentRegistry: Record<string, ModalComponent> = {
@@ -48,53 +46,49 @@
   };
 
   import { fly } from "svelte/transition";
-  import { MetaTags } from 'svelte-meta-tags';
+  import { MetaTags } from "svelte-meta-tags";
   import { page } from "$app/stores";
-  
 
-  
-  
-  export let data;
+  // export let data;
 </script>
 
 <MetaTags
   title="Using More of Config"
-  titleTemplate=", by Dean Cochran"
+  titleTemplate="Dean Cochran"
   description="This example uses more of the available config options."
   canonical="https://www.canonical.ie/"
   openGraph={{
-    url: 'https://www.url.ie/a',
-    title: 'Open Graph Title',
-    description: 'Open Graph Description',
+    url: "https://www.url.ie/a",
+    title: "Open Graph Title",
+    description: "Open Graph Description",
     images: [
       {
-        url: 'https://www.example.ie/og-image-01.jpg',
+        url: "https://www.example.ie/og-image-01.jpg",
         width: 800,
         height: 600,
-        alt: 'Og Image Alt'
+        alt: "Og Image Alt",
       },
       {
-        url: 'https://www.example.ie/og-image-02.jpg',
+        url: "https://www.example.ie/og-image-02.jpg",
         width: 900,
         height: 800,
-        alt: 'Og Image Alt Second'
+        alt: "Og Image Alt Second",
       },
-      { url: 'https://www.example.ie/og-image-03.jpg' },
-      { url: 'https://www.example.ie/og-image-04.jpg' }
+      { url: "https://www.example.ie/og-image-03.jpg" },
+      { url: "https://www.example.ie/og-image-04.jpg" },
     ],
-    site_name: 'SiteName'
+    site_name: "SiteName",
   }}
   twitter={{
-    handle: '@handle',
-    site: '@site',
-    cardType: 'summary_large_image',
-    title: 'Using More of Config',
-    description: 'This example uses more of the available config options.',
-    image: 'https://www.example.ie/twitter-image.jpg',
-    imageAlt: 'Twitter image alt'
+    handle: "@handle",
+    site: "@site",
+    cardType: "summary_large_image",
+    title: "Using More of Config",
+    description: "This example uses more of the available config options.",
+    image: "https://www.example.ie/twitter-image.jpg",
+    imageAlt: "Twitter image alt",
   }}
 />
-
 
 <!-- Overlays -->
 <Modal components={modalComponentRegistry} />
@@ -112,8 +106,6 @@
       slotDefault="place-self-start"
       slotTrail="place-content-end"
       shadow=""
-      
-      
     >
       <svelte:fragment slot="lead">
         <NavigationLogo />
@@ -125,8 +117,7 @@
     </AppBar>
   </svelte:fragment>
 
-
-    <slot />
+  <slot />
 
   <svelte:fragment slot="pageFooter">
     <div class="bg-surface grid grid-cols-1 gap-4 p-4 rounded-none">
