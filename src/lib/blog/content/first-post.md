@@ -157,7 +157,6 @@ This renders a counter component inside your Markdown.
 
 Media inside the /static folder is served from `/`. But won't display when using a markdown preview tool
 
-![Svelte](favicon.png)
 ```
 
 You can also import a Markdown post as a svelte module and render it with `svelte:component`. More on `svelte:component` can be found [here](https://svelte.dev/docs/special-elements#svelte-component).
