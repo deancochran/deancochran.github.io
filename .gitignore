@@ -28,7 +28,7 @@ vite.config.ts.timestamp-*
 **/charts
 **/docker-compose*
 **/compose*
-**/Dockerfile*
+# **/Dockerfile*
 **/node_modules
 **/npm-debug.log
 **/obj

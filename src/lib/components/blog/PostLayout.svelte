@@ -1,10 +1,10 @@
 <script type="ts">
-  export let title;
-  export let description;
-  export let date;
-  export let categories;
-  export let published;
-  export let img_url;
+  // export let title;
+  // export let description;
+  // export let date;
+  // export let categories;
+  // export let published;
+  // export let img_url;
 </script>
 
 <div id="content">
@@ -41,7 +41,7 @@
     @apply pb-4;
   }
   #content :global(pre) {
-    @apply my-4 mb-8 rounded-lg p-4 shadow-secondary-500 shadow-md overflow-auto hide-scrollbar;
+    @apply my-4 mb-8 rounded-lg p-4 shadow-secondary-500 shadow-md overflow-auto;
   }
   #content :global(code) {
     @apply text-primary-500;
