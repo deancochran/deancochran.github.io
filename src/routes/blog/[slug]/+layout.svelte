@@ -1,31 +1,52 @@
 <script lang="ts">
-    import type { LayoutData } from './$types';
-	import { formatDate } from '$lib/utils/blog/formatting';
-    export let data: LayoutData;
+  import { page } from "$app/stores";
+  import { MetaTags } from "svelte-meta-tags";
+  import { onMount } from "svelte";
+  import { localStorageStore } from "@skeletonlabs/skeleton";
+  import { blogPostStore } from "$lib/stores/blog";
+  import { get, type Writable } from "svelte/store";
+
+  let data = $page.data;
 </script>
 
-<!-- SEO -->
-<!-- <svelte:head>
-	<title>{data.meta.title}</title>
-	<meta property="og:type" content="article" />
-	<meta property="og:title" content={data.meta.title} />
-</svelte:head> -->
-
-<article>
-  <!-- Title -->
-	<hgroup>
-		<h1>{data.meta.title}</h1>
-		<p>Published at {formatDate(data.meta.date)}</p>
-	</hgroup>
-
-  <!-- Tags -->
-	<div class="tags">
-		{#each data.meta.categories as category}
-			<span class="surface-4">&num;{category}</span>
-		{/each}
-	</div>
-
-    <slot/>
-</article>
-
-
+<MetaTags
+  title={data.meta.title}
+  titleTemplate="{data.meta.title}, by Dean Cochran"
+  description={data.meta.description}
+  canonical="https://www.deancochran.net/blog/{data.meta.slug}"
+  openGraph={{
+    url: "https://www.deancochran.net/blog/{data.meta.slug}",
+    title: data.meta.title,
+    description: data.meta.description,
+    // images: [
+    // USE a utility function that build image paths and loop through them onMount.
+    //  Make a array of obj of those paths for this
+    //
+    // {
+    // 	url: 'https://www.example.ie/og-image-01.jpg',
+    // 	width: 800,
+    // 	height: 600,
+    // 	alt: 'Og Image Alt'
+    // },
+    // {
+    // 	url: 'https://www.example.ie/og-image-02.jpg',
+    // 	width: 900,
+    // 	height: 800,
+    // 	alt: 'Og Image Alt Second'
+    // },
+    // { url: 'https://www.example.ie/og-image-03.jpg' },
+    // { url: 'https://www.example.ie/og-image-04.jpg' }
+    // ],
+    site_name: "Dean Cochran's Portfolio",
+  }}
+  twitter={{
+    handle: "@deancochran_",
+    // site: '@site',
+    cardType: "summary_large_image",
+    title: data.meta.title,
+    description: data.meta.description,
+    // image: 'https://www.example.ie/twitter-image.jpg', GET URL PATH NAME
+    imageAlt: data.meta.title,
+  }}
+/>
+<slot />
