@@ -9,7 +9,10 @@ export type Categories =
   | "skeleton"
   | "s3"
   | "route53"
-  | "cloudfront";
+  | "cloudfront"
+  | "spanish"
+  | "beginner"
+  | "learning";
 export const category_list: string[] = [
   "sveltekit",
   "svelte",
@@ -19,6 +22,9 @@ export const category_list: string[] = [
   "s3",
   "route53",
   "cloudfront",
+  "spanish",
+  "beginner",
+  "learning",
 ];
 
 export type Post = {
