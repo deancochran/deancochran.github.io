@@ -66,7 +66,8 @@ COPY --from=build /usr/src/deancochran/build ./build
 
 
 # Expose the port that the application listens on.
-# EXPOSE 5173
+EXPOSE 80
+ENV PORT 80
 
 # Run the application.
-CMD ["node","./build/index.js"]
+CMD ["node","build/index.js"]
