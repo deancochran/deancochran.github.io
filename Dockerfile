@@ -31,7 +31,8 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 # Create a stage for building the application.
 FROM deps as build
 
-RUN npm install -g npm@latest
+# RUN npm install -g npm@latest
+RUN npm i npm
 
 # Download additional development dependencies before building, as some projects require
 # "devDependencies" to be installed to build. If you don't need this, remove this step.
