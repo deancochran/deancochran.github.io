@@ -76,3 +76,28 @@ export async function getBlogPosts(search_categories: string[] = []) {
 
   return json(posts);
 }
+
+export async function getAPost() {
+  let posts: Post[] = [];
+
+  const paths = await getBlogPaths();
+  for (const path in paths) {
+    const file = paths[path];
+    const slug = path.split("/").at(-1)?.replace(".md", "");
+
+    if (file && typeof file === "object" && "metadata" in file && slug) {
+      const metadata = file.metadata as Omit<Post, "slug">;
+      const post: Post = { ...metadata, slug };
+      if(post.published==true){
+        posts.push(post);
+      }
+    }
+  }
+
+  posts = posts.sort(
+    (first, second) =>
+      new Date(second.date).getTime() - new Date(first.date).getTime()
+  );
+
+  return json(posts.at(0));
+}

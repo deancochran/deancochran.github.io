@@ -1,19 +1,19 @@
 <script lang="ts">
   import { getImgPath, shortenText } from "$lib/utils/blog/formatting";
-  import { getBlogPosts, type Post } from "$lib/utils/blog/posts";
+  import { getAPost, type Post } from "$lib/utils/blog/posts";
   import { blur } from "svelte/transition";
   import { onMount } from "svelte";
   import { onDestroy } from "svelte";
   import PostDisplayCard from "$lib/components/blog/PostDisplayCard.svelte";
 
-  let posts: Array<Post> = [];
+  let post: Post;
 
   let show_placeholders = false;
   let showPosts: boolean = false;
 
   const fetchData = async () => {
-    const res = await getBlogPosts();
-    posts = await res.json();
+    const res = await getAPost();
+    post = await res.json();
     show_placeholders = false;
   };
 
@@ -44,18 +44,16 @@
             on:outroend={() => {
               showPosts = true;
             }}
-            in:blur={{ delay: 300 * i, duration: 300 }}
-            out:blur={{ duration: 301 }}
+            in:blur={{ delay: 600 * i, duration: 600 }}
+            out:blur={{ duration: 600 }}
             class="placeholder animate-pulsesnap-center shrink-0 p-0 w-[60vw] h-[30vw] bg-surface-300 rounded-md shadow-lg drop-shadow-lg"
           />
         {/each}
       {:else if showPosts}
-        {#each posts as post, i}
-          <PostDisplayCard
-            meta={post}
-            classes="relative w-[60vw] h-fit md:w-[50vw] md:h-fit"
-          />
-        {/each}
+        <PostDisplayCard
+          meta={post}
+          classes="relative w-[60vw] h-fit md:w-[50vw] md:h-fit"
+        />
       {/if}
     </div>
   </div>

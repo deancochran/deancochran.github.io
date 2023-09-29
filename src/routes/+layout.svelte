@@ -45,11 +45,29 @@
     // exampleImage: { ref: ModalExampleImage }
   };
 
-  import { fly } from "svelte/transition";
+  import { fade, fly, slide, blur } from "svelte/transition";
+  import { cubicIn, cubicOut } from 'svelte/easing'
   import { MetaTags } from "svelte-meta-tags";
   import { page } from "$app/stores";
 
-  // export let data;
+  let crumbs: Array<{ label: string; href: string }> = [];
+  $: {
+    // Remove zero-length tokens.
+    const tokens = $page.url.pathname.split("/").filter((t) => t !== "");
+
+    // Create { label, href } pairs for each token.
+    let tokenPath = "";
+    crumbs = tokens.map((t) => {
+      tokenPath += "/" + t;
+      t = t.charAt(0).toUpperCase() + t.slice(1);
+      return { label: t, href: tokenPath };
+    });
+
+    // Add a way to get home too.
+    crumbs.unshift({ label: "Home", href: "/" });
+  }
+
+  export let data;
 </script>
 
 <MetaTags
@@ -117,7 +135,34 @@
     </AppBar>
   </svelte:fragment>
 
-  <slot />
+  {#key data.pathname}
+    <div 
+    in:fade={{ easing: cubicOut, duration: 300, delay: 1000 }}
+    out:fade={{ easing: cubicIn, duration:300}}
+     >
+      <div class="relative p-4 hidden sm:flex">
+        <ol class="breadcrumb">
+          {#if crumbs.length > 1}
+            {#each crumbs as crumb, i}
+              {#if i < crumbs.length - 1}
+                <li class="crumb">
+                  <a class="anchor font-semibold text-lg" href={crumb.href}
+                    >{crumb.label}</a
+                  >
+                </li>
+                <li class="crumb-separato text-lg" aria-hidden>&rsaquo;</li>
+              {:else}
+                <li class="crumb text-lg font-serif">{crumb.label}</li>
+              {/if}
+            {/each}
+          {/if}
+        </ol>
+      </div>
+
+
+      <slot />
+    </div>
+  {/key}
 
   <svelte:fragment slot="pageFooter">
     <div class="bg-surface grid grid-cols-1 gap-4 p-4 rounded-none">
