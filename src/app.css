@@ -1,0 +1,18 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+html {
+	@apply m-0 h-full p-0 transition-all duration-200;
+}
+
+body {
+	@apply min-h-full overscroll-none;
+}
+
+pre {
+	@apply overflow-x-auto overflow-y-hidden p-4;
+}
+pre button {
+	@apply absolute top-2;
+}
