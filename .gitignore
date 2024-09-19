@@ -20,5 +20,8 @@ Thumbs.db
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
+# Bun
+bun.lockb
+
 # Obsidian
 .obsidian/
