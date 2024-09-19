@@ -55,7 +55,7 @@ The folder contains a `+page.ts`, to find and load the post, then `+page.svelte`
 
 #### In Depth with Markdown Editors and Markdown preprocessors
 
-As noted I use a mardown editor to take notes. It allows me to _just write_ without worry of the actual end user interface. Notably svelte does **not** render markdown files without additional configuration.
+As noted I use a markdown editor to take notes. It allows me to _just write_ without worry of the actual end user interface. Notably svelte does **not** render markdown files without additional configuration.
 This additional configuration needed. Takes files in markdown format `.md` and parses them into a readable `html` string.
 
 A markdown preprocessor turns:
