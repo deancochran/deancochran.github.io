@@ -1,4 +1,5 @@
 import { transformerCopyButton } from '@rehype-pretty/transformers';
+import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsvex } from 'mdsvex';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -6,8 +7,6 @@ import rehypeSlug from 'rehype-slug';
 import remarkToc from 'remark-toc';
 import remarkUnwrapImages from 'remark-unwrap-images';
 import { codeToHtml } from 'shiki';
-// import adapter from 'svelte-adapter-bun';
-import adapter from '@sveltejs/adapter-static';
 
 const theme = 'github-dark';
 async function customHighlight(code, lang) {
@@ -54,7 +53,7 @@ const config = {
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter({
 			pages: 'dist',
-			strict: false
+			fallback: 'index.html'
 		}),
 		prerender: {
 			crawl: true

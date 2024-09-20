@@ -1,6 +1,6 @@
 import { getPosts } from '$lib/utils/getPosts';
 import { json, type RequestEvent, type RequestHandler } from '@sveltejs/kit';
-
+export const prerender = true;
 type CustomResponse = Response & {
 	json: () => Promise<
 		(BlogPost & {
