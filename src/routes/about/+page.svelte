@@ -26,6 +26,12 @@
 			high-quality work. This balance fuels my creativity and keeps me at my best.
 		</p>
 
-		<p>Thanks for stopping by—feel free to connect or explore my work further! If you enjoyed this page or found it helpful, consider donating to support future content <a class="anchor" href="https://buymeacoffee.com/deancochran">here</a>.</p>
+		<p>
+			Thanks for stopping by—feel free to connect or explore my work further! If you enjoyed this
+			page or found it helpful, consider donating to support future content <a
+				class="anchor"
+				href="https://buymeacoffee.com/deancochran">here</a
+			>.
+		</p>
 	</article>
 </div>

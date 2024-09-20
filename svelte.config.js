@@ -55,7 +55,10 @@ const config = {
 		adapter: adapter({
 			pages: 'dist',
 			strict: false
-		})
+		}),
+		prerender: {
+			crawl: true
+		}
 	}
 };
 

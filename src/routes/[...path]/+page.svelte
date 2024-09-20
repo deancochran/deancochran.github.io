@@ -13,11 +13,7 @@
 		<p class="opacity-60">
 			{data.meta.description}
 		</p>
-		<Image
-			src={data.meta.image}
-			alt={data.meta.title}
-			loading="eager"
-		/>
+		<Image src={data.meta.image} alt={data.meta.title} loading="eager" />
 	</header>
 
 	<br />

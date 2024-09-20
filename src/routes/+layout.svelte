@@ -75,8 +75,7 @@
 						<a href="https://twitter.com/deancochran_"
 							><LucideTwitter size={20} class="font-light" /></a
 						>
-						<a href="https://buymeacoffee.com/deancochran">
-							<BmcLogo /></a>
+						<a href="https://buymeacoffee.com/deancochran"> <BmcLogo /></a>
 					</div>
 				</div>
 			</div>

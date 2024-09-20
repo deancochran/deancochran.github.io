@@ -3,7 +3,6 @@
 </div>
 
 <style lang="postcss">
-	
 	#post {
 		:global(h1) {
 			@apply h1;
@@ -32,7 +31,6 @@
 			@apply blockquote;
 		}
 
-		
 		:global(li) {
 			@apply m-0 p-0 py-1;
 		}
