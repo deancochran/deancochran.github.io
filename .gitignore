@@ -27,3 +27,6 @@ vite.config.ts.timestamp-*
 
 # terraform
 infra/
+
+# static production files
+dist/
