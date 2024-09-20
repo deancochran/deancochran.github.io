@@ -6,7 +6,8 @@ import rehypeSlug from 'rehype-slug';
 import remarkToc from 'remark-toc';
 import remarkUnwrapImages from 'remark-unwrap-images';
 import { codeToHtml } from 'shiki';
-import adapter from 'svelte-adapter-bun';
+// import adapter from 'svelte-adapter-bun';
+import adapter from '@sveltejs/adapter-static';
 
 const theme = 'github-dark';
 async function customHighlight(code, lang) {
@@ -51,7 +52,10 @@ const config = {
 		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
 		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
-		adapter: adapter()
+		adapter: adapter({
+			pages: 'dist',
+			strict: false
+		})
 	}
 };
 

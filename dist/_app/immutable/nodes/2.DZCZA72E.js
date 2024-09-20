@@ -1,0 +1,1 @@
+import{b as e,t as r}from"../chunks/disclose-version.BffXv8gN.js";import{Y as p,_ as d}from"../chunks/runtime.fPXvfd0O.js";import{s as i,d as l}from"../chunks/misc.C2ru6DeU.js";var m=r('<div id="post" class="svelte-13bgpeh"><!></div>');function c(t,a){var o=m(),s=p(o);i(s,l(a),{}),d(o),e(t,o)}export{c as component};

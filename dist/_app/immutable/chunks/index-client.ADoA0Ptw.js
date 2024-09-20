@@ -1,0 +1,1 @@
+import{F as o,G as e,J as c,K as u}from"./runtime.fPXvfd0O.js";function a(n){o===null&&e(),o.l!==null?i(o).m.push(n):c(()=>{const t=u(n);if(typeof t=="function")return t})}function r(n){o===null&&e(),a(()=>()=>u(n))}function i(n){var t=n.l;return t.u??(t.u={a:[],b:[],m:[]})}export{r as a,a as o};
