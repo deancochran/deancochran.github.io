@@ -1,17 +1,3 @@
-import a from './a.svelte';
-import blockquote from './blockquote.svelte';
-import code from './code.svelte';
-import del from './del.svelte';
-import h1 from './h1.svelte';
-import h2 from './h2.svelte';
-import h3 from './h3.svelte';
-import h4 from './h4.svelte';
 import img from './img.svelte';
-import ins from './ins.svelte';
-import kbd from './kbd.svelte';
-import li from './li.svelte';
-import ol from './ol.svelte';
-import p from './p.svelte';
-import pre from './pre.svelte';
-import ul from './ul.svelte';
-export { a, blockquote, code, del, h1, h2, h3, h4, img, ins, kbd, li, ol, p, pre, ul };
+
+export { img };

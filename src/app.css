@@ -7,12 +7,23 @@ html {
 }
 
 body {
-	@apply min-h-full overscroll-none;
+	@apply min-h-full overscroll-none scroll-smooth;
 }
 
-pre {
-	@apply overflow-x-auto overflow-y-hidden p-4;
+code {
+	@apply code;
 }
+pre {
+	@apply pre p-4 text-xs;
+}
+
 pre button {
-	@apply absolute top-2;
+	@apply btn-icon absolute top-2 m-0;
+}
+pre button ready {
+	@apply stroke-white;
+}
+
+pre button success {
+	@apply stroke-green-400;
 }

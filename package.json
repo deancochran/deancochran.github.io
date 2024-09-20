@@ -46,6 +46,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"lucide-svelte": "^0.439.0"
+		"lucide-svelte": "^0.439.0",
+		"rehype-autolink-headings": "^7.1.0"
 	}
 }

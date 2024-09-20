@@ -1,11 +1,11 @@
+import { transformerCopyButton } from '@rehype-pretty/transformers';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsvex } from 'mdsvex';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import remarkToc from 'remark-toc';
 import remarkUnwrapImages from 'remark-unwrap-images';
 import { codeToHtml } from 'shiki';
-// import { addCopyButton } from 'shiki-transformer-copy-button';
-import { transformerCopyButton } from '@rehype-pretty/transformers';
 import adapter from 'svelte-adapter-bun';
 
 const theme = 'github-dark';
@@ -15,7 +15,8 @@ async function customHighlight(code, lang) {
 		transformers: [
 			transformerCopyButton({
 				visibility: 'always',
-				feedbackDuration: 3_000
+				feedbackDuration: 3_000,
+				copyIcon: '/icons/copy.svg'
 			})
 		],
 		theme
@@ -36,7 +37,7 @@ const mdsvexOptions = {
 		}
 	},
 	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true, maxDepth: 3 }]],
-	rehypePlugins: [rehypeSlug]
+	rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings]
 };
 
 /** @type {import('@sveltejs/kit').Config} */
