@@ -3,11 +3,11 @@
 @import 'tailwindcss/utilities';
 
 html {
-	@apply m-0 h-full p-0 transition-all duration-200;
+	@apply m-0 h-full scroll-smooth p-0 transition-all duration-200;
 }
 
 body {
-	@apply min-h-full overscroll-none scroll-smooth;
+	@apply min-h-full overscroll-none;
 }
 
 code {
@@ -19,11 +19,4 @@ pre {
 
 pre button {
 	@apply btn-icon absolute top-2 m-0;
-}
-pre button ready {
-	@apply stroke-white;
-}
-
-pre button success {
-	@apply stroke-green-400;
 }
