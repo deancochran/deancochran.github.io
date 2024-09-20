@@ -45,7 +45,7 @@
 			class="card card-hover block overflow-hidden border border-surface-200-800 divide-surface-200-800 preset-filled-surface-100-900 active:scale-[1.01]"
 		>
 			<header class="card-header">
-				<enhanced:img src={imgSrc} class="aspect-[21/9] w-full object-fill" alt="banner" />
+				<img src={imgSrc} class="aspect-[21/9] w-full object-fill" alt="banner" />
 			</header>
 
 			<article class="space-y-4 p-4">

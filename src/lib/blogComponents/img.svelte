@@ -4,4 +4,4 @@
 	src.replace('/static', '');
 </script>
 
-<enhanced:img {src} {alt} class="max-h-[50vh] object-scale-down" loading="eager" {...$$restProps} />
+<img {src} {alt} class="max-h-[50vh] object-scale-down" loading="eager" {...$$restProps} />
