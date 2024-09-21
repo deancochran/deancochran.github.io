@@ -5,22 +5,22 @@
 <style lang="postcss">
 	#post {
 		:global(h1) {
-			@apply h1;
+			@apply h1 font-bold;
 		}
 		:global(h2) {
-			@apply h2;
+			@apply h2 font-bold;
 		}
 		:global(h3) {
-			@apply h3;
+			@apply h3 font-bold;
 		}
 		:global(h4) {
-			@apply h4;
+			@apply h4 font-bold;
 		}
 		:global(h5) {
-			@apply h5;
+			@apply h5 font-bold;
 		}
 		:global(h6) {
-			@apply h6;
+			@apply h6 font-bold;
 		}
 
 		:global(a) {

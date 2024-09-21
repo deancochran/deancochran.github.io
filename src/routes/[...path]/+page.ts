@@ -12,12 +12,12 @@ export const load: PageLoad = async (event) => {
 		}
 	}
 	if (!match) {
-		throw error(404); // Couldn't resolve the post
+		throw error(404, `Post: '${event.params.path}' not found`); // Couldn't resolve the post
 	}
 
 	const post = await match.resolver();
 	if (!post || !post.metadata.published || !post.default) {
-		throw error(404); // Couldn't resolve the post
+		throw error(404, `Post ${match.path} found, but could not be loaded`); // Couldn't resolve the post
 	}
 
 	return {

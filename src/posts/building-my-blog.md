@@ -1,5 +1,5 @@
 ---
-title: Building my Blog with Svelte, Obsidian, and Terraform
+title: Building my Blog with Sveltekit and Terraform
 slug: building-my-blog
 date: '2024-9-17'
 image: /images/logo.png
@@ -8,6 +8,8 @@ published: true;
 ---
 
 ## Contents
+
+## About my blog
 
 I decided to build a blog using tools and frameworks I’m most comfortable with. While not all of these are essential, they represent a stack that suits my workflow:
 
@@ -23,7 +25,7 @@ The maintainers of:
 - [Skeleton UI](https://www.skeleton.dev/)
 - [Mdsvex](https://mdsvex.pngwn.io/)
 
-And the Blogs of:
+And the blogs of:
 
 - [Joy of Code](https://joyofcode.xyz/)
 - [Josh Collinsworth](https://joshcollinsworth.com/)
@@ -70,10 +72,10 @@ Ensuring that all your files can be prerendered is crucial. Having dynamic conte
 
 ### Page Routing and Rendering
 
-The root of the project is in the routes/ directory. Within that, I created a folder called [...path]/ to handle routing logic for the blog. This folder contains two main files:
+The root of the project is in the `routes/` directory. Within that, I created a folder called `[...path]/` to handle routing logic for the blog. This folder contains two main files:
 
-- +page.ts: Loads and processes the posts.
-- +page.svelte: Displays the post.
+- `+page.ts`: Loads and processes the posts.
+- `+page.svelte`: Displays the post.
 
 I write my posts in markdown for faster content creation while focusing on the writing itself. SvelteKit, with the help of mdsvex, handles the transformation of markdown into renderable Svelte components.
 
@@ -114,18 +116,18 @@ I’ve kept the mdsvex configuration simple, but if you want more details, feel 
 
 #### Svelte and Markdown
 
-SvelteKit doesn’t natively render markdown without configuring a markdown processor like mdsvex. This setup allows .md files to be parsed into usable HTML strings and rendered inside Svelte components.
+SvelteKit doesn’t natively render markdown without configuring a markdown processor like mdsvex. This setup allows `.md` files to be parsed into usable HTML strings and rendered inside Svelte components.
 
 Here’s a simple example of how you can dynamically load and display markdown content in your SvelteKit app:
 
-```html
+```jsx
 // [...posts]/+page.svelte
 <script lang="ts">
 	import type { PageData } from './$types';
 	export let data: PageData;
 </script>
-<!-- data.component is `renderable` markdown content -->
-<svelte:component this="{data.component}" />
+
+<svelte:component this={data.component} />
 ```
 
 ### Skeleton UI
@@ -156,7 +158,7 @@ Once my posts are finalized in markdown, I export the files, and mdsvex takes ca
 
 Here's how you can implement the deployment and updating process using a combination of the services I've mentioned
 
-### 1. **Update Git Repository**
+### 1. Update Git Repository
 
 Push your latest changes to your Git repository using standard Git commands:
 
@@ -171,7 +173,7 @@ git commit -m "Update blog content and infrastructure"
 git push origin main
 ```
 
-### 2. **Sync S3 Bucket with Static Files**
+### 2. Sync S3 Bucket with Static Files
 
 To sync your static blog content to your S3 bucket, you can use the AWS CLI command. Replace `my-s3-bucket` with your actual S3 bucket name:
 
@@ -184,7 +186,7 @@ aws s3 sync ./dist s3://my-s3-bucket --delete
 
 This command ensures that the latest static files are uploaded to your S3 bucket, and any deleted or changed files are updated accordingly.
 
-### 3. **Invalidate CloudFront Cache**
+### 3. Invalidate CloudFront Cache
 
 To ensure that CloudFront serves the updated content, you need to invalidate its cache. This forces CloudFront to fetch the new files from the S3 bucket. Replace `your-distribution-id` with your CloudFront distribution ID:
 
@@ -195,7 +197,7 @@ aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --path
 
 This command will invalidate all the cached files so that the updated files are served immediately.
 
-### 4. **Infrastructure Changes with Terraform**
+### 4. Infrastructure Changes with Terraform
 
 If any infrastructure changes are necessary, you can apply them with Terraform. Here’s how to initialize Terraform and apply changes to your infrastructure:
 
