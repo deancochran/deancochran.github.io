@@ -18,7 +18,7 @@
 	});
 </script>
 
-<div class="w-full h-full aign-middle flex flex-row flex-wrap items-center justify-center gap-4">
+<div class="aign-middle flex h-full w-full flex-row flex-wrap items-center justify-center gap-4">
 	{#each data.posts as post}
 		<a
 			href={'/posts/' + post.relativePath}

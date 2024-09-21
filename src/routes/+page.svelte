@@ -49,7 +49,7 @@
 			<div class="flex flex-col gap-4 p-4">
 				<div class="placeholder animate-pulse p-2"></div>
 			</div>
-			<article class="flex flex-col gap-4 p-4 ">
+			<article class="flex flex-col gap-4 p-4">
 				<div class="placeholder animate-pulse"></div>
 				<div class="placeholder animate-pulse"></div>
 				<div class="placeholder animate-pulse"></div>

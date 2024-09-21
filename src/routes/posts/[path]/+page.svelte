@@ -33,7 +33,7 @@
 	<footer class="card-footer flex flex-col items-center gap-4 align-middle">
 		<div class="flex flex-row flex-wrap items-center justify-between gap-2 align-middle">
 			<h5 class="h5 w-full">{data.meta.title}</h5>
-			<div class="flex flex-row grow flex-nowrap items-center justify-between gap-2 align-middle">
+			<div class="flex grow flex-row flex-nowrap items-center justify-between gap-2 align-middle">
 				<small class="opacity-60">{new Date(data.meta.date).toDateString()}</small>
 				<!-- <button type="button" class="btn btn-icon preset-filled">
 					<Share2 />
