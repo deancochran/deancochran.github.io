@@ -56,7 +56,8 @@ const config = {
 			fallback: 'index.html'
 		}),
 		prerender: {
-			crawl: true
+			crawl: true,
+			entries: ['/api/rss']
 		}
 	}
 };
