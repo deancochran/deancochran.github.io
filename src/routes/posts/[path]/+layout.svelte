@@ -1,5 +1,6 @@
 <div id="post">
 	<slot />
+	
 </div>
 
 <style lang="postcss">

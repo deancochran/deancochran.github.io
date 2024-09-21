@@ -4,6 +4,7 @@
 	import { zod } from 'sveltekit-superforms/adapters';
 	import type { PageData } from './$types';
 	import Image from '$lib/blogComponents/img.svelte';
+	import { fade } from 'svelte/transition';
 
 	export let data: PageData;
 	const { form, enhance, delayed } = superForm(data.form, {
@@ -14,6 +15,9 @@
 		delayMs: 0,
 		timeoutMs: 5000
 	});
+	async function randomPost(): Promise<BlogPost & { relativePath: string }> {
+		return data.posts[Math.floor(Math.random() * data.posts.length)];
+	}
 </script>
 
 <form
@@ -36,9 +40,32 @@
 
 <br />
 
-<div class="flex flex-col items-center justify-center gap-4">
-	{#each data.posts as post}
+<div class="flex h-full w-full flex-col items-center justify-start gap-4 align-middle">
+	{#await randomPost()}
+		<div
+			class="card card-hover flex h-3/4 w-full flex-col justify-between gap-4 border border-surface-200-800 divide-surface-200-800 preset-filled-surface-100-900"
+		>
+			<div class="placeholder h-1/2 animate-pulse"></div>
+			<div class="flex flex-col gap-4 p-4">
+				<div class="placeholder animate-pulse p-2"></div>
+			</div>
+			<article class="flex flex-col gap-4 p-4 ">
+				<div class="placeholder animate-pulse"></div>
+				<div class="placeholder animate-pulse"></div>
+				<div class="placeholder animate-pulse"></div>
+				<div class="placeholder animate-pulse"></div>
+				<footer class="card-footer flex items-center justify-between gap-4 pt-8">
+					<div class="placeholder w-1/5 animate-pulse"></div>
+					<button type="button" class="btn preset-filled">
+						<span>Read More</span>
+						<span>&rarr;</span>
+					</button>
+				</footer>
+			</article>
+		</div>
+	{:then post}
 		<a
+			in:fade={{ duration: 300 }}
 			href={'/posts/' + post.relativePath}
 			class="card card-hover block overflow-hidden border border-surface-200-800 divide-surface-200-800 preset-filled-surface-100-900 active:scale-[1.01]"
 		>
@@ -63,5 +90,5 @@
 				</button>
 			</footer>
 		</a>
-	{/each}
+	{/await}
 </div>
