@@ -77,7 +77,7 @@
 							><LucideTwitter size={20} class="font-light" /></a
 						>
 						<a href="https://buymeacoffee.com/deancochran"> <BmcLogo /></a>
-						<a href="/api/rss"> <Rss /></a>
+						<a href="/rss.xml"> <Rss /></a>
 					</div>
 				</div>
 			</div>

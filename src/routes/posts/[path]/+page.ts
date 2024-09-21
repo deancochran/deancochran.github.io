@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-
+export const prerender = true;
 export const load: PageLoad = async (event) => {
 	const modules = import.meta.glob('/src/posts/**/*.md');
 	let match: { path?: string; resolver: MdsvexResolver } | undefined;

@@ -36,9 +36,9 @@ const render = (
 ${posts
 	.map(
 		(post) => `<item>
-<guid isPermaLink="true">${siteURL}/${post.relativePath}</guid>
+<guid isPermaLink="true">${siteURL}/posts/${post.relativePath}</guid>
 <title>${post.title}</title>
-<link>${siteURL}/${post.relativePath}</link>
+<link>${siteURL}/posts/${post.relativePath}</link>
 <description>${post.title}</description>
 <pubDate>${new Date(post.date).toUTCString()}</pubDate>
 </item>`
