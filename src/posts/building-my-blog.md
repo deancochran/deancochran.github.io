@@ -3,25 +3,44 @@ title: Building my Blog with Svelte, Obsidian, and Terraform
 slug: building-my-blog
 date: '2024-9-17'
 image: /images/logo.png
-description: Most of the websites that I would use for my personal blog don't support custom code snippets, components, and other peices of content I love. Clearly building a full blog is overkill, and not necessary for the average 'blogger'. I'm coming at this from a 'becuase I can' attitude here. Not everyone needs these solutions, but here is mine for those interested in my implementation.
+description: Most of the websites that I would use for my personal blog don't support custom code snippets, components, and other pieces of content I love. Clearly building a full blog is overkill, and not necessary for the average 'blogger'. I'm coming at this from a 'because I can' attitude here. Not everyone needs these solutions, but here is mine for those interested in my implementation.
 published: true;
 ---
 
 ## Contents
 
-I decided to build a blog with the resources, and frameworks I feel most comfortable with. Utilizing all these are not inherently necessary.
+I decided to build a blog using tools and frameworks I’m most comfortable with. While not all of these are essential, they represent a stack that suits my workflow:
 
-- **Sveltekit**: UI framework that uses a compiler to let you concise components
-- **Obsidan**: A private and flexible writing app that I use as a markdown editor
-- **Terraform**: An automation for infrastructure tool that I use to deploy and distribute my blog
+- **SvelteKit**: A UI framework that uses a compiler to help build concise, fast-loading components.
+- **Obsidian**: A private and flexible writing app that I use as my markdown editor.
+- **Buttondown**: An email platform that makes it easy to start and grow a newsletter.
+- **Terraform**: A tool for automating infrastructure, which I use to deploy and distribute my blog.
 
-In this guide I hope to outline the 'ins and outs' of my blog. Through instruction and general outlining of this project. I plan for it to serve as a reference, not only for myself as a build it, but for anyone interested in taking matters into their own hands like myself.
+As a foreword, this post is not a deep dive into the technical details of my blog’s setup. Instead, I’m outlining the project as a reference for myself and anyone interested in building a similar system. I’d like to thank the following for their valuable resources:
+
+The maintainers of:
+
+- [Skeleton UI](https://www.skeleton.dev/)
+- [Mdsvex](https://mdsvex.pngwn.io/)
+
+And the Blogs of:
+
+- [Joy of Code](https://joyofcode.xyz/)
+- [Josh Collinsworth](https://joshcollinsworth.com/)
+- [John Miller](https://john-miller.dev/)
+- [Wiktor Kowalski](https://blog.wiktorkowalski.pl/)
 
 ## Configure Sveltekit
 
-For a static blog that is capable of rendering markdown files. You'll need to configure sveltekit to use a a static site generator (SSG).
+To set up a static blog capable of rendering markdown files, I configured SvelteKit to use a static site generator (SSG).
 
-Install that sveltekit static adapter `npm i -D @sveltejs/adapter-static` , then add the adapter to your `svelte.config.js`: See more here: <https://kit.svelte.dev/docs/adapter-static>
+Start by installing the SvelteKit static adapter:
+
+```sh
+npm i -D @sveltejs/adapter-static
+```
+
+Then, add the adapter to your svelte.config.js file:
 
 ```ts
 import adapter from '@sveltejs/adapter-static';
@@ -33,105 +52,42 @@ const config = {
 	// ....
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter({
+			pages: 'dist',
+			fallback: 'index.html'
+		}),
+		prerender: {
+			crawl: true
+		}
+	}
 	}
 };
 
 export default config;
 ```
 
-### Routing Debrief
+Ensuring that all your files can be prerendered is crucial. Having dynamic content transformed into cachable static assets is a huge performance boost for the site.
 
-Ideally if recreating this implementation, you would use something similar. I use some advance routing techniques to parse through my markdown notes and render them to the page.
+### Page Routing and Rendering
 
-The root of the project is found at `routes/` inside the directory I configured a handful of things here. Notably I have a folder `[...path]/` where I store most of the routing logic for my blog.
-The folder contains a `+page.ts`, to find and load the post, then `+page.svelte` displays the loaded post.
+The root of the project is in the routes/ directory. Within that, I created a folder called [...path]/ to handle routing logic for the blog. This folder contains two main files:
 
-#### Svelte and Markdown
+- +page.ts: Loads and processes the posts.
+- +page.svelte: Displays the post.
 
-As noted I use a markdown editor to take notes. It allows me to _just write_ without worry of the actual end user interface. Notably svelte does **not** render markdown files without additional configuration.
-This additional configuration needed. Takes files in markdown format `.md` and parses them into a readable `html` string.
+I write my posts in markdown for faster content creation while focusing on the writing itself. SvelteKit, with the help of mdsvex, handles the transformation of markdown into renderable Svelte components.
 
-A markdown preprocessor turns:
+### Mdsvex
 
-```md
-<!-- post.md -->
+[mdsvex](https://mdsvex.pngwn.io/docs) is a popular Svelte package that allows you to write markdown in your Svelte components or Svelte syntax in your markdown files.
 
-# Title
+To configure mdsvex in your project, first install it:
 
-## Subtitle
-
-This is a description of a post
+```sh
+npm i --save-dev mdsvex
 ```
 
-into:
-
-```xml
-<!-- post.html -->
-<h1>Title</h1>
-<h2>Subtitle</h2>
-<p>This is a description of a post</p>
-```
-
-Svelte enables you to create logic to dyanmically import markdown posts inside your source code, process the markdown into html strings, then pass these html strings into native svelte components and render them into a web page as such.
-
-```ts
-export const load: PageLoad = async (event) => {
-	// where I mount my markdown editor
-	const modules = import.meta.glob('/src/posts/**/*.md');
-	// finding the post that has matching metadata
-	let match: { path?: string; resolver: MdsvexResolver } | undefined;
-	for (const [path, resolver] of Object.entries(modules)) {
-		// the relativePath is used for <a> tags
-		// Example:...
-		// instead of /src/posts/BlogFolder/SubFolder/post-name.md
-		// it returns BlogFolder/SubFolder/post-name.md
-		const relativePath = path.split('.')[0].split('/').slice(3).join('/');
-		if (relativePath === event.params.path) {
-			match = { path, resolver: resolver as unknown as MdsvexResolver };
-			break;
-		}
-	}
-	// throws error incase no match was found
-	if (!match) {
-		// Couldn't resolve the post
-		throw error(404); 
-	}
-
-	const post = await match.resolver();
-	// incase the content/metadata couldn't be resolved
-	if (!post || !post.metadata.published || !post.default) {
-		// Couldn't resolve the post
-		throw error(404); 
-	}
-
-	return {
-		component: post.default,
-		meta: post.metadata
-	};
-};
-```
-
-Then when rendering the html string in the form of a svelte component you can load the file as such.
-
-```jsx
-[...posts]/+page.svelte
-<script lang="ts">
- import type { PageData } from './$types';
- export let data: PageData;
-</script>
-
-
-<svelte:component this={data.component} />
-```
-
-## Mdsvex
-
-[mdsvex](https://mdsvex.pngwn.io/docs) is a popular svelte packageto use when dealing with markdown files in your svelte project. This packaged markdown preprocessor allows you to use Svelte components in your markdown, or vice versa with markdown in your Svelte components.
-
-Configuring the package isn't exhausting at all. Notably a small adjust needs to be made to the `svelte.config.ts` file.
-
-First install the package `npm i --save-dev mdsvex`, then update the corresponding svelte configuration file to use you're custom configuration (I've added mine below).
+Then, update your svelte.config.ts file:
 
 ```ts
 // svelte.config.ts
@@ -139,168 +95,122 @@ import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsvex } from 'mdsvex';
 
-
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
-	// define you're config here
+	// define you're config inside here
 };
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: ['.svelte', '.md'],
-	preprocess: [mdsvex(mdsvexOptions), vitePreprocess()],
+	preprocess: [mdsvex(mdsvexOptions), vitePreprocess()]
 
-	kit: {
-		adapter: adapter()
-	}
+	// other config stuff...
 };
 
 export default config;
 ```
 
-I've kept my configuration out of this code block to keep this post more readable. However, if you're interested you can see my source code [here](https://github.com/deancochran/deancochran/blob/main/svelte.config.js).
+I’ve kept the mdsvex configuration simple, but if you want more details, feel free to check out my full setup [here](https://github.com/deancochran/deancochran/blob/main/svelte.config.js).
 
-## Skeleton UI
+#### Svelte and Markdown
 
-[Skeleton](https://www.skeleton.dev/) integrates with Tailwind to provide opinionated solutions for themes, colors, typography and more. Including easy to use components for your favorite web frameworks. 
+SvelteKit doesn’t natively render markdown without configuring a markdown processor like mdsvex. This setup allows .md files to be parsed into usable HTML strings and rendered inside Svelte components.
 
-I use skeleton's unreleased v3 updates which are almost complete! Go support them, and checkout their nearly complete [v3 documentation](https://next.skeleton.dev/) (link is likely to expire when the updates are finished) to get started. 
+Here’s a simple example of how you can dynamically load and display markdown content in your SvelteKit app:
 
-
-
-Terraform is a tool that allows you to automate the process of building, changing, and versioning infrastructure. It provides a unified command line and configuration language (called **HCL**, or HashiCorp Configuration Language) to manage resources across multiple providers, such as AWS, Azure, Google Cloud, or even on-premise infrastructure.
-
-With Terraform, instead of manually configuring your cloud infrastructure, you write declarative configuration files that describe **what** your infrastructure should look like. Terraform will handle the rest—creating, updating, and deleting resources as needed to match the configuration.
-
-### Key Benefits of Terraform
-
-1. **Multi-Cloud Support**: One of Terraform’s greatest strengths is its ability to work with multiple cloud providers. You can manage your entire infrastructure from one place, whether you’re using AWS, Azure, or even SaaS products like GitHub.
-
-2. **Declarative Language**: Instead of writing imperative commands to create infrastructure, Terraform lets you describe the desired state of your resources. For example, you define what you want (like an EC2 instance or S3 bucket), and Terraform takes care of the how.
-
-3. **State Management**: Terraform keeps track of your infrastructure's state via a **state file**. This file is crucial for understanding the difference between your infrastructure as it exists and the desired state described in your configuration files.
-
-4. **Version Control**: Because your infrastructure is defined in code, you can track and version it just like you would with application code. This allows you to roll back changes if necessary, peer review configurations, and collaborate with others easily.
-
-## Key Concepts in Terraform
-
-### Providers
-
-Terraform uses **providers** to interact with APIs and services like AWS, Google Cloud, Azure, and more. Each provider has its own set of resources and data sources that can be managed. To start using a provider, you simply define it in your configuration.
-
-In this example, we define the AWS provider and specify the region where our resources will be deployed.
-
-### Resources
-
-Resources are the key building blocks in Terraform. These are the services or infrastructure components you want to create, modify, or delete. For example, an AWS EC2 instance, an S3 bucket, or a Google Cloud SQL instance are resources.
-
-```js
-resource "aws_instance" "example" {
-  ami           = "ami-0c55b159cbfafe1f0"
-  instance_type = "t2.micro"
-}
+```html
+// [...posts]/+page.svelte
+<script lang="ts">
+	import type { PageData } from './$types';
+	export let data: PageData;
+</script>
+<!-- data.component is `renderable` markdown content -->
+<svelte:component this="{data.component}" />
 ```
 
-Here, we are defining an EC2 instance using the `aws_instance` resource. The `"example"` is just a logical name to reference this instance later in the configuration.
+### Skeleton UI
 
-### State
+[Skeleton](https://www.skeleton.dev/) integrates with Tailwind to provide opinionated solutions for themes, colors, typography and more. Including easy to use components for your favorite web frameworks.
 
-Terraform maintains the state of your infrastructure using a **state file**. This file stores information about what Terraform manages, which helps it know what changes need to be made to bring your infrastructure up to the desired state. Managing the state properly is crucial for keeping infrastructure consistent, and the state can be stored locally or remotely.
+I use skeleton's unreleased v3 updates which are almost complete! Go support them, and checkout their nearly complete [v3 documentation](https://next.skeleton.dev/) (link is likely to expire when the updates are finished) to get started.
 
-### Modules
+## Terraform and Infrastructure as Code
 
-Modules are containers for multiple resources that are used together. They enable you to organize and reuse configurations. For example, if you frequently deploy similar configurations for different environments, like staging and production, modules allow you to define these once and reuse them across environments.
+For deployment, I rely on Terraform to automate the infrastructure setup for my blog. Here’s a breakdown of the components I use:
 
-```js
-module "vpc" {
-  source = "./modules/aws_vpc"
-  cidr_block = "10.0.0.0/16"
-}
+- **S3 Buckets**: I deploy two S3 buckets—one for storing the Terraform remote backend and another for hosting my blog’s static content. The S3 bucket efficiently serves my static assets (HTML, CSS, JavaScript).
+
+- **CloudFront Distribution**: I use Amazon CloudFront as a CDN for my blog, ensuring fast, secure delivery of content to users worldwide. It’s placed in front of my S3 bucket to speed up access times.
+
+- **Route 53 Domain Name**: Amazon Route 53 manages my DNS and domain name, allowing me to point my custom domain to the CloudFront distribution and handle HTTPS traffic seamlessly.
+
+- **Additional Infrastructure**: Terraform helps automate the provisioning of SSL certificates (via AWS Certificate Manager), configure IAM roles, and scale resources as needed.
+
+## Obsidian
+
+I use Obsidian as my primary writing tool. It’s a powerful, flexible markdown editor that lets me focus solely on writing, without distractions from formatting or code. Obsidian allows me to easily organize my drafts, manage notes, and sync my posts with my SvelteKit blog setup.
+
+Once my posts are finalized in markdown, I export the files, and mdsvex takes care of converting them into HTML for the blog. It’s a straightforward and efficient workflow that helps me focus on creating content.
+
+## Deploying and Updating the app
+
+Here's how you can implement the deployment and updating process using a combination of the services I've mentioned
+
+### 1. **Update Git Repository**
+
+Push your latest changes to your Git repository using standard Git commands:
+
+```bash
+# Add any new or updated files
+git add .
+
+# Commit the changes with a message
+git commit -m "Update blog content and infrastructure"
+
+# Push the changes to your remote repository
+git push origin main
 ```
 
-### Plan and Apply
+### 2. **Sync S3 Bucket with Static Files**
 
-Terraform’s workflow involves two key commands:
+To sync your static blog content to your S3 bucket, you can use the AWS CLI command. Replace `my-s3-bucket` with your actual S3 bucket name:
 
-- **terraform plan**: This command shows you what Terraform will do to your infrastructure based on the configuration files. It allows you to verify the changes before making them.
-
-- **terraform apply**: After reviewing the plan, you can run this command to apply the changes, and Terraform will execute the plan to reach the desired state.
-
-## Getting Started with Terraform
-
-If you're new to Terraform, here’s a step-by-step guide to help you get up and running quickly.
-
-### Step 1: Install Terraform
-
-Terraform is easy to install. You can download it from the [official Terraform website](https://www.terraform.io/downloads) or install it using a package manager.
-
-- **For macOS (using Homebrew)**:
-
-```sh
-brew install terraform
-
+```bash
+# create a new production build with you're latest changes
+npm run build
+# Sync the local build directory (e.g., dist/) with your S3 bucket
+aws s3 sync ./dist s3://my-s3-bucket --delete
 ```
 
-- **For Windows (using Chocolatey)**:
+This command ensures that the latest static files are uploaded to your S3 bucket, and any deleted or changed files are updated accordingly.
 
-```sh
-choco install terraform
+### 3. **Invalidate CloudFront Cache**
+
+To ensure that CloudFront serves the updated content, you need to invalidate its cache. This forces CloudFront to fetch the new files from the S3 bucket. Replace `your-distribution-id` with your CloudFront distribution ID:
+
+```bash
+# Invalidate CloudFront cache to serve the latest content
+aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths "/*"
 ```
 
-### Step 2: Set Up a Provider
+This command will invalidate all the cached files so that the updated files are served immediately.
 
-In this example, we’ll use AWS. First, configure AWS as your provider by specifying the region in your `main.tf` file:
+### 4. **Infrastructure Changes with Terraform**
 
-```js
-provider "aws" {
-  region = "us-west-2"
-}
-```
+If any infrastructure changes are necessary, you can apply them with Terraform. Here’s how to initialize Terraform and apply changes to your infrastructure:
 
-Make sure you have AWS credentials configured by running `aws configure` or setting up your credentials manually.
+```bash
+# Navigate to your Terraform configuration directory
+cd terraform
 
-### Step 3: Define Resources
+# Initialize Terraform (only required the first time or after changes to modules/providers)
+terraform init
 
-Next, define the resources you want to create. For instance, to create an EC2 instance:
-
-```js
-resource "aws_instance" "my_instance" {
-  ami           = "ami-0c55b159cbfafe1f0"
-  instance_type = "t2.micro"
-}
-```
-
-### Step 4: Plan and Apply
-
-After defining your resources, run the `terraform plan` command to preview the changes Terraform will make to your infrastructure:
-
-```sh
+# Review the planned changes
 terraform plan
-```
 
-If everything looks good, apply the changes:
-
-```sh
+# Apply the changes to your infrastructure
 terraform apply
 ```
 
-Terraform will provision the resources as defined in your configuration.
-
-### Step 5: Managing Infrastructure
-
-Once you have applied the configuration, Terraform will continue to track your infrastructure’s state. Any future changes to the `main.tf` file can be planned and applied just like the initial deployment. Terraform will update the infrastructure in place, adding new resources, deleting obsolete ones, and modifying existing resources as needed.
-
-## Best Practices for Using Terraform
-
-1. **Use Remote State Storage**: Store your state file in a remote backend, like AWS S3 or Terraform Cloud, to collaborate across teams and avoid conflicts.
-
-2. **Use Modules**: Modularize your configuration for easier maintenance and reusability.
-
-3. **Version Control Your Infrastructure**: Store your configuration files in Git or another version control system to track changes, review code, and ensure infrastructure consistency.
-
-4. **Automate with CI/CD**: Use Terraform as part of your CI/CD pipeline to automate infrastructure changes in response to updates in your codebase.
-
-## Conclusion
-
-Terraform is an incredibly powerful tool for managing cloud infrastructure at scale. It simplifies the process of provisioning resources, ensures consistency, and allows you to manage multi-cloud environments effortlessly. Whether you're new to cloud infrastructure or a seasoned DevOps engineer, Terraform will help you automate your infrastructure and improve your deployment workflows.
-
-If you haven’t tried Terraform yet, now is the perfect time to dive in. By following the steps in this guide, you can start building and managing infrastructure like a pro!
+With these steps, you can easily deploy and update your blog, ensuring that new content and infrastructure changes are live without manual intervention. By automating the workflow, you’re able to focus on writing and growing your blog, while the deployment pipeline handles the rest.
