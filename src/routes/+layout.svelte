@@ -5,7 +5,7 @@
 
 	let { data } = $props();
 
-	import { GithubIcon, LucideTwitter, Moon, Sun } from 'lucide-svelte';
+	import { GithubIcon, Linkedin, LucideTwitter, Moon, Rss, Sun } from 'lucide-svelte';
 	import { fade } from 'svelte/transition';
 
 	import BmcLogo from '$lib/assets/bmc-logo.svelte';
@@ -29,7 +29,7 @@
 		{#snippet lead()}
 			<a class="transition-all duration-100 hover:scale-110" href="/"><Logo class="h-12 w-12" /></a>
 		{/snippet}
-		<h1 class="font-bold">Dean's List</h1>
+		<h6 class="h6">Dean's List</h6>
 		{#snippet trail()}
 			<Switch
 				name="mode"
@@ -68,14 +68,16 @@
 					<Logo class="h-12 w-12" /></a
 				>
 				<div class="flex flex-col">
-					<h1 class="font-bold">Dean's List</h1>
+					<h6 class="h6">Dean's List</h6>
 
 					<div class="flex w-full flex-row items-center gap-2">
+						<a href="https://www.linkedin.com/in/dean-cochran/"><Linkedin size={20} /></a>
 						<a href="https://github.com/deancochran"><GithubIcon size={20} class="font-light" /></a>
 						<a href="https://twitter.com/deancochran_"
 							><LucideTwitter size={20} class="font-light" /></a
 						>
 						<a href="https://buymeacoffee.com/deancochran"> <BmcLogo /></a>
+						<a href="/api/rss"> <Rss /></a>
 					</div>
 				</div>
 			</div>
