@@ -24,9 +24,6 @@ For a static blog that is capable of rendering markdown files. You'll need to co
 Install that sveltekit static adapter `npm i -D @sveltejs/adapter-static` , then add the adapter to your `svelte.config.js`: See more here: <https://kit.svelte.dev/docs/adapter-static>
 
 ```ts
-// ...
-// your imports
-// ...
 import adapter from '@sveltejs/adapter-static';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -36,9 +33,6 @@ const config = {
 	// ....
 
 	kit: {
-		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
-		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
-		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter()
 	}
 };
@@ -53,7 +47,7 @@ Ideally if recreating this implementation, you would use something similar. I us
 The root of the project is found at `routes/` inside the directory I configured a handful of things here. Notably I have a folder `[...path]/` where I store most of the routing logic for my blog.
 The folder contains a `+page.ts`, to find and load the post, then `+page.svelte` displays the loaded post.
 
-#### In Depth with Markdown Editors and Markdown preprocessors
+#### Svelte and Markdown
 
 As noted I use a markdown editor to take notes. It allows me to _just write_ without worry of the actual end user interface. Notably svelte does **not** render markdown files without additional configuration.
 This additional configuration needed. Takes files in markdown format `.md` and parses them into a readable `html` string.
@@ -100,13 +94,15 @@ export const load: PageLoad = async (event) => {
 	}
 	// throws error incase no match was found
 	if (!match) {
-		throw error(404); // Couldn't resolve the post
+		// Couldn't resolve the post
+		throw error(404); 
 	}
 
 	const post = await match.resolver();
-	// throws error incase the match's content/metadata couldn't be resolved
+	// incase the content/metadata couldn't be resolved
 	if (!post || !post.metadata.published || !post.default) {
-		throw error(404); // Couldn't resolve the post
+		// Couldn't resolve the post
+		throw error(404); 
 	}
 
 	return {
@@ -135,28 +131,41 @@ Then when rendering the html string in the form of a svelte component you can lo
 
 Configuring the package isn't exhausting at all. Notably a small adjust needs to be made to the `svelte.config.ts` file.
 
-First install the package `npm i --save-dev mdsvex`
+First install the package `npm i --save-dev mdsvex`, then update the corresponding svelte configuration file to use you're custom configuration (I've added mine below).
 
 ```ts
 // svelte.config.ts
+import adapter from '@sveltejs/adapter-static';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import { mdsvex } from 'mdsvex';
 
+
+/** @type {import('mdsvex').MdsvexOptions} */
+const mdsvexOptions = {
+	// define you're config here
+};
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
-	// for more information about preprocessors
 	extensions: ['.svelte', '.md'],
 	preprocess: [mdsvex(mdsvexOptions), vitePreprocess()],
 
 	kit: {
-		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
-		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
-		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter()
 	}
 };
 
 export default config;
 ```
+
+I've kept my configuration out of this code block to keep this post more readable. However, if you're interested you can see my source code [here](https://github.com/deancochran/deancochran/blob/main/svelte.config.js).
+
+## Skeleton UI
+
+[Skeleton](https://www.skeleton.dev/) integrates with Tailwind to provide opinionated solutions for themes, colors, typography and more. Including easy to use components for your favorite web frameworks. 
+
+I use skeleton's unreleased v3 updates which are almost complete! Go support them, and checkout their nearly complete [v3 documentation](https://next.skeleton.dev/) (link is likely to expire when the updates are finished) to get started. 
+
+
 
 Terraform is a tool that allows you to automate the process of building, changing, and versioning infrastructure. It provides a unified command line and configuration language (called **HCL**, or HashiCorp Configuration Language) to manage resources across multiple providers, such as AWS, Azure, Google Cloud, or even on-premise infrastructure.
 
