@@ -2,9 +2,9 @@
 	import { page } from '$app/stores';
 </script>
 
-<div class="flex flex-col w-full h-full items-center align-middle justify-center">
+<div class="flex h-full w-full flex-col items-center justify-center align-middle">
 	<h1 class="h1">{$page.status}</h1>
 	<span class="inline">{$page.error?.message}</span>
-	<br/>
+	<br />
 	<a class="btn preset-filled" href="/"><span>Go Home</span></a>
 </div>
