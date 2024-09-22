@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Logo from '$lib/assets/Logo.svelte';
 	import { AppBar } from '@skeletonlabs/skeleton-svelte';
 	import '../app.css';
