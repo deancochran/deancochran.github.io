@@ -1,12 +1,12 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+	import Image from '$lib/blogComponents/img.svelte';
 	import { email_schema } from '$lib/utils/schema';
+	import SvelteSeo from 'svelte-seo';
+	import { fade } from 'svelte/transition';
 	import { superForm } from 'sveltekit-superforms';
 	import { zod } from 'sveltekit-superforms/adapters';
 	import type { PageData } from './$types';
-	import Image from '$lib/blogComponents/img.svelte';
-	import { fade } from 'svelte/transition';
-	import SvelteSeo from 'svelte-seo';
-	import { page } from '$app/stores';
 
 	export let data: PageData;
 	const { form, enhance, delayed } = superForm(data.form, {
@@ -24,10 +24,10 @@
 
 <SvelteSeo
 	title="Dean Cochran's Blog"
-	canonical={$page.url.toString()}
+	canonical={$page.url.href}
 	openGraph={{
 		title: "Dean Cochran's Blog",
-		url: $page.url.toString(),
+		url: $page.url.href,
 		type: 'website',
 		site_name: 'Dean Cochran',
 		images: [
@@ -94,7 +94,7 @@
 			class="card card-hover block overflow-hidden border border-surface-200-800 divide-surface-200-800 preset-filled-surface-100-900 active:scale-[1.01]"
 		>
 			<header class="card-header">
-				<Image src={post.image} class="aspect-[21/9] w-full object-cover" alt="banner" />
+				<Image src={post.image??'/images/logo.png'} class="aspect-[21/9] w-full object-cover" alt="banner" />
 			</header>
 
 			<article class="space-y-4 p-4">

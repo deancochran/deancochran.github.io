@@ -20,10 +20,10 @@
 
 <SvelteSeo
 	title="Dean Cochran's Posts"
-	canonical={$page.url.toString()}
+	canonical={$page.url.href}
 	openGraph={{
 		title: "Dean Cochran's Posts",
-		url: $page.url.toString(),
+		url:  $page.url.href,
 		type: 'website',
 		site_name: 'Dean Cochran',
 		images: [

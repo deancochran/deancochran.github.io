@@ -21,11 +21,11 @@
 <SvelteSeo
 	title={data.meta.title}
 	description={data.meta.description}
-	canonical={$page.url.toString()}
+	canonical={$page.url.href}
 	openGraph={{
 		title: data.meta.title,
 		description: data.meta.description,
-		url: $page.url.toString(),
+		url:  $page.url.href,
 		type: 'website',
 		site_name: 'Dean Cochran',
 		images: [
