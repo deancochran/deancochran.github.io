@@ -62,12 +62,15 @@ resource "aws_cloudfront_function" "main" {
         var request = event.request;
         var uri = request.uri;
 
-        if (uri.endsWith('/')) {
-            request.uri += 'index.html';
+        // Handle the root URL specifically
+        if (uri === '/') {
+            request.uri = '/index.html';
         }
-
-        else if (!uri.includes('.')) {
-            request.uri += '/index.html';
+        // Add .html if the URI ends with a / or doesn't have a file extension
+        else if (uri.endsWith('/')) {
+            request.uri += 'index.html';
+        } else if (!uri.includes('.')) {
+            request.uri += '.html';
         }
 
         return request;

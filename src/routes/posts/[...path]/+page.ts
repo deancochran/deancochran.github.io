@@ -1,4 +1,7 @@
+import { email_schema } from '$lib/utils/schema';
 import { error } from '@sveltejs/kit';
+import { superValidate } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
 import type { PageLoad } from './$types';
 export const prerender = true;
 export const load: PageLoad = async (event) => {
@@ -20,8 +23,11 @@ export const load: PageLoad = async (event) => {
 		throw error(404, `Post ${match.path} found, but could not be loaded`); // Couldn't resolve the post
 	}
 
+	const form = await superValidate(zod(email_schema));
+
 	return {
 		component: post.default,
-		meta: post.metadata
+		meta: post.metadata,
+		form
 	};
 };

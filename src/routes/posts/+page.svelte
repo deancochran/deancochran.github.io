@@ -1,13 +1,13 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+	import Image from '$lib/blogComponents/img.svelte';
 	import { email_schema } from '$lib/utils/schema';
+	import SvelteSeo from 'svelte-seo';
 	import { superForm } from 'sveltekit-superforms';
 	import { zod } from 'sveltekit-superforms/adapters';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	const imgSrc =
-		'https://images.unsplash.com/photo-1463171515643-952cee54d42a?q=80&w=450&h=190&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
-
 	const { form, enhance, delayed } = superForm(data.form, {
 		applyAction: true,
 		invalidateAll: true,
@@ -18,6 +18,30 @@
 	});
 </script>
 
+<SvelteSeo
+	title="Dean Cochran's Posts"
+	canonical={$page.url.toString()}
+	openGraph={{
+		title: "Dean Cochran's Posts",
+		url: $page.url.toString(),
+		type: 'website',
+		site_name: 'Dean Cochran',
+		images: [
+			{
+				url: '/images/logo.png'
+			}
+		]
+	}}
+	twitter={{
+		card: 'summary_large_image',
+		creator: '@deancochran_',
+		title: "Dean Cochran's Posts",
+		image: '/images/logo.png'
+	}}
+/>
+
+<h1 class="h1">Posts</h1>
+
 <div class="aign-middle flex h-full w-full flex-row flex-wrap items-center justify-center gap-4">
 	{#each data.posts as post}
 		<a
@@ -25,7 +49,11 @@
 			class="card card-hover block overflow-hidden border border-surface-200-800 divide-surface-200-800 preset-filled-surface-100-900 active:scale-[1.01]"
 		>
 			<header class="card-header">
-				<img src={imgSrc} class="aspect-[21/9] w-full object-fill" alt="banner" />
+				<Image
+					src={post.image ?? '/images/logo.png'}
+					class="aspect-[21/9] w-full object-cover"
+					alt="banner"
+				/>
 			</header>
 
 			<article class="space-y-4 p-4">

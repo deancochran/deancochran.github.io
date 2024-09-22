@@ -2,6 +2,7 @@ import { email_schema } from '$lib/utils/schema';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 
+const prerender = true;
 export const load = async (event) => {
 	const response = await event.fetch(`/api/posts`);
 	const posts = (await response.json()) as (BlogPost & { relativePath: string })[];

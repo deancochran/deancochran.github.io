@@ -1,6 +1,30 @@
 <script>
+	import { page } from '$app/stores';
 	import Logo from '$lib/assets/Logo.svelte';
+	import SvelteSeo from 'svelte-seo';
 </script>
+
+<SvelteSeo
+	title="About Dean Cochran"
+	canonical={$page.url.toString()}
+	openGraph={{
+		title: 'About Dean Cochran',
+		url: $page.url.toString(),
+		type: 'website',
+		site_name: 'Dean Cochran',
+		images: [
+			{
+				url: '/images/logo.png'
+			}
+		]
+	}}
+	twitter={{
+		card: 'summary_large_image',
+		creator: '@deancochran_',
+		title: 'About Dean Cochran',
+		image: '/images/logo.png'
+	}}
+/>
 
 <div class="flex flex-col gap-4">
 	<header class="flex flex-col gap-4">

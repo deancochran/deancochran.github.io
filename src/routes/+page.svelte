@@ -5,6 +5,8 @@
 	import type { PageData } from './$types';
 	import Image from '$lib/blogComponents/img.svelte';
 	import { fade } from 'svelte/transition';
+	import SvelteSeo from 'svelte-seo';
+	import { page } from '$app/stores';
 
 	export let data: PageData;
 	const { form, enhance, delayed } = superForm(data.form, {
@@ -19,6 +21,28 @@
 		return data.posts[Math.floor(Math.random() * data.posts.length)];
 	}
 </script>
+
+<SvelteSeo
+	title="Dean Cochran's Blog"
+	canonical={$page.url.toString()}
+	openGraph={{
+		title: "Dean Cochran's Blog",
+		url: $page.url.toString(),
+		type: 'website',
+		site_name: 'Dean Cochran',
+		images: [
+			{
+				url: '/images/logo.png'
+			}
+		]
+	}}
+	twitter={{
+		card: 'summary_large_image',
+		creator: '@deancochran_',
+		title: "Dean Cochran's Blog",
+		image: '/images/logo.png'
+	}}
+/>
 
 <form
 	action="https://buttondown.com/api/emails/embed-subscribe/deancochran"
