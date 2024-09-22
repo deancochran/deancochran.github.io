@@ -42,7 +42,7 @@
 
 <h1 class="h1">Posts</h1>
 
-<div class="aign-middle flex h-full w-full flex-row flex-wrap items-center justify-center gap-4">
+<div class="aign-middle flex h-full w-full flex-row flex-wrap items-start justify-center gap-4">
 	{#each data.posts as post}
 		<a
 			href={'/posts/' + post.relativePath}
