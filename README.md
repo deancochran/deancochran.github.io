@@ -17,4 +17,5 @@ page or found it helpful, consider donating to support future content <a
 
 ## Blog posts
 <!-- Dean's List:START -->
+- [Building my Blog with Sveltekit and Terraform](https://dean-cochran.com/posts/building-my-blog)
 <!-- Dean's List:END -->
