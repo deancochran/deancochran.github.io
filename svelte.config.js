@@ -1,46 +1,14 @@
 import { transformerCopyButton } from '@rehype-pretty/transformers';
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import katex from 'katex';
 import { mdsvex } from 'mdsvex';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-// import rehypeKatex from 'rehype-katex';
 import rehypeKatexSvelte from 'rehype-katex-svelte';
 import rehypeSlug from 'rehype-slug';
 import remarkMath from 'remark-math';
 import remarkToc from 'remark-toc';
 import remarkUnwrapImages from 'remark-unwrap-images';
 import { codeToHtml } from 'shiki';
-import { visit } from 'unist-util-visit';
-
-const correctHastTree = () => (tree) => {
-	visit(tree, 'text', (node) => {
-		if (node.value.trim().startsWith('<')) {
-			node.type = 'raw';
-		}
-	});
-};
-
-const katexBlocks = () => (tree) => {
-	visit(tree, 'code', (node) => {
-		if (node.lang === 'math') {
-			const str = katex.renderToString(node.value, {
-				displayMode: true,
-				leqno: false,
-				fleqn: false,
-				throwOnError: true,
-				errorColor: '#cc0000',
-				strict: 'warn',
-				output: 'htmlAndMathml',
-				trust: false,
-				macros: { '\\f': '#1f(#2)' }
-			});
-
-			node.type = 'raw';
-			node.value = '{@html `' + str + '`}';
-		}
-	});
-};
 
 const theme = 'github-dark';
 async function customHighlight(code, lang) {
@@ -72,11 +40,16 @@ const mdsvexOptions = {
 	},
 	remarkPlugins: [
 		remarkMath,
-		katexBlocks,
+		// katexBlocks,
 		remarkUnwrapImages,
 		[remarkToc, { tight: true, maxDepth: 3 }]
 	],
-	rehypePlugins: [correctHastTree, rehypeKatexSvelte, rehypeSlug, rehypeAutolinkHeadings]
+	rehypePlugins: [
+		// correctHastTree,
+		rehypeKatexSvelte,
+		rehypeSlug,
+		rehypeAutolinkHeadings
+	]
 };
 
 /** @type {import('@sveltejs/kit').Config} */

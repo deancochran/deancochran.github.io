@@ -51,7 +51,6 @@
 		"katex": "^0.16.11",
 		"lucide-svelte": "^0.439.0",
 		"rehype-autolink-headings": "^7.1.0",
-		"remark-math": "3.0.0",
-		"unist-util-visit": "^5.0.0"
+		"remark-math": "3.0.0"
 	}
 }

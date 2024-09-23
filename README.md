@@ -1,46 +1,34 @@
-# Dean's List
+<style type="text/css" rel="stylesheet">
+#header{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: flex-start;
+    height: 100%; /* Optional: Adjust this to ensure vertical centering */
+    gap: .5rem; /* Adds a 2rem gap between items */
+}
+</style>
 
-My opionated blog
+<div id="header" >
+<img src="static/images/logo.png" height="100" />
 
-This blog is written in svelte, utilizing sveltekit for routing, and obsidian for creating cotent.
+<h1 >About</h1>
 
-## Managing Content
+</div>
 
-As mentioned obsidan is directly mounted to the root of the project. When creating content, I work directly in the `/src/posts directory`, refrencing any static content in the `/static` directory.
+<br/>
 
-Obsidian allows me to utilize a vault sync for creating content remotely. However I will refrain from this initially.... More on this to come. I would like for the wesite to be updated anytime I add a new post, but that has numerous complications...
+Hi, I’m Dean Cochran, a full-stack software engineer with a passion for building innovative
+solutions that solve real-world problems. With a background in data science, machine learning,
+and cloud computing, I thrive at the intersection of technology and creativity. I enjoy
+working on projects that challenge me to think critically and continue evolving my skills.
 
-## Creating a project
+When I’m not coding, you’ll find me outdoors, cycling, running, or taking part in endurance
+sports like triathlons. As a remote software engineer, I value a healthy work-life balance
+that allows me to pursue my passion for nature and adventure while still delivering
+high-quality work. This balance fuels my creativity and keeps me at my best.
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Thanks for stopping by—feel free to connect or explore my work further! If you enjoyed this
+page or found it helpful, consider donating to support future content <a
+    class="anchor"
+    href="https://buymeacoffee.com/deancochran">here</a>
