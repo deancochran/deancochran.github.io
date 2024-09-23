@@ -20,11 +20,16 @@ page or found it helpful, consider donating to support future content <a
 <!--START_SECTION:waka-->
 
 ```txt
-Svelte        4 hrs 49 mins   ████████░░░░░░░░░░░░░░░░░   32.58 %
-Markdown      3 hrs 48 mins   ██████▒░░░░░░░░░░░░░░░░░░   25.80 %
-TypeScript    1 hr 48 mins    ███░░░░░░░░░░░░░░░░░░░░░░   12.20 %
-JavaScript    1 hr 4 mins     █▓░░░░░░░░░░░░░░░░░░░░░░░   07.30 %
-CSS           50 mins         █▒░░░░░░░░░░░░░░░░░░░░░░░   05.66 %
+Python                     411 hrs 17 mins ███████▒░░░░░░░░░░░░░░░░░   29.73 %
+Svelte                     344 hrs 42 mins ██████▒░░░░░░░░░░░░░░░░░░   24.91 %
+Markdown                   205 hrs 53 mins ███▓░░░░░░░░░░░░░░░░░░░░░   14.88 %
+TypeScript                 201 hrs 17 mins ███▓░░░░░░░░░░░░░░░░░░░░░   14.55 %
+Other                      50 hrs 17 mins  █░░░░░░░░░░░░░░░░░░░░░░░░   03.63 %
+HTML                       47 hrs 16 mins  █░░░░░░░░░░░░░░░░░░░░░░░░   03.42 %
+JavaScript                 30 hrs 33 mins  ▓░░░░░░░░░░░░░░░░░░░░░░░░   02.21 %
+JSON                       11 hrs 34 mins  ▒░░░░░░░░░░░░░░░░░░░░░░░░   00.84 %
+Astro                      11 hrs 27 mins  ▒░░░░░░░░░░░░░░░░░░░░░░░░   00.83 %
+Docker                     10 hrs 50 mins  ▒░░░░░░░░░░░░░░░░░░░░░░░░   00.78 %
 ```
 
 <!--END_SECTION:waka-->
