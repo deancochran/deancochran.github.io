@@ -15,6 +15,11 @@ page or found it helpful, consider donating to support future content <a
     class="anchor"
     href="https://buymeacoffee.com/deancochran">here</a>
 
+## Stats
+
+<!--START_SECTION:waka-->
+<!--END_SECTION:waka-->
+
 ## Latest [Blog](https://dean-ccohran.com/) Posts:
 
 <!-- Dean's List:START -->
