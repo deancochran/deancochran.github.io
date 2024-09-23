@@ -18,6 +18,15 @@ page or found it helpful, consider donating to support future content <a
 ## Stats
 
 <!--START_SECTION:waka-->
+
+```txt
+Svelte        4 hrs 49 mins   ████████░░░░░░░░░░░░░░░░░   32.58 %
+Markdown      3 hrs 48 mins   ██████▒░░░░░░░░░░░░░░░░░░   25.80 %
+TypeScript    1 hr 48 mins    ███░░░░░░░░░░░░░░░░░░░░░░   12.20 %
+JavaScript    1 hr 4 mins     █▓░░░░░░░░░░░░░░░░░░░░░░░   07.30 %
+CSS           50 mins         █▒░░░░░░░░░░░░░░░░░░░░░░░   05.66 %
+```
+
 <!--END_SECTION:waka-->
 
 ## Latest [Blog](https://dean-ccohran.com/) Posts:
