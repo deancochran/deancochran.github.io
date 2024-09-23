@@ -46,7 +46,7 @@
 	{#each data.posts as post}
 		<a
 			href={'/posts/' + post.relativePath}
-			class="card card-hover block overflow-hidden border border-surface-200-800 divide-surface-200-800 preset-filled-surface-100-900 active:scale-[1.01]"
+			class="card card-hover h-fit block overflow-hidden border border-surface-200-800 divide-surface-200-800 preset-filled-surface-100-900 active:scale-[1.01]"
 		>
 			<header class="card-header">
 				<Image
@@ -56,22 +56,22 @@
 				/>
 			</header>
 
-			<article class="space-y-4 p-4">
-				<div>
-					<h2 class="h2">{post.title}</h2>
-				</div>
-				<p class="line-clamp-5 opacity-60">
-					{post.description}
-				</p>
-			</article>
-
-			<footer class="card-footer flex items-center justify-between gap-4 p-4">
-				<small class="opacity-60">{new Date(post.date).toDateString()}</small>
-				<button type="button" class="btn preset-filled">
-					<span>Read More</span>
-					<span>&rarr;</span>
-				</button>
-			</footer>
+			<div class="flex w-full h-full flex-col items-center justify-between gap-2 align-middle">
+				<article class="w-full space-y-4 p-4">
+						<h2 class="h2">{post.title}</h2>
+					<p class="line-clamp-3 opacity-60">
+						{post.description}
+					</p>
+				</article>
+	
+				<footer class="card-footer flex w-full items-center justify-between gap-4 p-4">
+					<small class="opacity-60">{new Date(post.date).toDateString()}</small>
+					<button type="button" class="btn preset-filled">
+						<span>Read More</span>
+						<span>&rarr;</span>
+					</button>
+				</footer>
+			</div>
 		</a>
 	{/each}
 </div>

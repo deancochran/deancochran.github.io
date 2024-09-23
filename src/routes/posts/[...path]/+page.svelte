@@ -43,7 +43,7 @@
 	}}
 />
 
-<div class="flex flex-col gap-8">
+<div class="flex flex-col gap-8 ">
 	<header class="flex flex-col gap-8">
 		<h2 class="h2">{data.meta.title}</h2>
 		<Image src={data.meta.image} alt={data.meta.title} loading="eager" />

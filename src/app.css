@@ -2,6 +2,13 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+.target-before:before {
+	content: '';
+	display: block;
+	height: 60px; /* fixed header height */
+	margin-top: -60px; /* negative fixed header height */
+}
+
 html {
 	@apply m-0 h-full scroll-smooth p-0 transition-all duration-200;
 }

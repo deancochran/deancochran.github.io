@@ -1,30 +1,30 @@
-<div id="post">
+<div id="post" class=" scroll-p-36">
 	<slot />
 </div>
 
 <style lang="postcss">
 	#post {
 		:global(h1) {
-			@apply h1 font-bold;
+			@apply h1 font-bold scroll-mt-[10vh];
 		}
 		:global(h2) {
-			@apply h2 font-bold;
+			@apply h2 font-bold scroll-mt-[10vh];
 		}
 		:global(h3) {
-			@apply h3 font-bold;
+			@apply h3 font-bold scroll-mt-[10vh];
 		}
 		:global(h4) {
-			@apply h4 font-bold;
+			@apply h4 font-bold scroll-mt-[10vh];
 		}
 		:global(h5) {
-			@apply h5 font-bold;
+			@apply h5 font-bold scroll-mt-[10vh];
 		}
 		:global(h6) {
-			@apply h6 font-bold;
+			@apply h6 font-bold scroll-mt-[10vh];
 		}
 
 		:global(a) {
-			@apply anchor;
+			@apply anchor
 		}
 
 		:global(blockquote) {

@@ -51,7 +51,7 @@
 		<aside class="transition-all duration-100 sm:w-1/6 md:w-1/4 lg:w-1/2"></aside>
 		{#key data.pathname}
 			<!-- Main -->
-			<main class="w-full overflow-hidden p-4" in:fade={{ duration: 800 }}>
+			<main class="flex flex-grow flex-col w-full overflow-hidden p-4" in:fade={{ duration: 800 }}>
 				<slot />
 			</main>
 		{/key}
