@@ -34,7 +34,7 @@ Docker                     10 hrs 50 mins  ▒░░░░░░░░░░░�
 
 <!--END_SECTION:waka-->
 
-## [Latest Blog Posts](https://dean-ccohran.com/):
+## [Latest Blog Posts](https://dean-cochran.com/posts.):
 
 <!-- Dean's List:START -->
 
