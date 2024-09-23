@@ -1,20 +1,7 @@
-<style type="text/css" rel="stylesheet">
-#header{
-    display: flex;
-    flex-direction: row;
-    align-items: end;
-    justify-content: flex-start;
-    height: 100%; /* Optional: Adjust this to ensure vertical centering */
-    gap: .5rem; /* Adds a 2rem gap between items */
-}
-</style>
-
-<div id="header" >
-<img src="static/images/logo.png" height="100" />
-
-<h1 >About</h1>
-
-</div>
+<h1 align="start">
+  <img src="static/images/logo.png" alt="Dean Cochran" width="100" style="vertical-align: middle; margin-right: 10px;" />
+  About
+</h1>
 
 <br/>
 
