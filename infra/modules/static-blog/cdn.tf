@@ -51,29 +51,45 @@ resource "aws_cloudfront_distribution" "main" {
         acm_certificate_arn = aws_acm_certificate.main.arn
         ssl_support_method  = "sni-only"
     }
+    custom_error_response {
+        error_caching_min_ttl = 0
+        error_code = 404
+        response_code = 200
+        response_page_path = "/index.html"
+    }
+
+    custom_error_response {
+        error_caching_min_ttl = 0
+        error_code = 403
+        response_code = 200
+        response_page_path = "/index.html"
+    }
+
 }
 
 resource "aws_cloudfront_function" "main" {
     name    = "dean-cochran"
     runtime = "cloudfront-js-2.0"
     publish = true
-    code    = <<EOF
+    code = <<EOF
         function handler(event) {
-        var request = event.request;
-        var uri = request.uri;
+            var request = event.request;
+            var uri = request.uri;
 
-        // Handle the root URL specifically
-        if (uri === '/') {
-            request.uri = '/index.html';
-        }
-        // Add .html if the URI ends with a / or doesn't have a file extension
-        else if (uri.endsWith('/')) {
-            request.uri += 'index.html';
-        } else if (!uri.includes('.')) {
-            request.uri += '.html';
-        }
+            // Handle the root URL specifically
+            if (uri === '/') {
+                request.uri = '/index.html';
+            }
+            // Replace trailing slash with .html if the URI ends with / and is not the root
+            else if (uri.endsWith('/') && uri !== '/') {
+                request.uri = uri.slice(0, -1) + '.html';
+            } 
+            // Add .html if the URI doesn't have a file extension
+            else if (!uri.includes('.')) {
+                request.uri += '.html';
+            }
 
-        return request;
+            return request;
         }
     EOF
 }
