@@ -29,7 +29,7 @@ CSS           50 mins         █▒░░░░░░░░░░░░░░�
 
 <!--END_SECTION:waka-->
 
-## Latest [Blog](https://dean-ccohran.com/) Posts:
+## [Latest Blog Posts](https://dean-ccohran.com/):
 
 <!-- Dean's List:START -->
 
