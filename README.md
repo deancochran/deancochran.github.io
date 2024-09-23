@@ -15,5 +15,6 @@ page or found it helpful, consider donating to support future content <a
     class="anchor"
     href="https://buymeacoffee.com/deancochran">here</a>
 
+# Blog posts
 <!-- BLOG-POST-LIST:START -->
 <!-- BLOG-POST-LIST:END -->
