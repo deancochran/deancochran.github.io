@@ -34,6 +34,5 @@ Other                      50 hrs 26 mins  █░░░░░░░░░░░�
 ## [Latest Blog Posts](https://dean-cochran.com/posts.):
 
 <!-- Dean's List:START -->
-
 - [Building my Blog with Sveltekit and Terraform](https://dean-cochran.com/posts/building-my-blog)
 <!-- Dean's List:END -->
