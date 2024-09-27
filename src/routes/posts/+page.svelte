@@ -19,7 +19,8 @@
 </script>
 
 <SvelteSeo
-	title="Dean Cochran's Posts"
+	title="Dean Cochran's Blog Posts"
+	description="Dean Cochran's Blog Posts"
 	canonical={$page.url.href}
 	openGraph={{
 		title: "Dean Cochran's Posts",

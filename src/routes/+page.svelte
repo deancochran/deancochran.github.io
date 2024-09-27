@@ -24,6 +24,7 @@
 
 <SvelteSeo
 	title="Dean Cochran's Blog"
+	description="Dean Cochran's Blog Wesbite"
 	canonical={$page.url.href}
 	openGraph={{
 		title: "Dean Cochran's Blog",
