@@ -12,7 +12,9 @@
 		"format": "prettier --write .",
 		"push": "npm version patch && git push",
 		"push-minor": "npm version minor && git push",
-		"push-major": "npm version major && git push"
+		"push-major": "npm version major && git push",
+		"prepublish": "vite build",
+		"publish": "bash ./publish.sh"
 	},
 	"devDependencies": {
 		"@rehype-pretty/transformers": "^0.13.2",

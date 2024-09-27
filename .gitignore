@@ -35,3 +35,5 @@ dist
 
 # vscode
 .vscode
+.env
+publish.sh
