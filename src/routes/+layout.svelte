@@ -10,6 +10,7 @@
 
 	import BmcLogo from '$lib/assets/bmc-logo.svelte';
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
+	import { onMount } from 'svelte';
 
 	let modeState = $state(false); // false = dark mode
 
@@ -17,6 +18,28 @@
 		modeState = !modeState;
 		document.documentElement.classList.toggle('dark');
 	}
+
+	// Detect service worker updates
+	// Identify the service worker and reload the page when a new version is available
+	async function detectServiceWorkerUpdates() {
+		const registration = await navigator.serviceWorker.ready
+		registration.addEventListener('updatefound', () => {
+			const serviceWorker = registration.installing
+			if (!serviceWorker) return
+
+			serviceWorker.addEventListener('statechange', () => {
+				if (serviceWorker.state === 'installed') {
+					if (confirm('New content available, reload to see it?')) {
+						serviceWorker.postMessage({ type: 'SKIP_WAITING' })
+						window.location.reload()
+					}
+				}
+			})
+		})
+	}
+	onMount(() => {
+		detectServiceWorkerUpdates()
+	})
 </script>
 
 <!-- Header -->
