@@ -29,17 +29,17 @@ While training and perfecting machine learning models requires significant compu
 
 ### Mobile Edge Computation: Why it Matters
 
-By using ML models on you're phone, we can achieve quicker responses, minimize reliance on internet connectivity, and improve privacy by keeping sensitive information on the device.
+By using ML models on your phone, we can achieve quicker responses, minimize reliance on internet connectivity, and improve privacy by keeping sensitive information on the device.
 
 ## Building a Machine Learning Mobile Edge App with SvelteKit and TensorFlow.js
 
 I’ll guide you through a real-world example that demonstrates how to use the power of TensorFlow.js within a SvelteKit app to create a machine learning-powered mobile application. You'll get to see how these technologies work together to deliver cutting-edge functionality right in your pocket!.
 
-#### Introducing TensorFlow.js for Mobile Edge Applications
+### Introducing TensorFlow.js for Mobile Edge Applications
 
 [TensorFlow.js](https://www.tensorflow.org/js) is an open-source library that enables developers to run machine learning models directly in the browser and on Node.js. It allows for seamless integration of ML capabilities into web apps, making it accessible for JavaScript developers. By performing computations on the client side, TensorFlow.js enhances mobile edge computation, reducing latency, improving user privacy, and enabling offline functionality. Its optimized performance makes it ideal for mobile devices.
 
-#### Why SvelteKit? A Modern Approach to Building Web Apps
+### Why SvelteKit? A Modern Approach to Building Web Apps
 
 [SvelteKit](https://kit.svelte.dev/) is a modern framework for building fast, interactive web applications. By compiling components into optimized JavaScript, it offers excellent performance and minimal bundle sizes, making it a perfect fit for integrating TensorFlow.js. SvelteKit simplifies creating dynamic user interfaces, thanks to features like server-side rendering and built-in routing. Its reactivity model allows for real-time interactions, enabling developers to create sophisticated, ML-powered mobile apps with ease.
 
@@ -51,17 +51,17 @@ The goal is to allow users to upload an image and classify it using a pre-traine
 
 #### 1. **Setting Up the Project**
 
-If have never seen the MobileNet model in action, visit the [live demo](https://storage.googleapis.com/tfjs-models/demos/mobilenet/index.html) and view the console to see the results of the edge computations
+If you have never seen the MobileNet model in action, visit the [live demo](https://storage.googleapis.com/tfjs-models/demos/mobilenet/index.html) and view the console to see the results of the edge computations
 
 - **Installing SvelteKit**: Instructions on initializing a new SvelteKit project can be found on the official documentation site [here](https://kit.svelte.dev/docs/introduction).
   - Head to **Skeleton UI** and follow their instructions on installing and initialization a svelte-kit application [here](https://www.skeleton.dev/docs/get-started)
 - **Adding TensorFlow.js**: Installation of TensorFlow.js via npm.
-  - Run `npm install @tensorflow/tfjs @tensorflow-models/mobilenet` .
+  - Run `npm install @tensorflow/tfjs @tensorflow-models/mobilenet`.
   - Optionally, mention using a CDN for TensorFlow.js if the app will run directly in the browser.
 
 #### 2. **Building the Image Classification Component**
 
-After you've installed the necessary packages, you can then begin to setup the project to utilize machine learning on the edge. For each image you classify, you'll want to use the same Svelte component so that you don't have to rewrite / copy and paste code.
+After you've installed the necessary packages, you can then begin to set up the project to utilize machine learning on the edge. For each image you classify, you'll want to use the same Svelte component so that you don't have to rewrite / copy and paste code.
 
 ```ts
 // $lib/components/ImageClassifier.svelte
@@ -140,7 +140,7 @@ async function predict() {
 
 #### 6. **Building the UI for Uploading an Image and viewing Classification Results**
 
-**Note:** This uses custom skeleton UI components. You will need to supply you're own file upload and progress bars if you don't want to use the skeleton UI package
+**Note:** This uses custom skeleton UI components. You will need to supply your own file upload and progress bars if you don't want to use the skeleton UI package
 
 - **Showing the Results in the UI**:
   - Bind the classification results (e.g., label and probability) to the component’s state.
