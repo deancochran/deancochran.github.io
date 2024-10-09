@@ -8,6 +8,7 @@ export const prerender = true;
 
 export const GET = async () => {
 	const allPosts = await getPosts();
+	console.log(allPosts);
 	const sortedPosts = allPosts.sort((a, b) => {
 		return new Date(b.date).getTime() - new Date(a.date).getTime();
 	});
