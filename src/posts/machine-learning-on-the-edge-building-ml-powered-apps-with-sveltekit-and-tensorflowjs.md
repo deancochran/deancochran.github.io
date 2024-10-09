@@ -1,11 +1,17 @@
 ---
-title: Machine Learning on the Edge Building ML powered Apps with SvelteKit and TensorFlowJS
-slug: machine-learning-on-the-edge-building-ml-powered-apps-with-sveltekit-and-tensorflowjs
+title: Machine Learning on the Edge with SvelteKit and TensorFlowJS
+slug: machine-learning-on-the-edge-with-sveltekit-and-tensorflowjs
 date: '2024-10-08'
-image: /images/logo.png
+image: /images/machine-learning-on-the-edge-with-sveltekit-and-tensorflowjs.webp
 description: Empowering mobile devices with Machine Learning has been a massive success lately. LLMs like ChatGPT are making headlines daily, and people everywhere are utilizing AI and Machine Learning with their mobile devices. For many, implementing machine learning on mobile applications is well beyond what the average user needs to know how to do in order to leverage the AI chat bot, image classifier, or recommendation system. However, in this guide I will be giving a guide and overview in what machine learning on the edge is, and how you can add it to your modern web application today.
-published: false
+published: true
 ---
+
+<script>
+	import MobileNetImageClassifier from '$lib/components/MobileNetImageClassifier.svelte';
+</script>
+
+<MobileNetImageClassifier/>
 
 ## Contents
 
@@ -71,6 +77,8 @@ import * as mobilenet from '@tensorflow-models/mobilenet';
 // $lib/components/ImageClassifier.svelte
 // ...
 
+// init a element for the model reference
+let imgEl: HTMLImageElement;
 // init a variable for the model
 let model: mobilenet.MobileNet;
 
@@ -97,8 +105,10 @@ const loadModel = async () => {
 // $lib/components/ImageClassifier.svelte
 // ...
 
+// a variable to hold the loading state
+let predictionsLoading = false;
 // a variable to hold the predictions
-let predictionsResult = [];
+let predictions: any[] = [];
 
 // a function handle an uploaded image
 const predictionImage = async (imgDisplay: HTMLImageElement) => {
@@ -106,23 +116,31 @@ const predictionImage = async (imgDisplay: HTMLImageElement) => {
 	predictionsResult = await classifyImage(preprocessedImage);
 };
 
-// preprocessing the device's selected image
-const preprocessImage = (imageElement: HTMLImageElement) => {
+// handle file uploads from a custom component
+async function handleImageChange(details: any): Promise<void> {
+	predictions = [];
+	const reader = new FileReader();
+	reader.onload = async (event) => {
+		imgEl.src = reader.result as string;
+	};
+	reader.readAsDataURL(details.acceptedFiles[0]);
+}
+// handle preprocessing and classifying the device's selected image
+async function predict() {
+	predictionsLoading = true;
 	// image -> 3D tensor  (height, width, color channels)
-	const imageTensor = tf.browser.fromPixels(imageElement);
+	const imageTensor = tf.browser.fromPixels(imgEl);
 	// reshape tensor for bilinear polarization
 	const resizedImageTensor = tf.image.resizeBilinear(imageTensor, [224, 224]);
-	return resizedImageTensor;
-};
-
-// using the model and classify the image
-const classifyImage = async (preprocessedImage: tf.Tensor3D) => {
-	const predictions = await model.classify(preprocessedImage);
-	return predictions;
-};
+	// using the model and classify the reshaped tensor
+	predictions = await model.classify(resizedImageTensor);
+	predictionsLoading = false;
+}
 ```
 
 #### 6. **Building the UI for Uploading an Image and viewing Classification Results**
+
+**Note:** This uses custom skeleton UI components. You will need to supply you're own file upload and progress bars if you don't want to use the skeleton UI package
 
 - **Showing the Results in the UI**:
   - Bind the classification results (e.g., label and probability) to the component’s state.
@@ -131,62 +149,52 @@ const classifyImage = async (preprocessedImage: tf.Tensor3D) => {
 ```xml
 <script lang="ts">
 	// $lib/components/ImageClassifier.svelte
-    // ...
-    // import packages, load model, handle file uploads, classify image
+    import { FileUpload, Progress } from '@skeletonlabs/skeleton-svelte';
     // ...
 </script>
-
-<section class="flex flex-col gap-8">
-    <div class="ml-auto mr-auto block w-1/2">
-        <Label class="pb-2 text-lg">Select an image to classify</Label>
-        <CustomFileComponent
-            {...fileuploadprops}
-            bind:files
-            on:change={handleImageChange}
-        />
-    </div>
-    <CustomCardComponent
-        size="md"
-        padding="sm"
-        class="ml-auto mr-auto "
-    >
-        <img
-            hidden={!imgDisplay}
-            src={imgDisplay}
-            alt=""
-            bind:this={imgtoprocess}
-        />
-        <div class="py-4">
-            <Heading tag="h3">Predictions:</Heading>
-            <List
-                position="outside"
-                class="p-4"
-            >
-                {#if predictionsLoading}
-                    <span class="flex flex-col items-center"
-                        ><Spinner color="blue" /></span
-                    >
-                {:else}
-                    {#each predictionsResult as prediction}
-                        <Li
-                            >{prediction.className}: {Math.round(
-                                prediction.probability * 100
-                            )}%</Li
-                        >
-                    {/each}
-                {/if}
-            </List>
-        </div>
-    </Card>
-</section>
+{#await loadModel()}
+	<div class="flex w-full flex-col gap-4">
+		<h3 class="h3">Image Classifier</h3>
+		<Progress value={null} />
+	</div>
+{:then _}
+	<section class="flex flex-col items-center justify-center gap-8 align-middle">
+		<div class="flex w-full flex-col gap-4">
+			<h3 class="h3">Image Classifier</h3>
+			<FileUpload
+				name="example"
+				accept="image/*"
+				maxFiles={1}
+				maxFileSize={1024 * 1024 * 10}
+				onFileChange={handleImageChange}
+				classes="w-full"
+				filesListClasses="hidden"
+			/>
+		</div>
+		<img bind:this={imgEl} on:load={predict} hidden={!imgEl?.src} width="300" height="300" alt="" />
+		<div
+			hidden={!imgEl?.src}
+			class="border-surface-200t-800 card w-full p-4 text-center preset-filled-surface-100-900"
+		>
+			<h4 class="h4">Predictions:</h4>
+			<div class="flex flex-col gap-2">
+				{#if predictionsLoading}
+					<span>Loading...</span>
+				{:else}
+					{#each predictions as prediction}
+						<span>{prediction.className}: {Math.round(100 * prediction.probability)}%</span>
+					{/each}
+				{/if}
+			</div>
+		</div>
+	</section>
+{/await}
 ```
 
 ## Conclusion
 
-- Summarize the key takeaways, including the potential of using SvelteKit with TensorFlow.js for mobile edge computation.
-- Encourage readers to experiment with their own mobile edge computation apps.
+That concludes this post on machine learning and mobile edge computation using SvelteKit and TensorFlow.js. I hope that you learned more about what machine learning on the edge is, and visualized how implementing machine learning on the edge is not as daunting as it may sound. These technologies allow developers to build complex applications right on users' devices, you can add it to your modern web application today!
 
 ## Call to Action
 
-- Invite readers to comment, share, or ask questions.
-- Suggest further reading or resources for learning about TensorFlow.js, SvelteKit, or mobile edge computing.
+I encourage you to dive deeper into this field! Experiment with your own SvelteKit projects using TensorFlow.js. Share your experiences, questions, or any challenges you encounter in the comments below.

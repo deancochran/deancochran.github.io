@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
-	import { img, MobileNetImageClassifier } from '$lib/blogComponents';
-	export { img, MobileNetImageClassifier };
+	import { img } from '$lib/blogComponents';
+	export { img };
 </script>
 
 <slot />
