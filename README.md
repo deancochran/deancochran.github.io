@@ -34,5 +34,6 @@ Other                      50 hrs 46 mins  █░░░░░░░░░░░�
 ## [Latest Blog Posts](https://dean-cochran.com/posts.):
 
 <!-- Dean's List:START -->
+- [Machine Learning on the Edge with SvelteKit and TensorFlowJS](https://dean-cochran.com/posts/machine-learning-on-the-edge-building-ml-powered-apps-with-sveltekit-and-tensorflowjs)
 - [Building my Blog with Sveltekit and Terraform](https://dean-cochran.com/posts/building-my-blog)
 <!-- Dean's List:END -->
