@@ -1,4 +1,7 @@
 // See https://kit.svelte.dev/docs/types#app
+
+import type { SvelteComponent } from "svelte";
+
 // for information about these interfaces
 declare global {
   namespace App {
@@ -9,7 +12,7 @@ declare global {
     // interface Platform {}
   }
   interface MdsvexFile {
-    default: import("svelte/internal").SvelteComponent;
+    default: SvelteComponent;
     metadata: Record<string, string>;
   }
 
