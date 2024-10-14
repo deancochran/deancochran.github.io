@@ -1,5 +1,5 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const email_schema = z.object({
-	email: z.string().email()
+  email: z.string().email(),
 });
