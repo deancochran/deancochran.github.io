@@ -1,29 +1,29 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 .target-before:before {
-	content: '';
-	display: block;
-	height: 60px; /* fixed header height */
-	margin-top: -60px; /* negative fixed header height */
+  content: "";
+  display: block;
+  height: 60px; /* fixed header height */
+  margin-top: -60px; /* negative fixed header height */
 }
 
 html {
-	@apply m-0 h-full scroll-smooth p-0 transition-all duration-200;
+  @apply m-0 h-full scroll-smooth p-0 transition-all duration-200;
 }
 
 body {
-	@apply min-h-full overscroll-none;
+  @apply min-h-full overscroll-none;
 }
 
 code {
-	@apply code;
+  @apply code;
 }
 pre {
-	@apply pre p-4 text-xs;
+  @apply pre p-4 text-xs;
 }
 
 pre button {
-	@apply btn-icon absolute top-2 m-0;
+  @apply btn-icon absolute top-2 m-0;
 }
