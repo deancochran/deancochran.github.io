@@ -85,7 +85,7 @@
 				<div class="placeholder animate-pulse"></div>
 				<footer class="card-footer flex items-center justify-between gap-4 pt-8">
 					<div class="placeholder w-1/5 animate-pulse"></div>
-					<button type="button" class="btn preset-tonal-surface">
+					<button type="button" class="btn preset-tonal-surface outline">
 						<span>Read More</span>
 						<span>&rarr;</span>
 					</button>
@@ -113,7 +113,7 @@
 
 			<footer class="card-footer flex items-center justify-between gap-4 p-4">
 				<small class="opacity-60">{new Date(post.date).toDateString()}</small>
-				<button type="button" class="btn preset-tonal-surface">
+				<button type="button" class="btn preset-tonal-surface outline">
 					<span>Read More</span>
 					<span>&rarr;</span>
 				</button>
