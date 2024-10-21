@@ -1,17 +1,16 @@
 <script lang="ts">
-	import Logo from '$lib/assets/Logo.svelte';
-	import { AppBar } from '@skeletonlabs/skeleton-svelte';
-	import '../app.css';
+	import Logo from '$lib/assets/Logo.svelte'
+	import { AppBar } from '@skeletonlabs/skeleton-svelte'
+	import '../app.css'
 
-	let { data } = $props();
+	import { GithubIcon, Linkedin, LucideTwitter, Moon, Rss, Sun } from 'lucide-svelte'
+	import { fade } from 'svelte/transition'
 
-	import { GithubIcon, Linkedin, LucideTwitter, Moon, Rss, Sun } from 'lucide-svelte';
-	import { fade } from 'svelte/transition';
-
-	import BmcLogo from '$lib/assets/bmc-logo.svelte';
-	import { Switch } from '@skeletonlabs/skeleton-svelte';
-	import { onMount } from 'svelte';
-
+	import BmcLogo from '$lib/assets/bmc-logo.svelte'
+	import { Switch } from '@skeletonlabs/skeleton-svelte'
+	import { onMount } from 'svelte'
+	let { data, children } = $props();
+	
 	let modeState = $state(false); // false = dark mode
 
 	function handleModeChange() {
@@ -75,7 +74,7 @@
 		{#key data.pathname}
 			<!-- Main -->
 			<main class="flex flex-grow flex-col w-full overflow-hidden p-4" in:fade={{ duration: 800 }}>
-				<slot />
+				{@render children?.()}
 			</main>
 		{/key}
 		<!-- Sidebar (Right) -->

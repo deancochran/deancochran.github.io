@@ -1,14 +1,18 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import Image from '$lib/blogComponents/img.svelte';
-	import { email_schema } from '$lib/utils/schema';
-	import SvelteSeo from 'svelte-seo';
-	import { fade } from 'svelte/transition';
-	import { superForm } from 'sveltekit-superforms';
-	import { zod } from 'sveltekit-superforms/adapters';
-	import type { PageData } from './$types';
+	import { page } from '$app/stores'
+	import Image from '$lib/blogComponents/img.svelte'
+	import { email_schema } from '$lib/utils/schema'
+	import SvelteSeo from 'svelte-seo'
+	import { fade } from 'svelte/transition'
+	import { superForm } from 'sveltekit-superforms'
+	import { zod } from 'sveltekit-superforms/adapters'
+	import type { PageData } from './$types'
 
-	export let data: PageData;
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
 	const { form, enhance, delayed } = superForm(data.form, {
 		applyAction: true,
 		invalidateAll: true,
@@ -49,7 +53,7 @@
 	action="https://buttondown.com/api/emails/embed-subscribe/deancochran"
 	method="post"
 	target="popupwindow"
-	on:submit|preventDefault={() => {
+	onsubmit={() => {
 		window.open('https://buttondown.com/deancochran', 'popupwindow');
 	}}
 	class="embeddable-buttondown-form"

@@ -1,13 +1,17 @@
 <script lang="ts">
 	// eslint-disable-file no-use-before-define
-	import { page } from '$app/stores';
-	import { img as Image } from '$lib/blogComponents';
-	import { email_schema } from '$lib/utils/schema';
-	import SvelteSeo from 'svelte-seo';
-	import { superForm } from 'sveltekit-superforms';
-	import { zod } from 'sveltekit-superforms/adapters';
-	import type { PageData } from './$types';
-	export let data: PageData;
+	import { page } from '$app/stores'
+	import { img as Image } from '$lib/blogComponents'
+	import { email_schema } from '$lib/utils/schema'
+	import SvelteSeo from 'svelte-seo'
+	import { superForm } from 'sveltekit-superforms'
+	import { zod } from 'sveltekit-superforms/adapters'
+	import type { PageData } from './$types'
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
 	const { form, enhance, delayed } = superForm(data.form, {
 		applyAction: true,
 		invalidateAll: true,
@@ -61,7 +65,7 @@
 	</header>
 
 	<article class="prose flex flex-col gap-4 text-pretty">
-		<svelte:component this={data.component} />
+		<data.component/>
 	</article>
 
 	<footer class="card-footer flex flex-col items-center gap-2 align-middle">
@@ -69,7 +73,7 @@
 			action="https://buttondown.com/api/emails/embed-subscribe/deancochran"
 			method="post"
 			target="popupwindow"
-			on:submit|preventDefault={() => {
+			onsubmit={() => {
 				window.open('https://buttondown.com/deancochran', 'popupwindow');
 			}}
 			class="embeddable-buttondown-form w-full"

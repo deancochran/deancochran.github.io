@@ -7,7 +7,11 @@
 	import { zod } from 'sveltekit-superforms/adapters';
 	import type { PageData } from './$types';
 
-	export let data: PageData;
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
 	const { form, enhance, delayed } = superForm(data.form, {
 		applyAction: true,
 		invalidateAll: true,

@@ -1,17 +1,17 @@
 <script lang="ts">
-	import { FileUpload, Progress } from '@skeletonlabs/skeleton-svelte';
-	import * as mobilenet from '@tensorflow-models/mobilenet';
-	import * as tf from '@tensorflow/tfjs';
+	import { FileUpload, Progress } from '@skeletonlabs/skeleton-svelte'
+	import * as mobilenet from '@tensorflow-models/mobilenet'
+	import * as tf from '@tensorflow/tfjs'
 	
 	// init a element for the model reference
-	let imgEl: HTMLImageElement;
+	let imgEl: HTMLImageElement | undefined = $state();
 	// init a variable for the model
 	let model: mobilenet.MobileNet;
 
 	// a variable to hold the loading state
-	let predictionsLoading = false;
+	let predictionsLoading = $state(false);
 	// a variable to hold the predictions
-	let predictions: any[] = [];
+	let predictions: any[] = $state([]);
 
 	// function to load the pretrained MobileNet model
 	const loadModel = async () => {
@@ -25,12 +25,14 @@
 		predictions = [];
 		const reader = new FileReader();
 		reader.onload = async (event) => {
+			if (!imgEl) {throw new Error('imgEl is undefined')}
 			imgEl.src = reader.result as string;
 		};
 		reader.readAsDataURL(details.acceptedFiles[0]);
 	}
 	// handle preprocessing and classifying the device's selected image
 	async function predict() {
+		if (!imgEl) {throw new Error('imgEl is undefined')}
 		predictionsLoading = true;
 		// image -> 3D tensor  (height, width, color channels)
 		const imageTensor = tf.browser.fromPixels(imgEl);
@@ -61,7 +63,7 @@
 				filesListClasses="hidden"
 			/>
 		</div>
-		<img bind:this={imgEl} on:load={predict} hidden={!imgEl?.src} width="300" height="300" alt="" />
+		<img bind:this={imgEl} onload={predict} hidden={!imgEl?.src} width="300" height="300" alt="" />
 		<div
 			hidden={!imgEl?.src}
 			class="border-surface-200t-800 card w-full p-4 text-center preset-filled-surface-100-900"

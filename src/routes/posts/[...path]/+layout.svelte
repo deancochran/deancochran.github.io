@@ -1,5 +1,10 @@
+<script lang="ts">
+	let { data,children } = $props();
+	console.log(children, data)
+</script>
+
 <div id="post" class=" scroll-p-36">
-	<slot />
+	{@render children?.()}
 </div>
 
 <style lang="postcss">
