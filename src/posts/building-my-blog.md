@@ -4,7 +4,7 @@ slug: building-my-blog
 date: '2024-9-17'
 image: /images/logo.png
 description: Most of the websites that I would use for my personal blog don't support custom code snippets, components, and other pieces of content I love. Clearly building a full blog is overkill, and not necessary for the average 'blogger'. I'm coming at this from a 'because I can' attitude here. Not everyone needs these solutions, but here is mine for those interested in my implementation.
-published: true;
+published: true
 ---
 
 ## Contents
