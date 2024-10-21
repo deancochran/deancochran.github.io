@@ -60,5 +60,6 @@
 		:global(p) {
 			@apply inline;
 		}
+
 	}
 </style>

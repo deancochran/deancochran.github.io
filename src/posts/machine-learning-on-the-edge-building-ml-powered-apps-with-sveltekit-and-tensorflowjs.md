@@ -116,8 +116,8 @@ copy and paste code.
 
 ```ts
 // $lib/components/ImageClassifier.svelte
-import * as tf from "@tensorflow/tfjs";
-import * as mobilenet from "@tensorflow-models/mobilenet";
+import * as tf from '@tensorflow/tfjs'
+import * as mobilenet from '@tensorflow-models/mobilenet'
 // ...
 // ...
 ```
@@ -129,17 +129,17 @@ import * as mobilenet from "@tensorflow-models/mobilenet";
 // ...
 
 // init a element for the model reference
-let imgEl: HTMLImageElement;
+let imgEl: HTMLImageElement
 // init a variable for the model
-let model: mobilenet.MobileNet;
+let model: mobilenet.MobileNet
 
 // function to load the pretrained MobileNet model
 const loadModel = async () => {
-  const version = 2;
-  const alpha = 0.5;
-  model = await mobilenet.load({ version, alpha });
-  console.log("Model loaded successfully");
-};
+	const version = 2
+	const alpha = 0.5
+	model = await mobilenet.load({ version, alpha })
+	console.log('Model loaded successfully')
+}
 // ...
 // ...
 ```
@@ -159,35 +159,35 @@ wait till the model has been successfully loaded until it proceeds
 // ...
 
 // a variable to hold the loading state
-let predictionsLoading = false;
+let predictionsLoading = false
 // a variable to hold the predictions
-let predictions: any[] = [];
+let predictions: any[] = []
 
 // a function handle an uploaded image
 const predictionImage = async (imgDisplay: HTMLImageElement) => {
-  const preprocessedImage = preprocessImage(imgDisplay);
-  predictionsResult = await classifyImage(preprocessedImage);
-};
+	const preprocessedImage = preprocessImage(imgDisplay)
+	predictionsResult = await classifyImage(preprocessedImage)
+}
 
 // handle file uploads from a custom component
 async function handleImageChange(details: any): Promise<void> {
-  predictions = [];
-  const reader = new FileReader();
-  reader.onload = async (event) => {
-    imgEl.src = reader.result as string;
-  };
-  reader.readAsDataURL(details.acceptedFiles[0]);
+	predictions = []
+	const reader = new FileReader()
+	reader.onload = async (event) => {
+		imgEl.src = reader.result as string
+	}
+	reader.readAsDataURL(details.acceptedFiles[0])
 }
 // handle preprocessing and classifying the device's selected image
 async function predict() {
-  predictionsLoading = true;
-  // image -> 3D tensor  (height, width, color channels)
-  const imageTensor = tf.browser.fromPixels(imgEl);
-  // reshape tensor for bilinear polarization
-  const resizedImageTensor = tf.image.resizeBilinear(imageTensor, [224, 224]);
-  // using the model and classify the reshaped tensor
-  predictions = await model.classify(resizedImageTensor);
-  predictionsLoading = false;
+	predictionsLoading = true
+	// image -> 3D tensor  (height, width, color channels)
+	const imageTensor = tf.browser.fromPixels(imgEl)
+	// reshape tensor for bilinear polarization
+	const resizedImageTensor = tf.image.resizeBilinear(imageTensor, [224, 224])
+	// using the model and classify the reshaped tensor
+	predictions = await model.classify(resizedImageTensor)
+	predictionsLoading = false
 }
 ```
 
@@ -231,7 +231,7 @@ package
 		<img bind:this={imgEl} on:load={predict} hidden={!imgEl?.src} width="300" height="300" alt="" />
 		<div
 			hidden={!imgEl?.src}
-			class="border-surface-200t-800 card w-full p-4 text-center preset-filled-surface-100-900"
+			class="border-surface-200t-800 card w-full p-4 text-center preset-tonal-surface"
 		>
 			<h4 class="h4">Predictions:</h4>
 			<div class="flex flex-col gap-2">

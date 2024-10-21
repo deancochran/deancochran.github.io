@@ -81,8 +81,6 @@ for the Svelte community. Svelte 5 was officially **released**! Along with it
 comes a new unified website that combines **Svelte**, **SvelteKit**, and the
 **Svelte tutorial** into one platform.
 
----
-
 **Svelte Summit 2024** was a fantastic event, and it’s clear that the Svelte
 community continues to innovate and push the boundaries of modern web
 development. Whether you're excited about the new features in Svelte 5 or

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import Image from '$lib/blogComponents/img.svelte';
-	import { email_schema } from '$lib/utils/schema';
-	import SvelteSeo from 'svelte-seo';
-	import { superForm } from 'sveltekit-superforms';
-	import { zod } from 'sveltekit-superforms/adapters';
-	import type { PageData } from './$types';
+	import { page } from '$app/stores'
+	import Image from '$lib/blogComponents/img.svelte'
+	import { email_schema } from '$lib/utils/schema'
+	import SvelteSeo from 'svelte-seo'
+	import { superForm } from 'sveltekit-superforms'
+	import { zod } from 'sveltekit-superforms/adapters'
+	import type { PageData } from './$types'
 
 	interface Props {
 		data: PageData;
@@ -51,7 +51,7 @@
 	{#each data.posts as post}
 		<a
 			href={'/posts/' + post.relativePath}
-			class="card card-hover h-fit block overflow-hidden border border-surface-200-800 divide-surface-200-800 preset-filled-surface-100-900 active:scale-[1.01]"
+			class="card card-hover h-fit block overflow-reset-filled-surface-100-900 border-[1px] border-surface-200-800 active:scale-[1.01]"
 		>
 			<header class="card-header">
 				<Image
@@ -71,7 +71,7 @@
 	
 				<footer class="card-footer flex w-full items-center justify-between gap-4 p-4">
 					<small class="opacity-60">{new Date(post.date).toDateString()}</small>
-					<button type="button" class="btn preset-filled">
+					<button type="button" class="btn preset-tonal-surface outline">
 						<span>Read More</span>
 						<span>&rarr;</span>
 					</button>

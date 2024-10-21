@@ -53,18 +53,15 @@
 		<Image src={data.meta.image} alt={data.meta.title} loading="eager" />
 		<div class="flex flex-col gap-4">
 			<div class="flex flex-row items-center justify-between gap-2 align-middle">
-				<small class="opacity-60">{new Date(data.meta.date).toDateString()}</small>
-				<!-- <button type="button" class="btn btn-icon preset-filled">
-					<Share2 />
-				</button> -->
+				<small>{new Date(data.meta.date).toDateString()}</small>
 			</div>
-			<p class="opacity-60">
+			<p>
 				{data.meta.description}
 			</p>
 		</div>
 	</header>
 
-	<article class="prose flex flex-col gap-4 text-pretty">
+	<article class="flex flex-col gap-4">
 		<data.component/>
 	</article>
 
@@ -82,7 +79,7 @@
 				<span class="label-text px-1">Subscribe to my newsletter</span>
 				<div class="flex flex-row items-center justify-center gap-4 align-middle">
 					<input name="bd-email" class="input" type="email" placeholder="janedoe@example.com" />
-					<button type="submit" class="btn preset-filled">Subscribe</button>
+					<button type="submit" class="btn preset-tonal-surface outline">Subscribe</button>
 				</div>
 			</label>
 		</form>

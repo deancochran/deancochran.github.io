@@ -66,7 +66,7 @@
 		<img bind:this={imgEl} onload={predict} hidden={!imgEl?.src} width="300" height="300" alt="" />
 		<div
 			hidden={!imgEl?.src}
-			class="border-surface-200t-800 card w-full p-4 text-center preset-filled-surface-100-900"
+			class="border-surface-200t-800 card w-full p-4 text-center preset-tonal"
 		>
 			<h4 class="h4">Predictions:</h4>
 			<div class="flex flex-col gap-2">

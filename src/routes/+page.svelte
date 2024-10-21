@@ -62,7 +62,7 @@
 		<span class="label-text px-1">Subscribe to my newsletter</span>
 		<div class="flex flex-row items-center justify-center gap-4 align-middle">
 			<input name="bd-email" class="input" type="email" placeholder="janedoe@example.com" />
-			<button type="submit" class="btn preset-filled">Subscribe</button>
+			<button type="submit" class="btn preset-tonal-surface outline">Subscribe</button>
 		</div>
 	</label>
 </form>
@@ -72,7 +72,7 @@
 <div class="flex h-full w-full flex-col items-center justify-start gap-4 align-middle">
 	{#await randomPost()}
 		<div
-			class="card card-hover flex h-3/4 w-full flex-col justify-between gap-4 border border-surface-200-800 divide-surface-200-800 preset-filled-surface-100-900"
+			class="card card-hover flex h-3/4 w-full flex-col justify-between gap-4 border"
 		>
 			<div class="placeholder h-1/2 animate-pulse"></div>
 			<div class="flex flex-col gap-4 p-4">
@@ -85,7 +85,7 @@
 				<div class="placeholder animate-pulse"></div>
 				<footer class="card-footer flex items-center justify-between gap-4 pt-8">
 					<div class="placeholder w-1/5 animate-pulse"></div>
-					<button type="button" class="btn preset-filled">
+					<button type="button" class="btn preset-tonal-surface">
 						<span>Read More</span>
 						<span>&rarr;</span>
 					</button>
@@ -96,7 +96,7 @@
 		<a
 			in:fade={{ duration: 300 }}
 			href={'/posts/' + post.relativePath}
-			class="card card-hover block overflow-hidden border border-surface-200-800 divide-surface-200-800 preset-filled-surface-100-900 active:scale-[1.01]"
+			class="card card-hover block overflow-hidden border border-surface-200-800 divide-surface-200-800 preset-tonal-surface active:scale-[1.01]"
 		>
 			<header class="card-header">
 				<Image src={post.image??'/images/logo.png'} class="aspect-[21/9] w-full object-cover" alt="banner" />
@@ -113,7 +113,7 @@
 
 			<footer class="card-footer flex items-center justify-between gap-4 p-4">
 				<small class="opacity-60">{new Date(post.date).toDateString()}</small>
-				<button type="button" class="btn preset-filled">
+				<button type="button" class="btn preset-tonal-surface">
 					<span>Read More</span>
 					<span>&rarr;</span>
 				</button>
