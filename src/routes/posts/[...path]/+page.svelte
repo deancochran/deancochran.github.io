@@ -34,7 +34,7 @@
 		site_name: 'Dean Cochran',
 		images: [
 			{
-				url: data.meta.image
+				url: $page.url.origin + data.meta.image
 			}
 		]
 	}}
@@ -43,7 +43,7 @@
 		creator: '@deancochran_',
 		title: data.meta.title,
 		description: data.meta.description,
-		image: data.meta.image
+		image: $page.url.origin + data.meta.image
 	}}
 />
 

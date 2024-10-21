@@ -33,7 +33,7 @@
 		site_name: 'Dean Cochran',
 		images: [
 			{
-				url: '/images/logo.png'
+				url: $page.url.origin + '/images/logo.png'
 			}
 		]
 	}}
@@ -41,7 +41,7 @@
 		card: 'summary_large_image',
 		creator: '@deancochran_',
 		title: "Dean Cochran's Posts",
-		image: '/images/logo.png'
+		image: $page.url.origin + '/images/logo.png'
 	}}
 />
 
