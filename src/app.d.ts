@@ -9,6 +9,10 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
+	interface MdsvexFile {
+		default: SvelteComponent
+		metadata: Record<string, string>
+	}
 
 	interface BlogPost {
 		title: string

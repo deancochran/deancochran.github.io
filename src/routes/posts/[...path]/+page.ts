@@ -8,7 +8,7 @@ export const load = async (event) => {
 	for (const [path, resolver] of Object.entries(posts)) {
 		const relativePath = path.split('.')[0].split('/').slice(3).join('/')
 		if (relativePath === event.params.path) {
-			const file = await resolver()
+			const file = (await resolver()) as MdsvexFile
 			if (!file || !file.metadata.published || !file.default) {
 				throw error(404, `Post ${path} found, but could not be loaded`) // Couldn't resolve the post
 			}
