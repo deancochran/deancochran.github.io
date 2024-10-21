@@ -1,6 +1,5 @@
 <script lang="ts">
-	let { data,children } = $props();
-	console.log(children, data)
+	let { children } = $props();
 </script>
 
 <div id="post" class=" scroll-p-36">
