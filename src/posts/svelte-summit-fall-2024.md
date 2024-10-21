@@ -1,5 +1,5 @@
 ---
-title: Svelte 5 is here
+title: Svelte 5.0 released at Svelte Fall 2024 Summit
 slug: svelte-summit-fall-2024
 date: '2024-10-18'
 image: /images/svelte-summit-fall-2024.png
