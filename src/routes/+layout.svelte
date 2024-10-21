@@ -51,7 +51,7 @@
 		{#snippet lead()}
 			<a class="transition-all duration-100 hover:scale-110" href="/"><Logo class="h-12 w-12" /></a>
 		{/snippet}
-		<h6 class="h6">Dean's List</h6>
+		<h6 class="h6">Dean's Spooky List</h6>
 		{#snippet trail()}
 			<a href="/about">About</a>
 			<a href="/posts">Blog</a>
@@ -92,7 +92,7 @@
 					<Logo class="h-12 w-12" /></a
 				>
 				<div class="flex flex-col">
-					<h6 class="h6">Dean's List</h6>
+					<h6 class="h6">Dean's Spooky List</h6>
 
 					<div class="flex w-full flex-row items-center gap-2">
 						<a href="https://www.linkedin.com/in/dean-cochran/"><Linkedin size={20} /></a>
