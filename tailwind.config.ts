@@ -3,6 +3,8 @@ import * as themes from '@skeletonlabs/skeleton/themes'
 import forms from '@tailwindcss/forms'
 import { join } from 'path'
 import type { Config } from 'tailwindcss'
+
+import * as CustomThemes from './themes'
 export default {
 	darkMode: 'class',
 	content: [
@@ -17,7 +19,13 @@ export default {
 	plugins: [
 		forms,
 		skeleton({
-			themes: [themes.cerberus, themes.catppuccin, themes.pine, themes.rose],
+			themes: [
+				themes.cerberus,
+				themes.catppuccin,
+				themes.pine,
+				themes.rose,
+				CustomThemes.halloween,
+			],
 		}),
 	],
 } as Config
