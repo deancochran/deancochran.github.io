@@ -71,7 +71,7 @@ const config = {
 		}),
 		prerender: {
 			crawl: true,
-		},
+		}
 	},
 }
 
