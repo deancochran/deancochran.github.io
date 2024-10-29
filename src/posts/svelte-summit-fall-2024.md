@@ -1,7 +1,7 @@
 ---
 title: Svelte 5.0 released at Svelte Fall 2024 Summit
 slug: svelte-summit-fall-2024
-date: '2024-10-18'
+date: "2024-10-18"
 image: /images/svelte-summit-fall-2024.png
 description: The Svelte Summit Fall 2024 Virtual Show was packed with exciting talks from various speakers, sharing their experiences and introducing the latest updates to the Svelte ecosystem. Here's a summary of some of the sessions that interested me the most.
 published: true

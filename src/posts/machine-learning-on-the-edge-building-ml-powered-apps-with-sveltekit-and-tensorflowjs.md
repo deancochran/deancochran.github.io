@@ -1,7 +1,7 @@
 ---
 title: Machine Learning on the Edge with SvelteKit and TensorFlowJS
 slug: machine-learning-on-the-edge-with-sveltekit-and-tensorflowjs
-date: '2024-10-08'
+date: "2024-10-08"
 image: /images/machine-learning-on-the-edge-with-sveltekit-and-tensorflowjs.webp
 description: Empowering mobile devices with Machine Learning has been a massive success lately. LLMs like ChatGPT are making headlines daily, and people everywhere are utilizing AI and Machine Learning with their mobile devices. For many, implementing machine learning on mobile applications is well beyond what the average user needs to know how to leverage the AI chatbot, image classifier, or recommendation system. However, in this guide, I will be giving an overview of what machine learning on the edge is, and show you how can add it to your modern web application today.
 published: true
@@ -116,8 +116,8 @@ copy and paste code.
 
 ```ts
 // $lib/components/ImageClassifier.svelte
-import * as tf from '@tensorflow/tfjs'
-import * as mobilenet from '@tensorflow-models/mobilenet'
+import * as tf from "@tensorflow/tfjs";
+import * as mobilenet from "@tensorflow-models/mobilenet";
 // ...
 // ...
 ```
@@ -129,17 +129,17 @@ import * as mobilenet from '@tensorflow-models/mobilenet'
 // ...
 
 // init a element for the model reference
-let imgEl: HTMLImageElement
+let imgEl: HTMLImageElement;
 // init a variable for the model
-let model: mobilenet.MobileNet
+let model: mobilenet.MobileNet;
 
 // function to load the pretrained MobileNet model
 const loadModel = async () => {
-	const version = 2
-	const alpha = 0.5
-	model = await mobilenet.load({ version, alpha })
-	console.log('Model loaded successfully')
-}
+  const version = 2;
+  const alpha = 0.5;
+  model = await mobilenet.load({ version, alpha });
+  console.log("Model loaded successfully");
+};
 // ...
 // ...
 ```
@@ -159,35 +159,35 @@ wait till the model has been successfully loaded until it proceeds
 // ...
 
 // a variable to hold the loading state
-let predictionsLoading = false
+let predictionsLoading = false;
 // a variable to hold the predictions
-let predictions: any[] = []
+let predictions: any[] = [];
 
 // a function handle an uploaded image
 const predictionImage = async (imgDisplay: HTMLImageElement) => {
-	const preprocessedImage = preprocessImage(imgDisplay)
-	predictionsResult = await classifyImage(preprocessedImage)
-}
+  const preprocessedImage = preprocessImage(imgDisplay);
+  predictionsResult = await classifyImage(preprocessedImage);
+};
 
 // handle file uploads from a custom component
 async function handleImageChange(details: any): Promise<void> {
-	predictions = []
-	const reader = new FileReader()
-	reader.onload = async (event) => {
-		imgEl.src = reader.result as string
-	}
-	reader.readAsDataURL(details.acceptedFiles[0])
+  predictions = [];
+  const reader = new FileReader();
+  reader.onload = async (event) => {
+    imgEl.src = reader.result as string;
+  };
+  reader.readAsDataURL(details.acceptedFiles[0]);
 }
 // handle preprocessing and classifying the device's selected image
 async function predict() {
-	predictionsLoading = true
-	// image -> 3D tensor  (height, width, color channels)
-	const imageTensor = tf.browser.fromPixels(imgEl)
-	// reshape tensor for bilinear polarization
-	const resizedImageTensor = tf.image.resizeBilinear(imageTensor, [224, 224])
-	// using the model and classify the reshaped tensor
-	predictions = await model.classify(resizedImageTensor)
-	predictionsLoading = false
+  predictionsLoading = true;
+  // image -> 3D tensor  (height, width, color channels)
+  const imageTensor = tf.browser.fromPixels(imgEl);
+  // reshape tensor for bilinear polarization
+  const resizedImageTensor = tf.image.resizeBilinear(imageTensor, [224, 224]);
+  // using the model and classify the reshaped tensor
+  predictions = await model.classify(resizedImageTensor);
+  predictionsLoading = false;
 }
 ```
 

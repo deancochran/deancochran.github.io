@@ -1,3 +1,3 @@
-import halloween from './halloween'
+import halloween from "./halloween";
 
-export { halloween }
+export { halloween };

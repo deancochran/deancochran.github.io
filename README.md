@@ -34,6 +34,7 @@ Other                      50 hrs 55 mins  █░░░░░░░░░░░�
 ## [Latest Blog Posts](https://dean-cochran.com/posts.):
 
 <!-- Dean's List:START -->
+
 - [Svelte 5.0 released at Svelte Fall 2024 Summit](https://dean-cochran.com/posts/svelte-summit-fall-2024)
 - [Machine Learning on the Edge with SvelteKit and TensorFlowJS](https://dean-cochran.com/posts/machine-learning-on-the-edge-building-ml-powered-apps-with-sveltekit-and-tensorflowjs)
 - [Building my Blog with Sveltekit and Terraform](https://dean-cochran.com/posts/building-my-blog)

@@ -4,8 +4,9 @@ import { zod } from "sveltekit-superforms/adapters";
 
 export const load = async (event) => {
   const response = await event.fetch(`/api/posts`);
-  const posts =
-    (await response.json()) as (BlogPost & { relativePath: string })[];
+  const posts = (await response.json()) as (BlogPost & {
+    relativePath: string;
+  })[];
   const form = await superValidate(zod(email_schema));
 
   return { posts: posts, form };
