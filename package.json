@@ -42,13 +42,13 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@sveltejs/adapter-static": "^3.0.5",
+		"@sveltejs/adapter-static": "^0.0.17",
 		"@tensorflow-models/mobilenet": "^2.1.1",
 		"@tensorflow/tfjs": "^4.21.0",
 		"katex": "^0.16.11",
 		"lucide-svelte": "^0.439.0",
 		"rehype-autolink-headings": "^7.1.0",
 		"remark-math": "3.0.0",
-		"utils": "^0.3.1"
+		"utils": "^0.2.2"
 	}
 }
