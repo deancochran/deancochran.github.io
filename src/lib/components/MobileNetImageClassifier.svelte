@@ -25,8 +25,10 @@
 		predictions = [];
 		const reader = new FileReader();
 		reader.onload = async (event) => {
+			
 			if (!imgEl) {throw new Error('imgEl is undefined')}
 			imgEl.src = reader.result as string;
+			imgEl.hidden = false;
 		};
 		reader.readAsDataURL(details.acceptedFiles[0]);
 	}
@@ -63,21 +65,25 @@
 				filesListClasses="hidden"
 			/>
 		</div>
-		<img bind:this={imgEl} onload={predict} hidden={!imgEl?.src} width="300" height="300" alt="" />
-		<div
-			hidden={!imgEl?.src}
+		<img bind:this={imgEl} hidden onload={predict} width="300" height="300" alt="" />
+			<div
 			class="border-surface-200t-800 card w-full p-4 text-center preset-tonal"
-		>
-			<h4 class="h4">Predictions:</h4>
-			<div class="flex flex-col gap-2">
+			>
+				
 				{#if predictionsLoading}
-					<span>Loading...</span>
+					
+					<h4 class="h4">Predictions:</h4>
+					<div class="flex flex-col gap-2">
+						<span>Loading...</span>
+					</div>
 				{:else}
-					{#each predictions as prediction}
-						<span>{prediction.className}: {Math.round(100 * prediction.probability)}%</span>
-					{/each}
+					<h4 class="h4">Predictions:</h4>
+					<div class="flex flex-col gap-2">
+						{#each predictions as prediction}
+							<span>{prediction.className}: {Math.round(100 * prediction.probability)}%</span>
+						{/each}
+					</div>
 				{/if}
 			</div>
-		</div>
 	</section>
 {/await}
