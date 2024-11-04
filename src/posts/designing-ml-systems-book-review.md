@@ -2,7 +2,7 @@
 title: Designing Machine Learning Systems by Chip Huyen (A Book Review)
 slug: designing-ml-systems-book-review
 date: "2024-10-28"
-image: /images/designing-ml-systems-book-review.jpg
+image: /images/designing-ml-systems-book-review.webp
 description: A refreshing departure from conventional ML texts, Chip Huyen's "Designing Machine Learning Systems" (2022) explores the comprehensive architecture needed to bring machine learning solutions into production, making it essential reading for both seasoned ML engineers and newcomers. It is the first book I have read by this author, and it will not be the last.
 published: true
 ---

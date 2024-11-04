@@ -1,7 +1,7 @@
 <script>
-	import { page } from '$app/stores';
-	import Logo from '$lib/assets/Logo.svelte';
-	import SvelteSeo from 'svelte-seo';
+	import { page } from '$app/stores'
+	import Logo from '$lib/assets/Logo.svelte'
+	import SvelteSeo from 'svelte-seo'
 </script>
 
 <SvelteSeo
@@ -14,7 +14,7 @@
 		site_name: 'Dean Cochran',
 		images: [
 			{
-				url: '/images/logo.png'
+				url: '/images/logo.webpp'
 			}
 		]
 	}}
@@ -22,7 +22,7 @@
 		card: 'summary_large_image',
 		creator: '@deancochran_',
 		title: 'About Dean Cochran',
-		image: '/images/logo.png'
+		image: '/images/logo.webp'
 	}}
 />
 

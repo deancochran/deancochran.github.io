@@ -33,7 +33,7 @@
 		site_name: 'Dean Cochran',
 		images: [
 			{
-				url: '/images/logo.png'
+				url: '/images/logo.webp'
 			}
 		]
 	}}
@@ -41,7 +41,7 @@
 		card: 'summary_large_image',
 		creator: '@deancochran_',
 		title: "Dean Cochran's Posts",
-		image: '/images/logo.png'
+		image: '/images/logo.webp'
 	}}
 />
 
@@ -55,7 +55,7 @@
 		>
 			<header class="flex card-header">
 				<Image
-					src={post.image ?? '/images/logo.png'}
+					src={post.image ?? '/images/logo.webp'}
 					class="aspect-[21/9] rounded-t-md w-full object-cover"
 					alt="banner"
 				/>
