@@ -27,3 +27,11 @@ pre {
 pre button {
   @apply btn-icon absolute top-2 m-0;
 }
+
+ul {
+  @apply list-inside list-disc ml-4;
+}
+
+ol {
+  @apply list-inside list-disc ml-4;
+}

@@ -99,7 +99,7 @@
 			class="card card-hover block overflow-hidden border border-surface-200-800 divide-surface-200-800 preset-tonal-surface active:scale-[1.01]"
 		>
 			<header class="card-header">
-				<Image src={post.image??'/images/logo.png'} class="aspect-[21/9] w-full object-cover" alt="banner" />
+				<Image src={post.image??'/images/logo.png'} class="aspect-[21/9] rounded-t-md w-full object-cover" alt="banner" />
 			</header>
 
 			<article class="space-y-4 p-4">

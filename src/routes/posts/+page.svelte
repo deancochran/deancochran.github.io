@@ -51,12 +51,12 @@
 	{#each data.posts as post}
 		<a
 			href={'/posts/' + post.relativePath}
-			class="card card-hover h-fit block overflow-reset-filled-surface-100-900 border-[1px] border-surface-200-800 active:scale-[1.01]"
+			class="card card-hover h-fit block overflow-reset-filled-surface-100-900 border-[1px] border-surface-200-800 active:scale-[1.01] rounded-e-xl"
 		>
-			<header class="card-header">
+			<header class="flex card-header">
 				<Image
 					src={post.image ?? '/images/logo.png'}
-					class="aspect-[21/9] w-full object-cover"
+					class="aspect-[21/9] rounded-t-md w-full object-cover"
 					alt="banner"
 				/>
 			</header>
