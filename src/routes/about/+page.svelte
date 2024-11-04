@@ -14,7 +14,7 @@
 		site_name: 'Dean Cochran',
 		images: [
 			{
-				url: '/images/logo.webpp'
+				url: '/images/logo..webp'
 			}
 		]
 	}}

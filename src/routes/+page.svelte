@@ -37,7 +37,7 @@
 		site_name: 'Dean Cochran',
 		images: [
 			{
-				url: '/images/logo.webppp'
+				url: '/images/logo..webpp'
 			}
 		]
 	}}
