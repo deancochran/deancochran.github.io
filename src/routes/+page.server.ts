@@ -9,5 +9,5 @@ export const load = async (event) => {
   })[];
   const form = await superValidate(zod(email_schema));
 
-  return { posts: posts, form };
+  return { post: posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0], form };
 };

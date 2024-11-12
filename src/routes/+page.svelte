@@ -22,7 +22,7 @@
 		timeoutMs: 5000
 	});
 	async function randomPost(): Promise<BlogPost & { relativePath: string }> {
-		return data.posts[Math.floor(Math.random() * data.posts.length)];
+		return data.post
 	}
 </script>
 
@@ -37,7 +37,7 @@
 		site_name: 'Dean Cochran',
 		images: [
 			{
-				url: '/images/logo..webpp'
+				url: '/images/logo.webp'
 			}
 		]
 	}}
@@ -70,54 +70,30 @@
 <br />
 
 <div class="flex h-full w-full flex-col items-center justify-start gap-4 align-middle">
-	{#await randomPost()}
-		<div
-			class="card card-hover flex h-3/4 w-full flex-col justify-between gap-4 border"
-		>
-			<div class="placeholder h-1/2 animate-pulse"></div>
-			<div class="flex flex-col gap-4 p-4">
-				<div class="placeholder animate-pulse p-2"></div>
-			</div>
-			<article class="flex flex-col gap-4 p-4">
-				<div class="placeholder animate-pulse"></div>
-				<div class="placeholder animate-pulse"></div>
-				<div class="placeholder animate-pulse"></div>
-				<div class="placeholder animate-pulse"></div>
-				<footer class="card-footer flex items-center justify-between gap-4 pt-8">
-					<div class="placeholder w-1/5 animate-pulse"></div>
-					<button type="button" class="btn preset-tonal-surface outline">
-						<span>Read More</span>
-						<span>&rarr;</span>
-					</button>
-				</footer>
-			</article>
-		</div>
-	{:then post}
 		<a
 			in:fade={{ duration: 300 }}
-			href={'/posts/' + post.relativePath}
+			href={'/posts/' + data.post.relativePath}
 			class="card card-hover block overflow-hidden border border-surface-200-800 divide-surface-200-800 preset-tonal-surface active:scale-[1.01]"
 		>
 			<header class="card-header">
-				<Image src={post.image??'/images/logo.webp'} class="aspect-[21/9] rounded-t-md w-full object-cover" alt="banner" />
+				<Image src={data.post.image??'/images/logo.webp'} class="aspect-[21/9] rounded-t-md w-full object-cover" alt="banner" />
 			</header>
 
 			<article class="space-y-4 p-4">
 				<div>
-					<h2 class="h2">{post.title}</h2>
+					<h2 class="h2">{data.post.title}</h2>
 				</div>
 				<p class="line-clamp-5 opacity-60">
-					{post.description}
+					{data.post.description}
 				</p>
 			</article>
 
 			<footer class="card-footer flex items-center justify-between gap-4 p-4">
-				<small class="opacity-60">{new Date(post.date).toDateString()}</small>
+				<small class="opacity-60">{new Date(data.post.date).toDateString()}</small>
 				<button type="button" class="btn preset-tonal-surface outline">
 					<span>Read More</span>
 					<span>&rarr;</span>
 				</button>
 			</footer>
 		</a>
-	{/await}
 </div>
