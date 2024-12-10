@@ -41,5 +41,3 @@ dist
 .env
 publish.sh
 
-# static images
-static
