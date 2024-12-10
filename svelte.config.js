@@ -40,12 +40,10 @@ const mdsvexOptions = {
   },
   remarkPlugins: [
     remarkMath,
-    // katexBlocks,
     remarkUnwrapImages,
     [remarkToc, { tight: true, maxDepth: 3 }],
   ],
   rehypePlugins: [
-    // correctHastTree,
     rehypeKatexSvelte,
     rehypeSlug,
     rehypeAutolinkHeadings,

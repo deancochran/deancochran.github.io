@@ -40,3 +40,6 @@ dist
 .vscode
 .env
 publish.sh
+
+# static images
+static
