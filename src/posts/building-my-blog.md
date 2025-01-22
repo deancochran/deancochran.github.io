@@ -168,8 +168,8 @@ the updates are finished) to get started.
 For deployment, I rely on Terraform to automate the infrastructure setup for my
 blog. Here’s a breakdown of the components I use:
 
-- **S3 Buckets**: I deploy two S3 buckets—one for storing the Terraform remote
-  backend and another for hosting my blog’s static content. The S3 bucket
+- **S3 Buckets**: I deploy three S3 buckets—one for storing the Terraform remote
+  backend, one for hosting my blog’s static content, and another for logging the network traffic. The S3 bucket
   efficiently serves my static assets (HTML, CSS, JavaScript).
 
 - **CloudFront Distribution**: I use Amazon CloudFront as a CDN for my blog,

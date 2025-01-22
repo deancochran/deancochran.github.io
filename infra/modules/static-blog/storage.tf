@@ -1,3 +1,4 @@
+# Static Blog Content Storage
 resource "aws_s3_bucket" "main" {
     bucket = var.bucket_name
 }
@@ -54,4 +55,27 @@ data "aws_iam_policy_document" "main" {
 resource "aws_s3_bucket_policy" "open_read" {
   bucket = aws_s3_bucket.main.id
   policy = data.aws_iam_policy_document.main.json
+}
+
+# Logging Storage
+resource "aws_s3_bucket" "logs" {
+  bucket = "${var.bucket_name}-logs"
+}
+
+data "aws_iam_policy_document" "cloudfront_logs" {
+  statement {
+    sid       = "AllowCloudFrontToWriteLogs"
+    actions   = ["s3:PutObject"]
+    resources = ["${aws_s3_bucket.logs.arn}/cloudfront-logs/*"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_s3_bucket_policy" "logging" {
+  bucket = aws_s3_bucket.logs.id
+  policy = data.aws_iam_policy_document.cloudfront_logs.json
 }

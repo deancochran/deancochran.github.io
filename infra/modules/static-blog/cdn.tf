@@ -15,6 +15,13 @@ resource "aws_cloudfront_distribution" "main" {
     is_ipv6_enabled     = true
     comment             = "CDN for my website"
     default_root_object = "index.html"
+
+    logging_config {
+        bucket = aws_s3_bucket.logs.bucket_regional_domain_name
+        prefix = "cloudfront-logs/"
+        include_cookies = true
+    }
+    
     aliases             = [var.domain_name]
 
     default_cache_behavior {
