@@ -143,7 +143,7 @@ Here’s a simple example of how you can dynamically load and display markdown
 content in your SvelteKit app:
 
 ```jsx
-// [...posts]/+page.svelte
+// [...blog]/+page.svelte
 <script lang="ts">
 	import type { PageData } from './$types';
 	export let data: PageData;

@@ -30,7 +30,7 @@
 		title: data.meta.title,
 		description: data.meta.description,
 		url:  $page.url.href,
-		type: 'website',
+		type: 'article',
 		site_name: 'Dean Cochran',
 		images: [
 			{
@@ -40,6 +40,7 @@
 	}}
 	twitter={{
 		card: 'summary_large_image',
+		site: '@deancochran_',
 		creator: '@deancochran_',
 		title: data.meta.title,
 		description: data.meta.description,

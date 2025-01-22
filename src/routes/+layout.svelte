@@ -54,7 +54,7 @@
 		<h6 class="h6">Dean's List</h6>
 		{#snippet trail()}
 			<a href="/about">About</a>
-			<a href="/posts">Blog</a>
+			<a href="/blog">Blog</a>
 			<Switch
 				name="mode"
 				controlActive="bg-surface-200"

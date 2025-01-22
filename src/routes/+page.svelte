@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import Image from '$lib/blogComponents/img.svelte'
+	import Post from '$lib/components/Post.svelte'
 	import { email_schema } from '$lib/utils/schema'
 	import SvelteSeo from 'svelte-seo'
-	import { fade } from 'svelte/transition'
 	import { superForm } from 'sveltekit-superforms'
 	import { zod } from 'sveltekit-superforms/adapters'
 	import type { PageData } from './$types'
@@ -21,9 +20,7 @@
 		delayMs: 0,
 		timeoutMs: 5000
 	});
-	async function randomPost(): Promise<BlogPost & { relativePath: string }> {
-		return data.post
-	}
+
 </script>
 
 <SvelteSeo
@@ -33,7 +30,7 @@
 	openGraph={{
 		title: "Dean Cochran's Blog",
 		url: $page.url.href,
-		type: 'website',
+		type: 'article',
 		site_name: 'Dean Cochran',
 		images: [
 			{
@@ -43,6 +40,7 @@
 	}}
 	twitter={{
 		card: 'summary_large_image',
+		site: '@deancochran_',
 		creator: '@deancochran_',
 		title: "Dean Cochran's Blog",
 		image: '/images/logo.webp'
@@ -70,30 +68,5 @@
 <br />
 
 <div class="flex h-full w-full flex-col items-center justify-start gap-4 align-middle">
-		<a
-			in:fade={{ duration: 300 }}
-			href={'/posts/' + data.post.relativePath}
-			class="card card-hover block overflow-hidden border border-surface-200-800 divide-surface-200-800 preset-tonal-surface active:scale-[1.01]"
-		>
-			<header class="card-header">
-				<Image src={data.post.image??'/images/logo.webp'} class="aspect-[21/9] rounded-t-md w-full object-cover" alt="banner" />
-			</header>
-
-			<article class="space-y-4 p-4">
-				<div>
-					<h2 class="h2">{data.post.title}</h2>
-				</div>
-				<p class="line-clamp-5 opacity-60">
-					{data.post.description}
-				</p>
-			</article>
-
-			<footer class="card-footer flex items-center justify-between gap-4 p-4">
-				<small class="opacity-60">{new Date(data.post.date).toDateString()}</small>
-				<button type="button" class="btn preset-tonal-surface outline">
-					<span>Read More</span>
-					<span>&rarr;</span>
-				</button>
-			</footer>
-		</a>
+	<Post post={data.post} />
 </div>
