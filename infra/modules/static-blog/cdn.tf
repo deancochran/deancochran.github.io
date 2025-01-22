@@ -17,7 +17,7 @@ resource "aws_cloudfront_distribution" "main" {
     default_root_object = "index.html"
 
     logging_config {
-        bucket = aws_s3_bucket.logs.bucket_regional_domain_name
+        bucket = aws_s3_bucket.cloudfront_logs.bucket_regional_domain_name
         prefix = "cloudfront-logs/"
         include_cookies = true
     }

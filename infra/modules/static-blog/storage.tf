@@ -57,16 +57,16 @@ resource "aws_s3_bucket_policy" "open_read" {
   policy = data.aws_iam_policy_document.main.json
 }
 
-# Logging Storage
-resource "aws_s3_bucket" "logs" {
-  bucket = "${var.bucket_name}-logs"
+# CloudFront Logging Storage
+resource "aws_s3_bucket" "cloudfront_logs" {
+  bucket = "${var.bucket_name}-cloudfront-logs"
 }
 
 data "aws_iam_policy_document" "cloudfront_logs" {
   statement {
     sid       = "AllowCloudFrontToWriteLogs"
     actions   = ["s3:PutObject"]
-    resources = ["${aws_s3_bucket.logs.arn}/cloudfront-logs/*"]
+    resources = ["${aws_s3_bucket.cloudfront_logs.arn}/cloudfront-logs/*"]
 
     principals {
       type        = "Service"
@@ -75,7 +75,7 @@ data "aws_iam_policy_document" "cloudfront_logs" {
   }
 }
 
-resource "aws_s3_bucket_policy" "logging" {
-  bucket = aws_s3_bucket.logs.id
+resource "aws_s3_bucket_policy" "cloudfront_logging" {
+  bucket = aws_s3_bucket.cloudfront_logs.id
   policy = data.aws_iam_policy_document.cloudfront_logs.json
 }
