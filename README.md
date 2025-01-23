@@ -34,8 +34,8 @@ Other                      52 hrs 7 mins   █░░░░░░░░░░░�
 ## [Latest Blog Posts](https://dean-cochran.com/blog.):
 
 <!-- Dean's List:START -->
-- [Designing Machine Learning Systems by Chip Huyen &lpar;A Book Review&rpar;](https://dean-cochran.com/blog/designing-ml-systems-book-review)
-- [Svelte 5.0 released at Svelte Fall 2024 Summit](https://dean-cochran.com/blog/svelte-summit-fall-2024)
-- [Machine Learning on the Edge with SvelteKit and TensorFlowJS](https://dean-cochran.com/blog/machine-learning-on-the-edge-building-ml-powered-apps-with-sveltekit-and-tensorflowjs)
-- [Building my Blog with Sveltekit and Terraform](https://dean-cochran.com/blog/building-my-blog)
+- [Designing Machine Learning Systems by Chip Huyen &lpar;A Book Review&rpar;](https://dean-cochran.com/posts/designing-ml-systems-book-review)
+- [Svelte 5.0 released at Svelte Fall 2024 Summit](https://dean-cochran.com/posts/svelte-summit-fall-2024)
+- [Machine Learning on the Edge with SvelteKit and TensorFlowJS](https://dean-cochran.com/posts/machine-learning-on-the-edge-building-ml-powered-apps-with-sveltekit-and-tensorflowjs)
+- [Building my Blog with Sveltekit and Terraform](https://dean-cochran.com/posts/building-my-blog)
 <!-- Dean's List:END -->
