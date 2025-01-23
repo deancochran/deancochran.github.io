@@ -62,11 +62,24 @@ resource "aws_s3_bucket" "cloudfront_logs" {
   bucket = "${var.bucket_name}-cloudfront-logs"
 }
 
+resource "aws_s3_bucket_ownership_controls" "cloudfront_logs" {
+  bucket = aws_s3_bucket.cloudfront_logs.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+resource "aws_s3_bucket_acl" "cloudfront_logs" {
+  depends_on = [aws_s3_bucket_ownership_controls.cloudfront_logs]
+  bucket = aws_s3_bucket.cloudfront_logs.id
+  acl    = "private"
+}
+
 data "aws_iam_policy_document" "cloudfront_logs" {
   statement {
     sid       = "AllowCloudFrontToWriteLogs"
     actions   = ["s3:PutObject"]
-    resources = ["${aws_s3_bucket.cloudfront_logs.arn}/cloudfront-logs/*"]
+    resources = ["${aws_s3_bucket.cloudfront_logs.arn}/*"]
 
     principals {
       type        = "Service"
