@@ -58,8 +58,20 @@ resource "aws_s3_bucket_policy" "open_read" {
 }
 
 # CloudFront Logging Storage
+
+# Retrieve your canonical user ID
+data "aws_canonical_user_id" "current" {}
+
 resource "aws_s3_bucket" "cloudfront_logs" {
   bucket = "${var.bucket_name}-cloudfront-logs"
+  tags = {
+    Environment = "Production"
+    Application = "CloudFront Logs"
+  }
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_s3_bucket_ownership_controls" "cloudfront_logs" {
@@ -72,7 +84,29 @@ resource "aws_s3_bucket_ownership_controls" "cloudfront_logs" {
 resource "aws_s3_bucket_acl" "cloudfront_logs" {
   depends_on = [aws_s3_bucket_ownership_controls.cloudfront_logs]
   bucket = aws_s3_bucket.cloudfront_logs.id
-  acl    = "private"
+  # acl    = "log-delivery-write" # Required for legacy logging
+  access_control_policy {
+    owner {
+      id = data.aws_canonical_user_id.current.id
+    }
+
+    grant {
+      grantee {
+        id   = data.aws_canonical_user_id.current.id
+        type = "CanonicalUser"
+      }
+      permission = "FULL_CONTROL"
+    }
+
+    grant {
+      # Allow CloudFront to write logs
+      grantee {
+        id   = "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0"
+        type = "CanonicalUser"
+      }
+      permission = "FULL_CONTROL"
+    }
+  }
 }
 
 data "aws_iam_policy_document" "cloudfront_logs" {
@@ -91,4 +125,15 @@ data "aws_iam_policy_document" "cloudfront_logs" {
 resource "aws_s3_bucket_policy" "cloudfront_logging" {
   bucket = aws_s3_bucket.cloudfront_logs.id
   policy = data.aws_iam_policy_document.cloudfront_logs.json
+}
+
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "cloudfront_logs" {
+  bucket = aws_s3_bucket.cloudfront_logs.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
 }
