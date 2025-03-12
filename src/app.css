@@ -1,37 +1,20 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
 
-.target-before:before {
-  content: "";
-  display: block;
-  height: 60px; /* fixed header height */
-  margin-top: -60px; /* negative fixed header height */
-}
+
+@import '@skeletonlabs/skeleton';
+
+/* Optional */
+@import '@skeletonlabs/skeleton/optional/presets';
+/* Themes */
+@import '@skeletonlabs/skeleton/themes/cerberus';
+
+@source '../node_modules/@skeletonlabs/skeleton-svelte/dist';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
 
 html {
-  @apply m-0 h-full scroll-smooth p-0 transition-all duration-200;
-}
-
-body {
-  @apply min-h-full overscroll-none;
-}
-
-code {
-  @apply code;
-}
-pre {
-  @apply pre p-4 text-xs;
-}
-
-pre button {
-  @apply btn-icon absolute top-2 m-0;
-}
-
-ul {
-  @apply list-inside list-disc ml-4;
-}
-
-ol {
-  @apply list-inside list-disc ml-4;
+	scroll-behavior: smooth;
 }

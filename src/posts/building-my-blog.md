@@ -1,7 +1,7 @@
 ---
 title: Building my Blog with Sveltekit and Terraform
 slug: building-my-blog
-date: "2024-9-17"
+date: '2024-9-17'
 image: /images/logo.webp
 description: Most of the websites that I would use for my personal blog don't support custom code snippets, components, and other pieces of content I love. Clearly building a full blog is overkill, and not necessary for the average 'blogger'. I'm coming at this from a 'because I can' attitude here. Not everyone needs these solutions, but here is mine for those interested in my implementation.
 published: true
@@ -111,22 +111,22 @@ Then, update your svelte.config.ts file:
 
 ```ts
 // svelte.config.ts
-import adapter from "@sveltejs/adapter-static";
-import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
-import { mdsvex } from "mdsvex";
+import adapter from '@sveltejs/adapter-static'
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
+import { mdsvex } from 'mdsvex'
 
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
-  // define you're config inside here
-};
+    // define you're config inside here
+}
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  extensions: [".svelte", ".md"],
-  preprocess: [mdsvex(mdsvexOptions), vitePreprocess()],
-  // other config stuff...
-};
+    extensions: ['.svelte', '.md'],
+    preprocess: [mdsvex(mdsvexOptions), vitePreprocess()],
+    // other config stuff...
+}
 
-export default config;
+export default config
 ```
 
 I’ve kept the mdsvex configuration simple, but if you want more details, feel
@@ -142,7 +142,7 @@ HTML strings and rendered inside Svelte components.
 Here’s a simple example of how you can dynamically load and display markdown
 content in your SvelteKit app:
 
-```jsx
+```svelte
 // [...blog]/+page.svelte
 <script lang="ts">
 	import type { PageData } from './$types';

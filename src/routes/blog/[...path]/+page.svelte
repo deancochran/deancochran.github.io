@@ -1,98 +1,122 @@
 <script lang="ts">
-	// eslint-disable-file no-use-before-define
-	import { page } from '$app/stores'
-	import { img as Image } from '$lib/blogComponents'
-	import { email_schema } from '$lib/utils/schema'
-	import SvelteSeo from 'svelte-seo'
-	import { superForm } from 'sveltekit-superforms'
-	import { zod } from 'sveltekit-superforms/adapters'
-	import type { PageData } from './$types'
-	interface Props {
-		data: PageData;
-	}
+    import { page } from '$app/state'
+    import { email_schema } from '$lib/utils/schema'
+    import { Avatar } from '@skeletonlabs/skeleton-svelte'
+    import SvelteSeo from 'svelte-seo'
+    import { superForm } from 'sveltekit-superforms'
+    import { zod } from 'sveltekit-superforms/adapters'
+    import type { PageData } from './$types'
+    interface Props {
+        data: PageData
+    }
 
-	let { data }: Props = $props();
-	const { form, enhance, delayed } = superForm(data.form, {
-		applyAction: true,
-		invalidateAll: true,
-		resetForm: true,
-		validators: zod(email_schema),
-		delayMs: 0,
-		timeoutMs: 5000
-	});
+    let { data }: Props = $props()
+    const { form, enhance, delayed } = superForm(data.form, {
+        applyAction: true,
+        invalidateAll: true,
+        resetForm: true,
+        validators: zod(email_schema),
+        delayMs: 0,
+        timeoutMs: 5000,
+    })
 </script>
 
 <SvelteSeo
-	title={data.meta.title}
-	description={data.meta.description}
-	canonical={$page.url.href}
-	openGraph={{
-		title: data.meta.title,
-		description: data.meta.description,
-		url:  $page.url.href,
-		type: 'article',
-		site_name: 'Dean Cochran',
-		images: [
-			{
-				url: data.meta.image
-			}
-		]
-	}}
-	twitter={{
-		card: 'summary_large_image',
-		site: '@deancochran_',
-		creator: '@deancochran_',
-		title: data.meta.title,
-		description: data.meta.description,
-		image: data.meta.image
-	}}
+    title={data.meta.title}
+    description={data.meta.description}
+    canonical={page.url.href}
+    openGraph={{
+        title: data.meta.title,
+        description: data.meta.description,
+        url: page.url.href,
+        type: 'article',
+        site_name: 'Dean Cochran',
+        images: [
+            {
+                url: data.meta.image,
+            },
+        ],
+    }}
+    twitter={{
+        card: 'summary_large_image',
+        site: '@deancochran_',
+        creator: '@deancochran_',
+        title: data.meta.title,
+        description: data.meta.description,
+        image: data.meta.image,
+    }}
 />
 
-<div class="flex flex-col gap-8 ">
-	<header class="flex flex-col gap-8">
-		<h2 class="h2">{data.meta.title}</h2>
-		<Image src={data.meta.image} alt={data.meta.title} loading="eager" />
-		<div class="flex flex-col gap-4">
-			<div class="flex flex-row items-center justify-between gap-2 align-middle">
-				<small>{new Date(data.meta.date).toDateString()}</small>
-			</div>
-			<p>
-				{data.meta.description}
-			</p>
-		</div>
-	</header>
+<div class="prose dark:prose-invert !max-w-none">
+    <header class="flex flex-col gap-4">
+        <h1 class="!m-0">{data.meta.title}</h1>
+        <div
+            class="flex flex-col items-stretch justify-between align-middle"
+        >
+            <div
+                class="flex flex-row gap-2 items-center align-middle justify-between"
+            >
+                <div class="flex flex-row gap-2 items-center align-middle justify-start">
+                    <Avatar name="Dean" src="/images/headshot.webp" classes={"w-12 h-12 !m-0"}/>
+                    <div class="flex flex-col items-stretch align-middle">
+                        <small>Written by: Dean Cochran</small>
+                        <small>Published: {new Date(data.meta.date).toLocaleDateString()}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img
+            src={data.meta.image}
+            alt={data.meta.title}
+            loading="eager"
+            class="object-scale-down lg:max-h=[25vh] sm:max-h-[50vh] !m-0"
+        />
+        <p class="!m-0">
+            {data.meta.description}
+        </p>
+    </header>
+    <hr/>
 
-	<article class="flex flex-col gap-4">
-		<data.component/>
-	</article>
+    <data.component />
 
-	<footer class="card-footer flex flex-col items-center gap-2 align-middle">
-		<form
-			action="https://buttondown.com/api/emails/embed-subscribe/deancochran"
-			method="post"
-			target="popupwindow"
-			onsubmit={() => {
-				window.open('https://buttondown.com/deancochran', 'popupwindow');
-			}}
-			class="embeddable-buttondown-form w-full"
-		>
-			<label for="bd-email" class="label">
-				<span class="label-text px-1">Subscribe to my newsletter</span>
-				<div class="flex flex-row items-center justify-center gap-4 align-middle">
-					<input name="bd-email" class="input" type="email" placeholder="janedoe@example.com" />
-					<button type="submit" class="btn preset-tonal-surface outline">Subscribe</button>
-				</div>
-			</label>
-		</form>
-		<br />
+    <footer class="flex flex-col items-center gap-2 align-middle">
+        <form
+            action="https://buttondown.com/api/emails/embed-subscribe/deancochran"
+            method="post"
+            target="popupwindow"
+            onsubmit={() => {
+                window.open('https://buttondown.com/deancochran', 'popupwindow')
+            }}
+            class="embeddable-buttondown-form w-full"
+        >
+            <label for="bd-email" class="label">
+                <span class="label-text px-1">Subscribe to my newsletter</span>
+                <div
+                    class="flex flex-row items-center justify-center gap-4 align-middle"
+                >
+                    <input
+                        name="bd-email"
+                        class="input"
+                        type="email"
+                        placeholder="janedoe@example.com"
+                    />
+                    <button
+                        type="submit"
+                        class="btn preset-tonal-surface outline"
+                        >Subscribe</button
+                    >
+                </div>
+            </label>
+        </form>
+        <br />
 
-		<script
-			src="https://utteranc.es/client.js"
-			data-repo="deancochran/deancochran"
-			data-issue-term="pathname"
-			data-theme="preferred-color-scheme"
-			data-crossorigin="anonymous"
-			async
-		></script>
-	</footer>
+        <script
+            src="https://utteranc.es/client.js"
+            data-repo="deancochran/deancochran"
+            data-issue-term="pathname"
+            data-theme="preferred-color-scheme"
+            data-crossorigin="anonymous"
+            async
+        ></script>
+    </footer>
 </div>

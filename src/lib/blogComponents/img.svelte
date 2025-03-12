@@ -9,4 +9,4 @@
 	src.replace('/static', '');
 </script>
 
-<img {src} {alt} class="max-h-[50vh] object-scale-down" loading="eager" {...rest} />
+<img {src} {alt} class="object-scale-down" loading="eager" {...rest} />

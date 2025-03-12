@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import Post from '$lib/components/Post.svelte'
 	import { email_schema } from '$lib/utils/schema'
 	import SvelteSeo from 'svelte-seo'
@@ -25,11 +25,11 @@
 <SvelteSeo
 	title="Dean Cochran's Blog Posts"
 	description="Dean Cochran's Blog Posts"
-	canonical={$page.url.href}
+	canonical={page.url.href}
 	themeColor= "#000000"
 	openGraph={{
 		title: "Dean Cochran's Posts",
-		url:  $page.url.href,
+		url:  page.url.href,
 		type: 'article',
 		site_name: 'Dean Cochran',
 		images: [
@@ -50,8 +50,9 @@
 
 <h1 class="h1">Posts</h1>
 
+
 <div class="aign-middle flex h-full w-full flex-row flex-wrap items-start justify-center gap-4">
 	{#each data.posts as post}
 		<Post post={post} />
 	{/each}
-</div>
+</div>			

@@ -1,17 +1,18 @@
 
 <script lang="ts">
-	import Image from '$lib/blogComponents/img.svelte'
-	import { fade } from "svelte/transition"
-    export let post: BlogPost & { relativePath: string }
+		interface Props {
+		post: BlogPost & { relativePath: string };
+	}
+
+	let { post }: Props = $props();
 </script>
 
 		<a
-			in:fade={{ duration: 300 }}
 			href={'/blog/' + post.relativePath}
 			class="card block overflow-hidden border border-surface-200-800 divide-surface-200-800 preset-tonal-surface active:scale-[1.01]"
 		>
 			<header class="card-header">
-				<Image src={post.image??'/images/logo.webp'} class="aspect-[21/9] rounded-t-md w-full object-cover" alt="banner" />
+				<img src={post.image??'/images/logo.webp'} class="aspect-21/9 rounded-t-md w-full object-cover" alt="banner" />
 			</header>
 
 			<article class="space-y-4 p-4">
