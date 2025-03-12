@@ -1,7 +1,7 @@
 ---
 title: Machine Learning on the Edge with SvelteKit and TensorFlowJS
 slug: machine-learning-on-the-edge-with-sveltekit-and-tensorflowjs
-date: "2024-10-08"
+date: '2024-10-08'
 image: /images/machine-learning-on-the-edge-with-sveltekit-and-tensorflowjs.webp
 description: Empowering mobile devices with Machine Learning has been a massive success lately. LLMs like ChatGPT are making headlines daily, and people everywhere are utilizing AI and Machine Learning with their mobile devices. For many, implementing machine learning on mobile applications is well beyond what the average user needs to know how to leverage the AI chatbot, image classifier, or recommendation system. However, in this guide, I will be giving an overview of what machine learning on the edge is, and show you how can add it to your modern web application today.
 published: true
@@ -30,13 +30,13 @@ the edge either. This is what allows us to use these powerful algorithms to run
 directly on mobile, camera, and other single board computer devices, rather than
 relying solely on remote cloud servers.
 
-> "Machine learning, particularly deep learning, is computationally heavy and
+> Machine learning, particularly deep learning, is computationally heavy and
 > requires servers with GPUs because **it often involves processing massive
 > datasets with complex algorithms, which can only be done efficiently through
 > parallel processing capabilities offered by GPUs, allowing for significantly
 > faster calculations compared to traditional CPUs**; essentially, GPUs can
 > handle many computations simultaneously, making them ideal for the demanding
-> tasks of training and running machine learning models" -
+> tasks of training and running machine learning models -
 > [Emmanuel Ohiri](https://www.cudocompute.com/blog/gpu-servers-for-ai-everything-you-need-to-know)
 
 While training and perfecting machine learning models requires significant
@@ -99,13 +99,13 @@ and view the console to see the results of the edge computations
 - **Installing SvelteKit**: Instructions on initializing a new SvelteKit project
   can be found on the official documentation site
   [here](https://kit.svelte.dev/docs/introduction).
-  - Head to **Skeleton UI** and follow their instructions on installing and
-    initialization a svelte-kit application
-    [here](https://www.skeleton.dev/docs/get-started)
+    - Head to **Skeleton UI** and follow their instructions on installing and
+      initialization a svelte-kit application
+      [here](https://www.skeleton.dev/docs/get-started)
 - **Adding TensorFlow.js**: Installation of TensorFlow.js via npm.
-  - Run `npm install @tensorflow/tfjs @tensorflow-models/mobilenet`.
-  - Optionally, mention using a CDN for TensorFlow.js if the app will run
-    directly in the browser.
+    - Run `npm install @tensorflow/tfjs @tensorflow-models/mobilenet`.
+    - Optionally, mention using a CDN for TensorFlow.js if the app will run
+      directly in the browser.
 
 #### 2. **Building the Image Classification Component**
 
@@ -116,8 +116,8 @@ copy and paste code.
 
 ```ts
 // $lib/components/ImageClassifier.svelte
-import * as tf from "@tensorflow/tfjs";
-import * as mobilenet from "@tensorflow-models/mobilenet";
+import * as tf from '@tensorflow/tfjs'
+import * as mobilenet from '@tensorflow-models/mobilenet'
 // ...
 // ...
 ```
@@ -129,17 +129,17 @@ import * as mobilenet from "@tensorflow-models/mobilenet";
 // ...
 
 // init a element for the model reference
-let imgEl: HTMLImageElement;
+let imgEl: HTMLImageElement
 // init a variable for the model
-let model: mobilenet.MobileNet;
+let model: mobilenet.MobileNet
 
 // function to load the pretrained MobileNet model
 const loadModel = async () => {
-  const version = 2;
-  const alpha = 0.5;
-  model = await mobilenet.load({ version, alpha });
-  console.log("Model loaded successfully");
-};
+    const version = 2
+    const alpha = 0.5
+    model = await mobilenet.load({ version, alpha })
+    console.log('Model loaded successfully')
+}
 // ...
 // ...
 ```
@@ -150,44 +150,44 @@ wait till the model has been successfully loaded until it proceeds
 #### 4. **Handling Upload and Classification of the Image**
 
 - **JavaScript for File Input Handling**:
-  - Write a function to handle file uploads and convert the uploaded image into
-    a format suitable for TensorFlow.js.
-  - Use `FileReader` to read the image data and display the preview.
+    - Write a function to handle file uploads and convert the uploaded image into
+      a format suitable for TensorFlow.js.
+    - Use `FileReader` to read the image data and display the preview.
 
 ```ts
 // $lib/components/ImageClassifier.svelte
 // ...
 
 // a variable to hold the loading state
-let predictionsLoading = false;
+let predictionsLoading = false
 // a variable to hold the predictions
-let predictions: any[] = [];
+let predictions: any[] = []
 
 // a function handle an uploaded image
 const predictionImage = async (imgDisplay: HTMLImageElement) => {
-  const preprocessedImage = preprocessImage(imgDisplay);
-  predictionsResult = await classifyImage(preprocessedImage);
-};
+    const preprocessedImage = preprocessImage(imgDisplay)
+    predictionsResult = await classifyImage(preprocessedImage)
+}
 
 // handle file uploads from a custom component
 async function handleImageChange(details: any): Promise<void> {
-  predictions = [];
-  const reader = new FileReader();
-  reader.onload = async (event) => {
-    imgEl.src = reader.result as string;
-  };
-  reader.readAsDataURL(details.acceptedFiles[0]);
+    predictions = []
+    const reader = new FileReader()
+    reader.onload = async (event) => {
+        imgEl.src = reader.result as string
+    }
+    reader.readAsDataURL(details.acceptedFiles[0])
 }
 // handle preprocessing and classifying the device's selected image
 async function predict() {
-  predictionsLoading = true;
-  // image -> 3D tensor  (height, width, color channels)
-  const imageTensor = tf.browser.fromPixels(imgEl);
-  // reshape tensor for bilinear polarization
-  const resizedImageTensor = tf.image.resizeBilinear(imageTensor, [224, 224]);
-  // using the model and classify the reshaped tensor
-  predictions = await model.classify(resizedImageTensor);
-  predictionsLoading = false;
+    predictionsLoading = true
+    // image -> 3D tensor  (height, width, color channels)
+    const imageTensor = tf.browser.fromPixels(imgEl)
+    // reshape tensor for bilinear polarization
+    const resizedImageTensor = tf.image.resizeBilinear(imageTensor, [224, 224])
+    // using the model and classify the reshaped tensor
+    predictions = await model.classify(resizedImageTensor)
+    predictionsLoading = false
 }
 ```
 
@@ -198,10 +198,10 @@ own file upload and progress bars if you don't want to use the skeleton UI
 package
 
 - **Showing the Results in the UI**:
-  - Bind the classification results (e.g., label and probability) to the
-    component’s state.
-  - Display the results in the result section of the component with basic
-    styling for better readability.
+    - Bind the classification results (e.g., label and probability) to the
+      component’s state.
+    - Display the results in the result section of the component with basic
+      styling for better readability.
 
 ```xml
 <script lang="ts">

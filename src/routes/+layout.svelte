@@ -1,21 +1,16 @@
 <script lang="ts">
+	import BmcLogo from '$lib/assets/bmc-logo.svelte'
 	import Logo from '$lib/assets/Logo.svelte'
 	import { AppBar } from '@skeletonlabs/skeleton-svelte'
-	import '../app.css'
-
-	import { GithubIcon, Linkedin, LucideTwitter, Moon, Rss, Sun } from 'lucide-svelte'
-	import { fade } from 'svelte/transition'
-
-	import BmcLogo from '$lib/assets/bmc-logo.svelte'
-	import { Switch } from '@skeletonlabs/skeleton-svelte'
+	import { GithubIcon, Linkedin, LucideTwitter, Rss, SunMoon } from 'lucide-svelte'
 	import { onMount } from 'svelte'
-	let { data, children } = $props();
-	
-	let modeState = $state(false); // false = dark mode
+	import { fade } from 'svelte/transition'
+	import '../app.css'
+	let { data, children } = $props()
 
+	// Handle the change in state when toggled.
 	function handleModeChange() {
-		modeState = !modeState;
-		document.documentElement.classList.toggle('dark');
+		document.documentElement.classList.toggle('dark')
 	}
 
 	// Detect service worker updates
@@ -44,47 +39,64 @@
 <!-- Header -->
 <div class="flex h-full min-h-screen w-full flex-col items-start justify-between align-middle">
 	<AppBar
-		trailClasses="flex items-center align-middle justify-between"
+		trailClasses="flex items-center align-middle justify-between gap-2"
 		centerClasses="flex items-center align-middle justify-between"
-		classes="sticky top-0 z-10 p-4"
+		classes="sticky top-0 z-10 p-2"
 	>
 		{#snippet lead()}
-			<a class="transition-all duration-100 hover:scale-110" href="/"><Logo class="h-12 w-12" /></a>
+			<a href="/"><Logo class="h-12 w-12" /></a>
 		{/snippet}
 		<h6 class="h6">Dean's List</h6>
 		{#snippet trail()}
 			<a href="/about">About</a>
 			<a href="/blog">Blog</a>
-			<Switch
-				name="mode"
-				controlActive="bg-surface-200"
-				bind:checked={modeState}
-				onCheckedChange={handleModeChange}
-			>
-				{#snippet inactiveChild()}<Moon size="14" />{/snippet}
-				{#snippet activeChild()}<Sun size="14" />{/snippet}
-			</Switch>
+
+			<button class="btn-icon hover:preset-tonal" name="mode" onclick={(e) => handleModeChange()}>
+				<SunMoon size="20" />
+			</button>
 		{/snippet}
 	</AppBar>
 
 	<!-- Content -->
 	<div class="flex w-full grow">
-		<!-- Sidebar (Left) -->
-		<aside class="transition-all duration-100 sm:w-1/6 md:w-1/4 lg:w-1/2"></aside>
-		{#key data.pathname}
-			<!-- Main -->
-			<main class="flex flex-grow flex-col w-full overflow-hidden p-4" in:fade={{ duration: 800 }}>
-				{@render children?.()}
-			</main>
-		{/key}
-		<!-- Sidebar (Right) -->
-		<aside class="transition-all duration-100 sm:w-1/6 md:w-1/4 lg:w-1/2"></aside>
+		
+        
+    <aside class="transition-all duration-100 sm:w-1/4 lg:w-1/2"></aside>
+    {#key data.pathname}
+        <!-- Main -->
+        <main class="flex flex-col w-full gap-4 p-4" in:fade={{duration: 200}}>
+            <ol class="flex justify-start items-center text-xs gap-2">
+                {#each data.pathname.split('/').splice(1) as path, i}
+					{#if data.pathname.split('/').length > 2}
+					{#if i === data.pathname.split('/').splice(1).length - 1}
+					<li class="capitalize">{path}</li>
+				{:else}
+					<li>
+						<a
+							class="opacity-60 capitalize hover:underline"
+							href={`/${data.pathname.split('/').slice(1, i + 2)}`}
+						>
+							{path}
+						</a>
+					</li>
+					<li class="opacity-60" aria-hidden="true">&rsaquo;</li>
+				{/if}
+					{/if}
+                    
+                {/each}
+            </ol>
+            {@render children?.()}
+        </main>
+        {/key}
+        <!-- Sidebar (Right) -->
+        <aside class="transition-all duration-100 sm:w-1/4 lg:w-1/2"></aside>
 	</div>
+	
 
 	{#key data.pathname}
 		<!-- Footer -->
 		<footer
-			in:fade={{ duration: 1000 }}
+			in:fade={{duration: 200, delay:200}}
 			class="flex w-full items-center justify-between p-4 align-middle"
 		>
 			<div class="flex w-full flex-row items-center gap-4">
