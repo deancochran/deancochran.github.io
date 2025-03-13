@@ -70,13 +70,13 @@
 	</AppBar>
 
 	<!-- Content -->
-	<div class="flex w-full grow">
+	<div class="flex flex-row align-middle w-full grow">
 		
         
     <aside class="transition-all duration-100 sm:w-1/4 lg:w-1/2"></aside>
     {#key data.pathname}
         <!-- Main -->
-        <main class="flex flex-col w-full gap-4 p-4" in:fade={{duration: 200}}>
+        <main class="flex flex-col w-full gap-4 p-4 shrink" in:fade={{duration: 200}}>
             <ol class="flex justify-start items-center text-xs gap-2">
                 {#each data.pathname.split('/').splice(1) as path, i}
 					{#if data.pathname.split('/').length > 2}
