@@ -49,7 +49,7 @@
 
 <div class="prose dark:prose-invert !max-w-none">
     <header class="flex flex-col gap-4">
-        <h1 class="!m-0">{data.meta.title}</h1>
+        <h1 class="!m-0 py-4">{data.meta.title}</h1>
         <div
             class="flex flex-col items-stretch justify-between align-middle"
         >
@@ -57,9 +57,11 @@
                 class="flex flex-row gap-2 items-center align-middle justify-between"
             >
                 <div class="flex flex-row gap-2 items-center align-middle justify-start">
-                    <Avatar name="Dean" src="/images/headshot.webp" classes={"w-12 h-12 !m-0"}/>
+                    <a class="btn-icon w-auto h-auto" href="/about">
+                        <Avatar name="Dean" src="/images/headshot.webp" classes={"w-12 h-12 !m-0"}/>
+                    </a>
                     <div class="flex flex-col items-stretch align-middle">
-                        <small>Written by: Dean Cochran</small>
+                        <small>Written by: <a class="hover:underline no-underline underline-offset-1" href="/about">Dean Cochran</a></small>
                         <small>Published: {new Date(data.meta.date).toLocaleDateString()}</small>
                     </div>
                 </div>
@@ -71,7 +73,7 @@
             loading="eager"
             class="object-scale-down lg:max-h=[25vh] sm:max-h-[50vh] !m-0"
         />
-        <p class="!m-0">
+        <p class=" !m-0">
             {data.meta.description}
         </p>
     </header>

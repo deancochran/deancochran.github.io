@@ -48,58 +48,31 @@
 />
 
 <!-- Content -->
-<div class="flex w-full grow">
 
-	<aside class="transition-all duration-100 sm:w-1/4"></aside>
-	{#key data.pathname}
-
-		<main class="flex flex-col w-full gap-4 p-2 transition-all" in:fade={{ duration: 200 }}>
-			<ol class="flex justify-start items-center text-xs gap-2">
-				{#each data.pathname.split('/').splice(1) as path, i}
-					{#if i === data.pathname.split('/').splice(1).length - 1}
-						<li class="capitalize">{path}</li>
-					{:else}
-						<li>
-							<a
-								class="opacity-60 capitalize hover:underline"
-								href={`/${data.pathname.split('/').slice(1, i + 2)}`}
-							>
-								{path}
-							</a>
-						</li>
-						<li class="opacity-60" aria-hidden="true">&rsaquo;</li>
-					{/if}
-				{/each}
-			</ol>
-
-			<form
-				name="newsletter"
-				action="https://buttondown.com/api/emails/embed-subscribe/deancochran"
-				method="post"
-				target="popupwindow"
-				onsubmit={() => {
-					window.open('https://buttondown.com/deancochran', 'popupwindow')
-				}}
-				class="embeddable-buttondown-form"
-			>
-				<label for="bd-email" class="label">
-					<span class="label-text px-1">Subscribe to my newsletter</span>
-					<div class="flex flex-row items-center justify-center gap-4 align-middle">
-						<input name="bd-email" class="input" type="email" placeholder="janedoe@example.com" />
-						<button form="newsletter" type="submit" class="btn preset-tonal-surface outline"
-							>Subscribe</button
-						>
-					</div>
-				</label>
-			</form>
-
-			<br />
-
-			<div class="flex h-full w-full flex-col items-center justify-start gap-4 align-middle">
-				<Post post={data.post} />
+	<form
+		name="newsletter"
+		action="https://buttondown.com/api/emails/embed-subscribe/deancochran"
+		method="post"
+		target="popupwindow"
+		onsubmit={() => {
+			window.open('https://buttondown.com/deancochran', 'popupwindow')
+		}}
+		class="embeddable-buttondown-form"
+	>
+		<label for="bd-email" class="label">
+			<span class="label-text px-1">Subscribe to my newsletter</span>
+			<div class="flex flex-row items-center justify-center gap-4 align-middle">
+				<input name="bd-email" class="input" type="email" placeholder="janedoe@example.com" />
+				<button form="newsletter" type="submit" class="btn preset-tonal-surface outline"
+					>Subscribe</button
+				>
 			</div>
-		</main>
-	{/key}
+		</label>
+	</form>
 
-	<aside class="transition-all duration-100 sm:w-1/4"></aside>
-</div>
+	<br />
+
+	<div class="flex h-full w-full flex-col items-center justify-start gap-4 align-middle">
+		<Post post={data.post} />
+	</div>
+
