@@ -7,6 +7,7 @@ import rehypeSlug from 'rehype-slug'
 import remarkMath from 'remark-math'
 import remarkToc from 'remark-toc'
 import remarkUnwrapImages from 'remark-unwrap-images'
+
 import { createHighlighter } from 'shiki'
 const highlighter = await createHighlighter({
     themes: ['poimandres'],
@@ -30,9 +31,8 @@ const mdsvexOptions = {
 
     highlight: {
         highlighter: async (code, lang = 'text') => {
-            await highlighter.loadLanguage('javascript', 'typescript')
             const html = escapeSvelte(
-                highlighter.codeToHtml(code, { lang, theme: 'poimandres' })
+                highlighter.codeToHtml(code, { lang, theme: 'poimandres', })
             )
             return `{@html \`${html}\` }`
         },
