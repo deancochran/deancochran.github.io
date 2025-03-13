@@ -49,7 +49,8 @@
 
 <div class="prose dark:prose-invert !max-w-none">
     <header class="flex flex-col gap-4">
-        <h1 class="!m-0 py-4">{data.meta.title}</h1>
+        <h1 class="!m-0 py-4"
+        style={`view-transition-name: item-title-${data.meta.title};`}>{data.meta.title}</h1>
         <div
             class="flex flex-col items-stretch justify-between align-middle"
         >
@@ -72,8 +73,10 @@
             alt={data.meta.title}
             loading="eager"
             class="object-scale-down lg:max-h=[25vh] sm:max-h-[50vh] !m-0"
+            style={`view-transition-name: item-image-${data.relativePath};`}
         />
-        <p class=" !m-0">
+        <p class=" !m-0"
+        style={`view-transition-name: item-description-${data.meta.relativePath};`}>
             {data.meta.description}
         </p>
     </header>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onNavigate } from '$app/navigation'
 	import BmcLogo from '$lib/assets/bmc-logo.svelte'
 	import Logo from '$lib/assets/Logo.svelte'
 	import { AppBar } from '@skeletonlabs/skeleton-svelte'
@@ -7,6 +8,17 @@
 	import { fade } from 'svelte/transition'
 	import '../app.css'
 	let { data, children } = $props()
+
+	onNavigate((navigation) => {
+		if (!document.startViewTransition) return
+
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve()
+				await navigation.complete
+			})
+		})
+	})
 
 	// Handle the change in state when toggled.
 	function handleModeChange() {

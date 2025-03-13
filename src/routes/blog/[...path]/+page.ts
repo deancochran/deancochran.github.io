@@ -17,6 +17,7 @@ export const load = async (event) => {
                 component: file.default,
                 meta: file.metadata,
                 form,
+                relativePath
             }
         }
     }
