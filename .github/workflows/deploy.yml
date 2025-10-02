@@ -22,21 +22,20 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24   # Recommended for SvelteKit
-          cache: 'npm'
+          node-version: 24
 
-      # 3️⃣ Install dependencies
+      # 3️⃣ Install dependencies (force JS Rollup)
       - name: Install dependencies
         run: npm install
         env:
-          ROLLUP_NO_NATIVE: true   # Avoid Rollup native issues on CI
+          ROLLUP_NO_NATIVE: true   # critical: skip native Rollup
 
       # 4️⃣ Build project
       - name: Build project
         run: npm run build
         env:
           GITHUB_PAGES: true
-          ROLLUP_NO_NATIVE: true
+          ROLLUP_NO_NATIVE: true   # critical: skip native Rollup
 
       # 5️⃣ Upload production-ready build files
       - name: Upload build files
@@ -54,4 +53,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
