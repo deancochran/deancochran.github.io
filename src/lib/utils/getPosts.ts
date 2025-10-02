@@ -13,5 +13,7 @@ export async function getPosts() {
             })
         )
         return allPosts
-    } catch (error) {}
+    } catch (error) {
+        return []
+    }
 }
