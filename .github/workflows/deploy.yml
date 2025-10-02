@@ -12,6 +12,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Applies to all steps in this job
+      ROLLUP_NO_NATIVE: true
 
     steps:
       # 1️⃣ Checkout repository
@@ -24,18 +27,15 @@ jobs:
         with:
           node-version: 24
 
-      # 3️⃣ Install dependencies (force JS Rollup)
+      # 3️⃣ Install dependencies
       - name: Install dependencies
         run: npm install
-        env:
-          ROLLUP_NO_NATIVE: true   # critical: skip native Rollup
 
       # 4️⃣ Build project
       - name: Build project
         run: npm run build
         env:
-          GITHUB_PAGES: true
-          ROLLUP_NO_NATIVE: true   # critical: skip native Rollup
+          GITHUB_PAGES: true   # Only additional env for build
 
       # 5️⃣ Upload production-ready build files
       - name: Upload build files
