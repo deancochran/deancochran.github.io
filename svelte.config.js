@@ -42,6 +42,16 @@ const mdsvexOptions = {
     rehypePlugins: [rehypeKatexSvelte, rehypeSlug, rehypeAutolinkHeadings],
 }
 
+
+
+const dev = process.argv.includes('dev');
+
+export default {
+  kit: {
+    adapter: adapter(),
+  }
+};
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
     // Consult https://kit.svelte.dev/docs/integrations#preprocessors
@@ -62,6 +72,9 @@ const config = {
         prerender: {
             crawl: true,
         },
+        paths: {
+            base: dev ? '' : '/deancochran'          
+        }
     },
 }
 
