@@ -1,6 +1,6 @@
 import { getPosts } from '$lib/utils/getPosts'
 
-const siteURL = 'https://dean-cochran.com'
+const siteURL = import.meta.env.PUBLIC_SITE_URL
 const siteTitle = "Dean's List"
 const siteDescription = 'An opinionated list of my favorite things.'
 
@@ -8,9 +8,7 @@ export const prerender = true
 
 export const GET = async () => {
     const allPosts = await getPosts()
-    const sortedPosts = allPosts.sort((a, b) => {
-        return new Date(b.date).getTime() - new Date(a.date).getTime()
-    })
+    const sortedPosts = allPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     const filteredPosts = sortedPosts.filter((post) => post.published)
 
     const body = render(filteredPosts)
@@ -33,17 +31,17 @@ const render = (posts: (BlogPost & { relativePath: string })[]) =>
 <link>${siteURL}</link>
 <atom:link href="${siteURL}/rss.xml" rel="self" type="application/rss+xml"/>
 ${posts
-    .map(
-        (post) =>
-            `<item>
+        .map(
+            (post) =>
+                `<item>
 <guid isPermaLink="true">${siteURL}/blog/${post.relativePath}</guid>
 <title>${post.title}</title>
 <link>${siteURL}/blog/${post.relativePath}</link>
 <description>${post.description}</description>
 <pubDate>${new Date(post.date).toUTCString()}</pubDate>
 </item>`
-    )
-    .join('')}
+        )
+        .join('')}
 </channel>
-</rss>
-`
+</rss>`
+
