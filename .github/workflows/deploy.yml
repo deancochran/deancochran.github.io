@@ -12,9 +12,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      # Applies to all steps in this job
-      ROLLUP_NO_NATIVE: true
 
     steps:
       # 1️⃣ Checkout repository
@@ -27,24 +24,27 @@ jobs:
         with:
           node-version: 24
 
-      # 3️⃣ Install dependencies
-      - name: Install dependencies
-        run: npm install --no-optional
-        env:
-          ROLLUP_NO_NATIVE: true
+      # 3️⃣ Setup pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
 
-      # 4️⃣ Build project
+      # 4️⃣ Install dependencies
+      - name: Install dependencies
+        run: pnpm install
+
+      # 5️⃣ Build project
       - name: Build project
-        run: npm run build
+        run: pnpm build
         env:
           GITHUB_PAGES: true   # Only additional env for build
-          ROLLUP_NO_NATIVE: true
 
-      # 5️⃣ Upload production-ready build files
+      # 6️⃣ Upload production-ready build files
       - name: Upload build files
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build   # Matches adapter-static output
+          path: build   # Ensure your adapter-static outputs here
 
   deploy:
     runs-on: ubuntu-latest
@@ -56,3 +56,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
