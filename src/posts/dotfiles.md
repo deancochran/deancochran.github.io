@@ -1,5 +1,5 @@
 ---
-title: Dotfiles: Building a Future-Proof Development Environment
+title: Building a Future Proof Development Environment with dotfiles
 slug: dotfiles
 date: '2025-11-12'
 image: /images/logo.webp
