@@ -1,6 +1,6 @@
 import { getPosts } from '$lib/utils/getPosts'
 
-const siteURL = import.meta.env.PUBLIC_SITE_URL
+const siteURL = "https://deancochran.github.io"
 const siteTitle = "Dean's List"
 const siteDescription = 'An opinionated list of my favorite things.'
 
