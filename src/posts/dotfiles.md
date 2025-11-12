@@ -2,7 +2,7 @@
 title: Building a Future Proof Development Environment with dotfiles
 slug: dotfiles
 date: '2025-11-12'
-image: /images/logo.webp
+image: /images/dotfile-header.webp
 description: Dotfiles are the backbone of your development environment. They define how your tools behave, how your workflow feels, and ultimately how productive you are. For me, dotfiles aren’t just configs—they’re an investment in my future.
 published: true
 ---
