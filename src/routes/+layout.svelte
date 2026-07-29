@@ -32,15 +32,6 @@
         dark = !dark
         document.documentElement.classList.toggle('dark', dark)
         localStorage.setItem('theme', dark ? 'dark' : 'light')
-        document
-            .querySelector<HTMLIFrameElement>('.utterances-frame')
-            ?.contentWindow?.postMessage(
-                {
-                    type: 'set-theme',
-                    theme: dark ? 'github-dark' : 'github-light',
-                },
-                'https://utteranc.es'
-            )
     }
 
     function formatBreadcrumb(path: string) {

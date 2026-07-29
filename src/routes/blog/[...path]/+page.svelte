@@ -1,5 +1,6 @@
 <script lang="ts">
     import { page } from '$app/state'
+    import Comments from '$lib/components/Comments.svelte'
     import Newsletter from '$lib/components/Newsletter.svelte'
     import Seo from '$lib/components/Seo.svelte'
     import type { PageData } from './$types'
@@ -74,13 +75,6 @@
         class="not-prose mt-12 space-y-8 border-t border-[var(--border)] pt-8"
     >
         <Newsletter compact />
-        <script
-            src="https://utteranc.es/client.js"
-            data-repo="deancochran/deancochran"
-            data-issue-term="pathname"
-            data-theme="preferred-color-scheme"
-            data-crossorigin="anonymous"
-            async
-        ></script>
+        <Comments />
     </footer>
 </article>
