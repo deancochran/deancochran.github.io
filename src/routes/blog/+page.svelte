@@ -11,10 +11,8 @@
 
     let { data }: Props = $props()
 
-    type PostData = BlogPost & { relativePath: string }
-
-    function groupPostsByYear(posts: PostData[]) {
-        const groups = new Map<string, PostData[]>()
+    function groupPostsByYear(posts: BlogPostSummary[]) {
+        const groups = new Map<string, BlogPostSummary[]>()
 
         for (const post of posts) {
             const year = post.date.slice(0, 4)
@@ -35,23 +33,14 @@
     image="/images/logo.webp"
 />
 
-<header class="space-y-6 border-b border-[var(--border)] pb-10 sm:pb-14">
-    <p class="archive-meta">Writing</p>
-    <h1 class="archive-title max-w-[16ch]">
-        Technical notes and field guides.
-    </h1>
-    <div
-        class="flex max-w-3xl flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"
-    >
-        <p class="ui-muted max-w-[60ch] leading-7">
-            Notes on building software, applied machine learning, and the tools
-            I use to create reliable systems.
-        </p>
-        <p class="archive-meta whitespace-nowrap">
-            {data.posts.length}
-            {data.posts.length === 1 ? 'article' : 'articles'}
-        </p>
-    </div>
+<header
+    class="flex items-end justify-between gap-6 border-b border-[var(--border)] pb-5"
+>
+    <h1 class="page-title">Articles</h1>
+    <p class="archive-meta whitespace-nowrap">
+        {data.posts.length}
+        {data.posts.length === 1 ? 'article' : 'articles'}
+    </p>
 </header>
 
 {#if featuredPost}

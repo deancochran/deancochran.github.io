@@ -2,9 +2,7 @@ import { base } from '$app/paths'
 
 export const load = async (event) => {
     const response = await event.fetch(`${base}/api/posts`)
-    const posts = (await response.json()) as (BlogPost & {
-        relativePath: string
-    })[]
+    const posts = (await response.json()) as BlogPostSummary[]
 
     return {
         post:

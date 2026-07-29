@@ -1,6 +1,6 @@
 <script lang="ts">
     interface Props {
-        post: BlogPost & { relativePath: string }
+        post: BlogPostSummary
         variant?: 'featured' | 'archive'
     }
 
@@ -41,13 +41,16 @@
             </div>
 
             <div class="flex flex-col justify-center gap-4 p-5 sm:p-7">
-                <time
-                    class="archive-meta"
-                    datetime={post.date}
-                    title={fullDate.format(parseDate(post.date))}
-                >
-                    {fullDate.format(parseDate(post.date))}
-                </time>
+                <p class="archive-meta flex flex-wrap items-center gap-2">
+                    <time
+                        datetime={post.date}
+                        title={fullDate.format(parseDate(post.date))}
+                    >
+                        {fullDate.format(parseDate(post.date))}
+                    </time>
+                    <span aria-hidden="true">·</span>
+                    <span>{post.readingMinutes} min read</span>
+                </p>
                 <h2
                     class="max-w-[18ch] text-2xl leading-tight font-semibold tracking-[-0.035em] sm:text-3xl"
                     style={`view-transition-name: item-title-${post.relativePath};`}
@@ -85,9 +88,13 @@
             </div>
 
             <div class="space-y-2">
-                <time class="archive-meta md:hidden" datetime={post.date}>
-                    {shortDate.format(parseDate(post.date))}
-                </time>
+                <p class="archive-meta flex items-center gap-2 md:hidden">
+                    <time datetime={post.date}>
+                        {shortDate.format(parseDate(post.date))}
+                    </time>
+                    <span aria-hidden="true">·</span>
+                    <span>{post.readingMinutes} min read</span>
+                </p>
                 <h3
                     class="line-clamp-3 text-xl leading-tight font-semibold tracking-[-0.025em] transition-colors group-hover:text-[var(--muted-foreground)] sm:text-2xl"
                     style={`view-transition-name: item-title-${post.relativePath};`}
@@ -105,13 +112,17 @@
                 >
             </div>
 
-            <time
-                class="archive-meta hidden whitespace-nowrap md:block"
-                datetime={post.date}
-                title={fullDate.format(parseDate(post.date))}
+            <p
+                class="archive-meta hidden text-right whitespace-nowrap md:flex md:flex-col md:gap-1"
             >
-                {shortDate.format(parseDate(post.date))}
-            </time>
+                <time
+                    datetime={post.date}
+                    title={fullDate.format(parseDate(post.date))}
+                >
+                    {shortDate.format(parseDate(post.date))}
+                </time>
+                <span>{post.readingMinutes} min read</span>
+            </p>
         </a>
     </article>
 {/if}

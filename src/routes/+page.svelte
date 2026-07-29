@@ -19,10 +19,9 @@
     image="/images/logo.webp"
 />
 
-<header class="max-w-2xl space-y-4">
-    <p class="ui-muted text-sm font-medium">Software engineering notes</p>
-    <h1 class="page-title">
-        Practical ideas for building thoughtful software.
+<header class="max-w-3xl space-y-6">
+    <h1 class="archive-title max-w-[16ch]">
+        Technical guides and field notes.
     </h1>
     <p class="ui-muted text-base leading-7 sm:text-lg">
         Writing about software engineering, machine learning, cloud systems, and

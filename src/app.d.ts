@@ -21,6 +21,11 @@ declare global {
         date: string
         published: boolean
     }
+
+    interface BlogPostSummary extends BlogPost {
+        relativePath: string
+        readingMinutes: number
+    }
 }
 
 export {}

@@ -1,6 +1,7 @@
 const POST_PREFIX = '/src/posts/'
 const POST_SUFFIX = '.md'
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
+const WORDS_PER_MINUTE = 200
 
 function requiredString(
     metadata: Record<string, unknown>,
@@ -51,4 +52,11 @@ export function getPostPath(source: string) {
     }
 
     return source.slice(POST_PREFIX.length, -POST_SUFFIX.length)
+}
+
+export function getReadingMinutes(source: string) {
+    const content = source.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, '')
+    const words = content.match(/[A-Za-z0-9]+(?:['-][A-Za-z0-9]+)*/g)
+
+    return Math.max(1, Math.ceil((words?.length ?? 0) / WORDS_PER_MINUTE))
 }

@@ -1,8 +1,17 @@
-import { getPostPath, parsePostMetadata } from '$lib/utils/posts'
+import {
+    getPostPath,
+    getReadingMinutes,
+    parsePostMetadata,
+} from '$lib/utils/posts'
 import { error } from '@sveltejs/kit'
 export const prerender = true
 export const load = async (event) => {
     const posts = import.meta.glob('/src/posts/**/*.md')
+    const postSources = import.meta.glob('/src/posts/**/*.md', {
+        eager: true,
+        import: 'default',
+        query: '?raw',
+    }) as Record<string, string>
     for (const [path, resolver] of Object.entries(posts)) {
         const relativePath = getPostPath(path)
         if (relativePath === event.params.path) {
@@ -14,6 +23,7 @@ export const load = async (event) => {
             return {
                 component: file.default,
                 meta,
+                readingMinutes: getReadingMinutes(postSources[path]),
                 relativePath,
             }
         }

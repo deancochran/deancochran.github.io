@@ -48,6 +48,8 @@
                             day: 'numeric',
                         })}
                     </time>
+                    <span aria-hidden="true"> · </span>
+                    <span>{data.readingMinutes} min read</span>
                 </p>
             </div>
         </div>
