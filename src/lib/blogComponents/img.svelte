@@ -9,11 +9,7 @@
     let { src, alt, ...rest } = $props()
 
     const siteURL = import.meta.env.PUBLIC_SITE_URL
-
-    // Prefix root-relative paths with PUBLIC_SITE_URL
-    if (src.startsWith('/')) {
-        src = siteURL + src
-    }
+    const resolvedSrc = $derived(src.startsWith('/') ? siteURL + src : src)
 </script>
 
-<img {src} {alt} {...rest} />
+<img src={resolvedSrc} {alt} {...rest} />
