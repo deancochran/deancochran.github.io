@@ -80,7 +80,7 @@
         class="sticky top-0 z-20 w-full border-b border-[var(--border)] bg-[color-mix(in_srgb,var(--background)_92%,transparent)] backdrop-blur"
     >
         <div
-            class="mx-auto flex h-14 max-w-6xl items-center gap-6 px-5 sm:px-8 lg:px-10"
+            class="mx-auto flex h-14 max-w-6xl items-center gap-2 px-3 sm:gap-6 sm:px-8 lg:px-10"
         >
             <a
                 href="/"
@@ -88,7 +88,7 @@
                 aria-label="Dean's List home"
             >
                 <Logo class="h-7 w-7" />
-                <span class="hidden sm:inline">Dean's List</span>
+                <span>Dean's List</span>
             </a>
 
             <nav
@@ -97,7 +97,7 @@
             >
                 <a
                     class:nav-active={data.pathname === '/about'}
-                    class="ui-button border-transparent shadow-none"
+                    class="ui-button border-transparent px-2 shadow-none sm:px-3.5"
                     href="/about"
                     aria-current={data.pathname === '/about'
                         ? 'page'
@@ -105,7 +105,7 @@
                 >
                 <a
                     class:nav-active={data.pathname.startsWith('/blog')}
-                    class="ui-button border-transparent shadow-none"
+                    class="ui-button border-transparent px-2 shadow-none sm:px-3.5"
                     href="/blog"
                     aria-current={data.pathname.startsWith('/blog')
                         ? 'page'
