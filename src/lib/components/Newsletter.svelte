@@ -13,7 +13,10 @@
             : 'grid gap-5 sm:grid-cols-[1fr_auto] sm:items-end'}
     >
         <div class="space-y-1">
-            <h2 id="newsletter-title" class="font-semibold tracking-tight">
+            <h2
+                id="newsletter-title"
+                class="!m-0 !border-0 !p-0 font-semibold tracking-tight"
+            >
                 Stay in the loop
             </h2>
             <p class="ui-muted text-sm leading-6">

@@ -61,7 +61,7 @@
             style={`view-transition-name: item-image-${data.relativePath};`}
         />
         <p
-            class="ui-muted max-w-2xl text-lg leading-8"
+            class="ui-muted w-full text-lg leading-8"
             style={`view-transition-name: item-description-${data.relativePath};`}
         >
             {data.meta.description}

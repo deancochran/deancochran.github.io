@@ -359,6 +359,10 @@ a {
     background: var(--primary);
 }
 
+.utterances {
+    max-width: none !important;
+}
+
 html.dark .shiki,
 html.dark .shiki span {
     color: var(--shiki-dark) !important;

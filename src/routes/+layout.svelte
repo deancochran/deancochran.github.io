@@ -43,6 +43,12 @@
             )
     }
 
+    function formatBreadcrumb(path: string) {
+        return path
+            .replaceAll('-', ' ')
+            .replace(/\b\w/g, (letter) => letter.toUpperCase())
+    }
+
     async function detectServiceWorkerUpdates() {
         const registration = await navigator.serviceWorker.ready
         registration.addEventListener('updatefound', () => {
@@ -143,10 +149,10 @@
                                         .split('/')
                                         .filter(Boolean).length - 1}
                                     <li
-                                        class="truncate text-[var(--foreground)] capitalize"
+                                        class="truncate text-[var(--foreground)]"
                                         aria-current="page"
                                     >
-                                        {path.replaceAll('-', ' ')}
+                                        {formatBreadcrumb(path)}
                                     </li>
                                 {:else}
                                     <li>
@@ -158,7 +164,7 @@
                                                 .slice(0, i + 1)
                                                 .join('/')}`}
                                         >
-                                            {path.replaceAll('-', ' ')}
+                                            {formatBreadcrumb(path)}
                                         </a>
                                     </li>
                                     <li aria-hidden="true">/</li>
