@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="dark" data-theme="cerberus">
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <link rel="alternate" type="application/rss+xml" href="/rss.xml" />
@@ -25,6 +25,16 @@
             href="%sveltekit.assets%/favicon/site.webmanifest"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script>
+            const theme = localStorage.getItem('theme')
+            const prefersDark = window.matchMedia(
+                '(prefers-color-scheme: dark)'
+            ).matches
+            document.documentElement.classList.toggle(
+                'dark',
+                theme === 'dark' || (!theme && prefersDark)
+            )
+        </script>
         <!-- KATEX -->
         <link
             rel="stylesheet"

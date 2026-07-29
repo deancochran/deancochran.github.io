@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { FileUpload, Progress } from '@skeletonlabs/skeleton-svelte'
     import * as mobilenet from '@tensorflow-models/mobilenet'
     import * as tf from '@tensorflow/tfjs'
 
@@ -21,7 +20,11 @@
     }
 
     // handle file uploads from a custom component
-    async function handleImageChange(details: any): Promise<void> {
+    async function handleImageChange(event: Event): Promise<void> {
+        const input = event.currentTarget as HTMLInputElement
+        const file = input.files?.[0]
+        if (!file) return
+
         predictions = []
         const reader = new FileReader()
         reader.onload = async (event) => {
@@ -31,7 +34,7 @@
             imgEl.src = reader.result as string
             imgEl.hidden = false
         }
-        reader.readAsDataURL(details.acceptedFiles[0])
+        reader.readAsDataURL(file)
     }
     // handle preprocessing and classifying the device's selected image
     async function predict() {
@@ -47,30 +50,36 @@
             [224, 224]
         )
         // using the model and classify the reshaped tensor
-        predictions = await model.classify(resizedImageTensor)
-        predictionsLoading = false
+        try {
+            predictions = await model.classify(resizedImageTensor)
+        } finally {
+            imageTensor.dispose()
+            resizedImageTensor.dispose()
+            predictionsLoading = false
+        }
     }
 </script>
 
 {#await loadModel()}
-    <div class="flex w-full flex-col gap-4">
-        <h3 class="h3">Image Classifier</h3>
-        <Progress value={null} />
+    <div class="not-prose ui-card my-8 flex w-full flex-col gap-4 p-5">
+        <h3 class="font-semibold tracking-tight">Loading image classifier</h3>
+        <progress aria-label="Loading image classifier"></progress>
     </div>
 {:then _}
     <section
-        class="flex flex-col items-center justify-center gap-8 align-middle"
+        class="not-prose ui-card my-8 flex flex-col items-center justify-center gap-6 p-5 sm:p-6"
     >
-        <div class="flex w-full flex-col gap-4">
-            <h3 class="h3">Image Classifier</h3>
-            <FileUpload
-                name="example"
+        <div class="w-full space-y-2">
+            <h3 class="font-semibold tracking-tight">Image classifier</h3>
+            <p class="ui-muted text-sm">
+                Choose an image to classify locally in your browser.
+            </p>
+            <input
+                class="ui-input h-auto file:mr-3 file:border-0 file:bg-transparent file:text-sm file:font-medium"
+                name="image"
+                type="file"
                 accept="image/*"
-                maxFiles={1}
-                maxFileSize={1024 * 1024 * 10}
-                onFileChange={handleImageChange}
-                classes="w-full"
-                filesListClasses="hidden"
+                onchange={handleImageChange}
             />
         </div>
         <img
@@ -82,15 +91,15 @@
             alt=""
         />
         <div
-            class="border-surface-200t-800 card preset-tonal w-full p-4 text-center"
+            class="w-full rounded-[var(--radius)] border border-[var(--border)] bg-[var(--muted)] p-4 text-center"
         >
             {#if predictionsLoading}
-                <h4 class="h4">Predictions:</h4>
+                <h4 class="font-medium">Predictions</h4>
                 <div class="flex flex-col gap-2">
                     <span>Loading...</span>
                 </div>
             {:else}
-                <h4 class="h4">Predictions:</h4>
+                <h4 class="font-medium">Predictions</h4>
                 <div class="flex flex-col gap-2">
                     {#each predictions as prediction}
                         <span

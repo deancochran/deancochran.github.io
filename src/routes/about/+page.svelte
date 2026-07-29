@@ -13,18 +13,24 @@
 />
 
 <!-- Main -->
-<div class="flex flex-col gap-4">
-    <header class="flex flex-col gap-4">
+<div class="flex flex-col gap-8">
+    <header
+        class="flex items-center gap-5 border-b border-[var(--border)] pb-8"
+    >
         <div
-            class="flex flex-row items-center justify-center gap-4 align-middle"
+            class="grid h-20 w-20 shrink-0 place-items-center rounded-[var(--radius)] border border-[var(--border)] bg-[var(--muted)]"
         >
-            <Logo class="h-32 w-32" />
-            <h2 class="h2 text-center">About</h2>
+            <Logo class="h-14 w-14" />
+        </div>
+        <div class="space-y-2">
+            <h1 class="page-title">About</h1>
+            <p class="ui-muted">
+                Full-stack software engineer and lifelong learner.
+            </p>
         </div>
     </header>
-    <br />
 
-    <article class="prose dark:prose-invert !max-w-none">
+    <article class="prose !max-w-none">
         <p>
             Hi, I’m Dean Cochran, a full-stack software engineer with a passion
             for building innovative solutions that solve real-world problems.
@@ -47,7 +53,6 @@
             Thanks for stopping by—feel free to connect or explore my work
             further! If you enjoyed this page or found it helpful, consider
             donating to support future content <a
-                class="anchor"
                 href="https://buymeacoffee.com/deancochran">here</a
             >.
         </p>

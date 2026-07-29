@@ -1,5 +1,6 @@
 <script lang="ts">
     import { page } from '$app/state'
+    import Newsletter from '$lib/components/Newsletter.svelte'
     import Post from '$lib/components/Post.svelte'
     import Seo from '$lib/components/Seo.svelte'
     import type { PageData } from './$types'
@@ -9,6 +10,22 @@
     }
 
     let { data }: Props = $props()
+
+    type PostData = BlogPost & { relativePath: string }
+
+    function groupPostsByYear(posts: PostData[]) {
+        const groups = new Map<string, PostData[]>()
+
+        for (const post of posts) {
+            const year = post.date.slice(0, 4)
+            groups.set(year, [...(groups.get(year) ?? []), post])
+        }
+
+        return Array.from(groups, ([year, posts]) => ({ year, posts }))
+    }
+
+    let featuredPost = $derived(data.posts[0] ?? null)
+    let archiveGroups = $derived(groupPostsByYear(data.posts.slice(1)))
 </script>
 
 <Seo
@@ -18,14 +35,59 @@
     image="/images/logo.webp"
 />
 
-<h1 class="h1">Posts</h1>
+<header class="space-y-6 border-b border-[var(--border)] pb-10 sm:pb-14">
+    <p class="archive-meta">Writing</p>
+    <h1 class="archive-title max-w-[16ch]">
+        Technical notes and field guides.
+    </h1>
+    <div
+        class="flex max-w-3xl flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"
+    >
+        <p class="ui-muted max-w-[60ch] leading-7">
+            Notes on building software, applied machine learning, and the tools
+            I use to create reliable systems.
+        </p>
+        <p class="archive-meta whitespace-nowrap">
+            {data.posts.length}
+            {data.posts.length === 1 ? 'article' : 'articles'}
+        </p>
+    </div>
+</header>
 
-<div
-    class="aign-middle flex h-full w-full flex-row flex-wrap items-start justify-center gap-4"
->
-    {#each data.posts as post}
-        <Post {post} />
-    {:else}
-        <p>No published posts yet.</p>
-    {/each}
-</div>
+{#if featuredPost}
+    <section class="space-y-5" aria-labelledby="latest-article">
+        <p id="latest-article" class="archive-meta">Latest</p>
+        <Post post={featuredPost} variant="featured" />
+    </section>
+
+    {#if archiveGroups.length > 0}
+        <div class="space-y-10" aria-labelledby="all-articles">
+            <p id="all-articles" class="archive-meta">All articles</p>
+
+            {#each archiveGroups as group}
+                <section aria-labelledby={`year-${group.year}`}>
+                    <h2
+                        id={`year-${group.year}`}
+                        class="border-b border-[var(--border)] pb-3 font-mono text-sm font-semibold tracking-[0.12em]"
+                    >
+                        {group.year}
+                    </h2>
+                    <div class="divide-y divide-[var(--border)]">
+                        {#each group.posts as post}
+                            <Post {post} variant="archive" />
+                        {/each}
+                    </div>
+                </section>
+            {/each}
+        </div>
+    {/if}
+{:else}
+    <section class="py-8" aria-labelledby="empty-archive">
+        <h2 id="empty-archive" class="text-xl font-semibold">
+            No articles published yet.
+        </h2>
+        <p class="ui-muted mt-2">Subscribe to hear when the first one lands.</p>
+    </section>
+{/if}
+
+<Newsletter />

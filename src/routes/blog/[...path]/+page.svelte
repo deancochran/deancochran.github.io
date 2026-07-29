@@ -1,6 +1,6 @@
 <script lang="ts">
     import { page } from '$app/state'
-    import { Avatar } from '@skeletonlabs/skeleton-svelte'
+    import Newsletter from '$lib/components/Newsletter.svelte'
     import Seo from '$lib/components/Seo.svelte'
     import type { PageData } from './$types'
     interface Props {
@@ -18,93 +18,60 @@
     type="article"
 />
 
-<div class="prose dark:prose-invert !max-w-none">
-    <header class="flex flex-col gap-4">
+<article class="prose !max-w-none">
+    <header
+        class="not-prose mb-10 flex flex-col gap-5 border-b border-[var(--border)] pb-8"
+    >
         <h1
-            class="!m-0 py-4"
-            style={`view-transition-name: item-title-${data.meta.title};`}
+            class="page-title max-w-3xl"
+            style={`view-transition-name: item-title-${data.relativePath};`}
         >
             {data.meta.title}
         </h1>
-        <div class="flex flex-col items-stretch justify-between align-middle">
-            <div
-                class="flex flex-row items-center justify-between gap-2 align-middle"
-            >
-                <div
-                    class="flex flex-row items-center justify-start gap-2 align-middle"
+        <div class="flex items-center gap-3">
+            <a href="/about" aria-label="About Dean Cochran">
+                <img
+                    src="/images/headshot.webp"
+                    alt=""
+                    class="h-10 w-10 rounded-full border border-[var(--border)] object-cover"
+                />
+            </a>
+            <div class="text-sm leading-5">
+                <a class="font-medium hover:underline" href="/about"
+                    >Dean Cochran</a
                 >
-                    <a class="btn-icon h-auto w-auto" href="/about">
-                        <Avatar
-                            name="Dean"
-                            src="/images/headshot.webp"
-                            classes={'w-12 h-12 !m-0'}
-                        />
-                    </a>
-                    <div class="flex flex-col items-stretch align-middle">
-                        <small
-                            >Written by: <a
-                                class="no-underline underline-offset-1 hover:underline"
-                                href="/about">Dean Cochran</a
-                            ></small
-                        >
-                        <small
-                            >Published: {new Date(
-                                data.meta.date
-                            ).toLocaleDateString()}</small
-                        >
-                    </div>
-                </div>
+                <p class="ui-muted">
+                    <time datetime={data.meta.date}>
+                        {new Date(data.meta.date).toLocaleDateString('en', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                        })}
+                    </time>
+                </p>
             </div>
         </div>
         <img
             src={data.meta.image}
             alt={data.meta.title}
             loading="eager"
-            class="lg:max-h=[25vh] !m-0 object-scale-down sm:max-h-[50vh]"
+            class="max-h-[28rem] w-full rounded-[var(--radius)] border border-[var(--border)] object-cover"
             style={`view-transition-name: item-image-${data.relativePath};`}
         />
         <p
-            class=" !m-0"
+            class="ui-muted max-w-2xl text-lg leading-8"
             style={`view-transition-name: item-description-${data.relativePath};`}
         >
             {data.meta.description}
         </p>
     </header>
-    <hr />
 
     <data.component />
 
-    <footer class="flex flex-col items-center gap-2 align-middle">
-        <form
-            action="https://buttondown.com/api/emails/embed-subscribe/deancochran"
-            method="post"
-            target="popupwindow"
-            onsubmit={() => {
-                window.open('https://buttondown.com/deancochran', 'popupwindow')
-            }}
-            class="embeddable-buttondown-form w-full"
-        >
-            <label for="bd-email" class="label">
-                <span class="label-text px-1">Subscribe to my newsletter</span>
-                <div
-                    class="flex flex-row items-center justify-center gap-4 align-middle"
-                >
-                    <input
-                        name="bd-email"
-                        class="input"
-                        type="email"
-                        placeholder="janedoe@example.com"
-                    />
-                    <button
-                        type="submit"
-                        class="btn preset-tonal-surface outline"
-                        >Subscribe</button
-                    >
-                </div>
-            </label>
-        </form>
-        <br />
-
+    <footer
+        class="not-prose mt-12 space-y-8 border-t border-[var(--border)] pt-8"
+    >
+        <Newsletter compact />
         <script
             src="https://utteranc.es/client.js"
             data-repo="deancochran/deancochran"
@@ -114,4 +81,4 @@
             async
         ></script>
     </footer>
-</div>
+</article>

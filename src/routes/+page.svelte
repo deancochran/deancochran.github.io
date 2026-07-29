@@ -1,5 +1,6 @@
 <script lang="ts">
     import { page } from '$app/state'
+    import Newsletter from '$lib/components/Newsletter.svelte'
     import Post from '$lib/components/Post.svelte'
     import Seo from '$lib/components/Seo.svelte'
     import type { PageData } from './$types'
@@ -18,41 +19,34 @@
     image="/images/logo.webp"
 />
 
-<form
-    action="https://buttondown.com/api/emails/embed-subscribe/deancochran"
-    method="POST"
-    target="popupwindow"
-    onsubmit={() => {
-        window.open('https://buttondown.com/deancochran', 'popupwindow')
-    }}
-    class="embeddable-buttondown-form"
->
-    <label for="bd-email" class="label">
-        <span class="label-text px-1">Subscribe to my newsletter</span>
-        <div
-            class="flex flex-row items-center justify-center gap-4 align-middle"
+<header class="max-w-2xl space-y-4">
+    <p class="ui-muted text-sm font-medium">Software engineering notes</p>
+    <h1 class="page-title">
+        Practical ideas for building thoughtful software.
+    </h1>
+    <p class="ui-muted text-base leading-7 sm:text-lg">
+        Writing about software engineering, machine learning, cloud systems, and
+        the tools behind the work.
+    </p>
+</header>
+
+<Newsletter />
+
+<section class="space-y-4" aria-labelledby="latest-post">
+    <div class="flex items-center justify-between gap-4">
+        <h2 id="latest-post" class="text-lg font-semibold tracking-tight">
+            Latest post
+        </h2>
+        <a
+            class="ui-muted text-sm font-medium transition-colors hover:text-[var(--foreground)]"
+            href="/blog"
         >
-            <input
-                name="bd-email"
-                class="input"
-                type="email"
-                placeholder="janedoe@example.com"
-            />
-            <button type="submit" class="btn preset-tonal-surface outline"
-                >Subscribe</button
-            >
-        </div>
-    </label>
-</form>
-
-<br />
-
-<div
-    class="flex h-full w-full flex-col items-center justify-start gap-4 align-middle"
->
+            View all
+        </a>
+    </div>
     {#if data.post}
-        <Post post={data.post} />
+        <Post post={data.post} variant="featured" />
     {:else}
-        <p>No published posts yet.</p>
+        <p class="ui-muted text-sm">No published posts yet.</p>
     {/if}
-</div>
+</section>
