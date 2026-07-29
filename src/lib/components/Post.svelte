@@ -8,12 +8,12 @@
 
 <a
     href={'/blog/' + post.relativePath}
-    class="card block overflow-hidden border border-surface-200-800 divide-surface-200-800 preset-tonal-surface active:scale-[1.01]"
+    class="card border-surface-200-800 divide-surface-200-800 preset-tonal-surface block overflow-hidden border active:scale-[1.01]"
 >
     <header class="card-header">
         <img
             src={post.image ?? '/images/logo.webp'}
-            class="aspect-21/9 rounded-t-md w-full object-cover"
+            class="aspect-21/9 w-full rounded-t-md object-cover"
             alt="banner"
             style={`view-transition-name: item-image-${post.relativePath};`}
         />
@@ -21,11 +21,17 @@
 
     <article class="space-y-4 p-4">
         <div>
-            <h2 class="h2"
-			style={`view-transition-name: item-title-${post.relativePath};`}>{post.title}</h2>
+            <h2
+                class="h2"
+                style={`view-transition-name: item-title-${post.relativePath};`}
+            >
+                {post.title}
+            </h2>
         </div>
-        <p class="line-clamp-5 opacity-60"
-		style={`view-transition-name: item-description-${post.relativePath};`}>
+        <p
+            class="line-clamp-5 opacity-60"
+            style={`view-transition-name: item-description-${post.relativePath};`}
+        >
             {post.description}
         </p>
     </article>

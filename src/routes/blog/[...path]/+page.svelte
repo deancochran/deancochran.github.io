@@ -1,69 +1,57 @@
 <script lang="ts">
     import { page } from '$app/state'
-    import { email_schema } from '$lib/utils/schema'
     import { Avatar } from '@skeletonlabs/skeleton-svelte'
-    import SvelteSeo from 'svelte-seo'
-    import { superForm } from 'sveltekit-superforms'
-    import { zod } from 'sveltekit-superforms/adapters'
+    import Seo from '$lib/components/Seo.svelte'
     import type { PageData } from './$types'
     interface Props {
         data: PageData
     }
 
     let { data }: Props = $props()
-    const { form, enhance, delayed } = superForm(data.form, {
-        applyAction: true,
-        invalidateAll: true,
-        resetForm: true,
-        validators: zod(email_schema),
-        delayMs: 0,
-        timeoutMs: 5000,
-    })
 </script>
 
-<SvelteSeo
+<Seo
     title={data.meta.title}
     description={data.meta.description}
-    canonical={page.url.href}
-    openGraph={{
-        title: data.meta.title,
-        description: data.meta.description,
-        url: page.url.href,
-        type: 'article',
-        site_name: 'Dean Cochran',
-        images: [
-            {
-                url: data.meta.image,
-            },
-        ],
-    }}
-    twitter={{
-        card: 'summary_large_image',
-        site: '@deancochran_',
-        creator: '@deancochran_',
-        title: data.meta.title,
-        description: data.meta.description,
-        image: data.meta.image,
-    }}
+    path={page.url.pathname}
+    image={data.meta.image}
+    type="article"
 />
 
 <div class="prose dark:prose-invert !max-w-none">
     <header class="flex flex-col gap-4">
-        <h1 class="!m-0 py-4"
-        style={`view-transition-name: item-title-${data.meta.title};`}>{data.meta.title}</h1>
-        <div
-            class="flex flex-col items-stretch justify-between align-middle"
+        <h1
+            class="!m-0 py-4"
+            style={`view-transition-name: item-title-${data.meta.title};`}
         >
+            {data.meta.title}
+        </h1>
+        <div class="flex flex-col items-stretch justify-between align-middle">
             <div
-                class="flex flex-row gap-2 items-center align-middle justify-between"
+                class="flex flex-row items-center justify-between gap-2 align-middle"
             >
-                <div class="flex flex-row gap-2 items-center align-middle justify-start">
-                    <a class="btn-icon w-auto h-auto" href="/about">
-                        <Avatar name="Dean" src="/images/headshot.webp" classes={"w-12 h-12 !m-0"}/>
+                <div
+                    class="flex flex-row items-center justify-start gap-2 align-middle"
+                >
+                    <a class="btn-icon h-auto w-auto" href="/about">
+                        <Avatar
+                            name="Dean"
+                            src="/images/headshot.webp"
+                            classes={'w-12 h-12 !m-0'}
+                        />
                     </a>
                     <div class="flex flex-col items-stretch align-middle">
-                        <small>Written by: <a class="hover:underline no-underline underline-offset-1" href="/about">Dean Cochran</a></small>
-                        <small>Published: {new Date(data.meta.date).toLocaleDateString()}</small>
+                        <small
+                            >Written by: <a
+                                class="no-underline underline-offset-1 hover:underline"
+                                href="/about">Dean Cochran</a
+                            ></small
+                        >
+                        <small
+                            >Published: {new Date(
+                                data.meta.date
+                            ).toLocaleDateString()}</small
+                        >
                     </div>
                 </div>
             </div>
@@ -72,15 +60,17 @@
             src={data.meta.image}
             alt={data.meta.title}
             loading="eager"
-            class="object-scale-down lg:max-h=[25vh] sm:max-h-[50vh] !m-0"
+            class="lg:max-h=[25vh] !m-0 object-scale-down sm:max-h-[50vh]"
             style={`view-transition-name: item-image-${data.relativePath};`}
         />
-        <p class=" !m-0"
-        style={`view-transition-name: item-description-${data.meta.relativePath};`}>
+        <p
+            class=" !m-0"
+            style={`view-transition-name: item-description-${data.relativePath};`}
+        >
             {data.meta.description}
         </p>
     </header>
-    <hr/>
+    <hr />
 
     <data.component />
 

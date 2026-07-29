@@ -1,7 +1,7 @@
 ---
 title: Building my Blog with Sveltekit and Terraform
 slug: building-my-blog
-date: '2024-9-17'
+date: '2024-09-17'
 image: /images/logo.webp
 description: Most of the websites that I would use for my personal blog don't support custom code snippets, components, and other pieces of content I love. Clearly building a full blog is overkill, and not necessary for the average 'blogger'. I'm coming at this from a 'because I can' attitude here. Not everyone needs these solutions, but here is mine for those interested in my implementation.
 published: true
@@ -143,12 +143,12 @@ Here’s a simple example of how you can dynamically load and display markdown
 content in your SvelteKit app:
 
 ```svelte
-// [...blog]/+page.svelte
 <script lang="ts">
-	import type { PageData } from './$types';
-	export let data: PageData;
+    import type { PageData } from './$types'
+    export let data: PageData
 </script>
 
+// [...blog]/+page.svelte
 <svelte:component this={data.component} />
 ```
 

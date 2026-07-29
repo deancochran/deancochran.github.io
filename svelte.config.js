@@ -8,6 +8,7 @@ import remarkMath from 'remark-math'
 import remarkToc from 'remark-toc'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import { createHighlighter } from 'shiki'
+import { SITE_ORIGIN } from './site.config.js'
 
 const highlighter = await createHighlighter({
     themes: ['poimandres'],
@@ -49,12 +50,13 @@ const config = {
         adapter: adapter({
             pages: 'build',
             assets: 'build',
-            fallback: undefined,
+            fallback: '404.html',
             precompress: false,
         }),
         prerender: {
             crawl: true,
-            entries: ['*', '/rss.xml', '/robots.txt'],
+            entries: ['*', '/rss.xml', '/sitemap.xml', '/robots.txt'],
+            origin: SITE_ORIGIN,
         },
     },
 }

@@ -11,12 +11,12 @@ declare global {
     }
     interface MdsvexFile {
         default: SvelteComponent
-        metadata: Record<string, string>
+        metadata: unknown
     }
 
     interface BlogPost {
         title: string
-        image?: string
+        image: string
         description: string
         date: string
         published: boolean

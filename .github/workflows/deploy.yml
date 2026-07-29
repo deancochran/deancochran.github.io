@@ -1,59 +1,62 @@
 name: CI & Deploy to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 
 permissions:
-  pages: write
-  id-token: write
+    pages: write
+    id-token: write
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+    build:
+        runs-on: ubuntu-latest
 
-    steps:
-      # 1️⃣ Checkout repository
-      - name: Checkout repository
-        uses: actions/checkout@v4
+        steps:
+            # 1️⃣ Checkout repository
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-      # 2️⃣ Setup Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
+            # 2️⃣ Setup Node.js
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 24
 
-      # 3️⃣ Setup pnpm
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
+            # 3️⃣ Setup pnpm
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 11.3.0
 
-      # 4️⃣ Install dependencies
-      - name: Install dependencies
-        run: pnpm install
+            # 4️⃣ Install dependencies
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
 
-      # 5️⃣ Build project
-      - name: Build project
-        run: pnpm build
-        env:
-          GITHUB_PAGES: true   # Only additional env for build
+            - name: Check project
+              run: pnpm check
 
-      # 6️⃣ Upload production-ready build files
-      - name: Upload build files
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: build   # Ensure your adapter-static outputs here
+            - name: Check formatting
+              run: pnpm format:check
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+            # 5️⃣ Build project
+            - name: Build project
+              run: pnpm build
 
+            # 6️⃣ Upload production-ready build files
+            - name: Upload build files
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: build # Ensure your adapter-static outputs here
+
+    deploy:
+        runs-on: ubuntu-latest
+        needs: build
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4

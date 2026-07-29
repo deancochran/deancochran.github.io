@@ -1,19 +1,20 @@
+import { getPostPath, parsePostMetadata } from './posts'
+
 export async function getPosts() {
     const allPostFiles = import.meta.glob('/src/posts/**/*.md')
     const iterablePostFiles = Object.entries(allPostFiles)
-    try {
-        const allPosts = await Promise.all(
-            iterablePostFiles.map(async ([path, resolver]) => {
+
+    return Promise.all(
+        iterablePostFiles.map(async ([path, resolver]) => {
+            try {
                 const { metadata } = (await resolver()) as MdsvexFile
-                const route = path.split('.')[0].split('/').slice(3).join('/')
                 return {
-                    ...metadata,
-                    relativePath: route,
-                } as BlogPost & { relativePath: string }
-            })
-        )
-        return allPosts
-    } catch (error) {
-        return []
-    }
+                    ...parsePostMetadata(metadata, path),
+                    relativePath: getPostPath(path),
+                }
+            } catch (error) {
+                throw new Error(`Failed to load post ${path}`, { cause: error })
+            }
+        })
+    )
 }

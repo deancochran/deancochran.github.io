@@ -4,78 +4,126 @@
 /// <reference lib="webworker" />
 
 declare let self: ServiceWorkerGlobalScope
-import { build, files, version } from '$service-worker'
+import { build, files, prerendered, version } from '$service-worker'
 
-// Create a unique cache name for this deployment
-const CACHE = `cache-${version}`
+const CACHE_PREFIX = 'deans-list-'
+const PRECACHE = `${CACHE_PREFIX}precache-${version}`
+const PAGE_CACHE = `${CACHE_PREFIX}pages-${version}`
+const ASSET_CACHE = `${CACHE_PREFIX}assets-${version}`
+const SHELL_ROUTES = new Set(['/', '/about', '/blog'])
 
-const ASSETS = [
-    ...build, // the app itself
-    ...files, // everything in `static`
+const PRECACHE_ASSETS = [
+    ...build.filter((path) => path.endsWith('.css')),
+    ...files.filter(
+        (path) => path.startsWith('/favicon/') || path === '/images/logo.webp'
+    ),
+    ...prerendered.filter((path) => SHELL_ROUTES.has(path)),
 ]
 
-// install service worker
 self.addEventListener('install', (event) => {
-    // Create a new cache and add all files to it
-    async function addFilesToCache() {
-        const cache = await caches.open(CACHE)
-        await cache.addAll(ASSETS)
-    }
-    event.waitUntil(addFilesToCache())
+    event.waitUntil(
+        caches.open(PRECACHE).then((cache) => cache.addAll(PRECACHE_ASSETS))
+    )
 })
 
-// activate service worker
 self.addEventListener('activate', (event) => {
-    // Remove previous cached data from disk
-    async function deleteOldCaches() {
-        for (const key of await caches.keys()) {
-            if (key !== CACHE) await caches.delete(key)
-        }
-    }
-    event.waitUntil(deleteOldCaches())
+    event.waitUntil(
+        caches
+            .keys()
+            .then((keys) =>
+                Promise.all(
+                    keys
+                        .filter(
+                            (key) =>
+                                (key.startsWith(CACHE_PREFIX) ||
+                                    key.startsWith('cache-')) &&
+                                ![PRECACHE, PAGE_CACHE, ASSET_CACHE].includes(
+                                    key
+                                )
+                        )
+                        .map((key) => caches.delete(key))
+                )
+            )
+    )
 })
 
-// fetch service worker
+async function putWithLimit(
+    cacheName: string,
+    request: Request | string,
+    response: Response,
+    limit: number
+) {
+    const cache = await caches.open(cacheName)
+    await cache.put(request, response)
+
+    const keys = await cache.keys()
+    await Promise.all(keys.slice(0, -limit).map((key) => cache.delete(key)))
+}
+
 self.addEventListener('fetch', (event) => {
-    // ignore POST requests etc
-    if (event.request.method !== 'GET') return
-
-    async function respond() {
-        const url = new URL(event.request.url)
-        const cache = await caches.open(CACHE)
-        // check if the requested resource can be found in the cache
-        if (ASSETS.includes(url.pathname)) {
-            const response = await cache.match(url.pathname)
-            // if we found cached files, respond with them
-            if (response) {
-                return response
-            }
-        }
-
-        try {
-            // if we can't find the resource in the cache, try to connect to the network
-            const response = await fetch(event.request)
-            // if we're offline, fetch can return a value that is not a Response
-            // instead of throwing - and we can't pass this non-Response to respondWith
-            if (!(response instanceof Response)) {
-                throw new Error('invalid response from fetch')
-            }
-            if (response.status === 200) {
-                cache.put(event.request, response.clone())
-            }
-            return response
-        } catch (err) {
-            // fall back to the cache if we're offline
-            const response = await cache.match(event.request)
-            if (response) {
-                return response
-            }
-            // if there's no cache, then just error out
-            // as there is nothing we can do to respond to this request
-            throw err
-        }
+    const url = new URL(event.request.url)
+    if (event.request.method !== 'GET' || url.origin !== self.location.origin) {
+        return
     }
-    event.respondWith(respond())
+
+    if (event.request.mode === 'navigate') {
+        event.respondWith(
+            (async () => {
+                const cacheKey = url.pathname
+                try {
+                    const response = await fetch(event.request)
+                    if (response.ok) {
+                        event.waitUntil(
+                            putWithLimit(
+                                PAGE_CACHE,
+                                cacheKey,
+                                response.clone(),
+                                20
+                            )
+                        )
+                    }
+                    return response
+                } catch {
+                    const cached = await caches.match(cacheKey)
+                    return (
+                        cached ??
+                        (await caches.match('/')) ??
+                        new Response('This page is unavailable offline.', {
+                            status: 503,
+                            headers: { 'Content-Type': 'text/plain' },
+                        })
+                    )
+                }
+            })()
+        )
+        return
+    }
+
+    const shouldCacheAsset =
+        url.pathname.startsWith('/_app/immutable/') ||
+        event.request.destination === 'image'
+
+    if (shouldCacheAsset) {
+        event.respondWith(
+            (async () => {
+                const cached = await caches.match(event.request)
+                if (cached) return cached
+
+                const response = await fetch(event.request)
+                if (response.ok) {
+                    event.waitUntil(
+                        putWithLimit(
+                            ASSET_CACHE,
+                            event.request,
+                            response.clone(),
+                            40
+                        )
+                    )
+                }
+                return response
+            })()
+        )
+    }
 })
 
 self.addEventListener('message', (event) => {

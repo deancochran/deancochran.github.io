@@ -13,11 +13,11 @@ published: true
 
 I’m 27, and I want tools that will scale with me for decades. Switching tools later is costly, so I’m building a foundation now that prioritizes:
 
-* **Longevity:** Tools that are future-proof and actively maintained.
-* **Portability:** My environment should be reproducible anywhere—Linux, macOS, or Windows (via WSL).
-* **Transparency:** Every tweak should be visible and versioned, so I always know what changed and why.
+- **Longevity:** Tools that are future-proof and actively maintained.
+- **Portability:** My environment should be reproducible anywhere—Linux, macOS, or Windows (via WSL).
+- **Transparency:** Every tweak should be visible and versioned, so I always know what changed and why.
 
-Your dotfiles are more than configs—they’re your *digital DNA*. They define how you think, move, and work in the terminal.
+Your dotfiles are more than configs—they’re your _digital DNA_. They define how you think, move, and work in the terminal.
 
 ## Core Tools in My Setup
 
@@ -25,27 +25,27 @@ Here’s what I use and why:
 
 ### 1. Neovim (Custom LazyVim)
 
-* Modern Vim with Lua-based extensibility.
-* Blazing fast, minimal, and endlessly scriptable.
-* Plugins managed declaratively for reproducibility.
+- Modern Vim with Lua-based extensibility.
+- Blazing fast, minimal, and endlessly scriptable.
+- Plugins managed declaratively for reproducibility.
 
 ### 2. Tmux
 
-* Terminal multiplexer for running multiple sessions in one window.
-* Perfect for remote work and persistent workflows.
-* My keybindings emphasize speed and mnemonic consistency.
+- Terminal multiplexer for running multiple sessions in one window.
+- Perfect for remote work and persistent workflows.
+- My keybindings emphasize speed and mnemonic consistency.
 
 ### 3. Nix
 
-* Declarative package manager and system configuration tool.
-* Ensures every machine I touch is configured identically.
-* Ideal for managing dependencies, tools, and bootstrap scripts.
+- Declarative package manager and system configuration tool.
+- Ensures every machine I touch is configured identically.
+- Ideal for managing dependencies, tools, and bootstrap scripts.
 
 ### 4. Zsh
 
-* A powerful shell with first-class customization.
-* Plugins like `zsh-autosuggestions` and `zsh-syntax-highlighting` improve UX.
-* Custom aliases and functions reduce repetitive typing.
+- A powerful shell with first-class customization.
+- Plugins like `zsh-autosuggestions` and `zsh-syntax-highlighting` improve UX.
+- Custom aliases and functions reduce repetitive typing.
 
 ## How I Structure My Dotfiles
 
@@ -71,9 +71,9 @@ My dotfiles live in a single version-controlled directory, structured by tool:
 
 ```
 
-* **Modular Design:** Each tool’s config lives in its own folder.
-* **Version-Controlled:** The entire repo is tracked with Git.
-* **Bootstrap Script:** Automates installation, symlinking, and dependency setup.
+- **Modular Design:** Each tool’s config lives in its own folder.
+- **Version-Controlled:** The entire repo is tracked with Git.
+- **Bootstrap Script:** Automates installation, symlinking, and dependency setup.
 
 ## Managing Dotfiles with GNU Stow
 
@@ -131,9 +131,9 @@ cd ~/dotfiles
 
 Your `bootstrap.sh` can:
 
-* Install system dependencies via Nix or Homebrew.
-* Use Stow to link configs.
-* Set up Neovim plugins and shells.
+- Install system dependencies via Nix or Homebrew.
+- Use Stow to link configs.
+- Set up Neovim plugins and shells.
 
 Example `bootstrap.sh`:
 
@@ -192,16 +192,16 @@ You can even create a **post-commit hook** to automatically re-stow after every 
 
 ## Why This Setup Works
 
-* **Reproducibility:** One repo, one command, same environment anywhere.
-* **Simplicity:** Stow keeps the filesystem clean—no manual symlink management.
-* **Future-Proofing:** Nix ensures long-term reproducibility across versions and platforms.
-* **Transparency:** Every configuration lives under version control.
+- **Reproducibility:** One repo, one command, same environment anywhere.
+- **Simplicity:** Stow keeps the filesystem clean—no manual symlink management.
+- **Future-Proofing:** Nix ensures long-term reproducibility across versions and platforms.
+- **Transparency:** Every configuration lives under version control.
 
 This system scales—from laptops to servers, from WSL to macOS—without friction.
 
 ## Closing Thought
 
 Your dotfiles are your **second brain** for development.
-They evolve as you do. When thoughtfully built, they turn every terminal into *your terminal*—consistent, efficient, and uniquely yours.
+They evolve as you do. When thoughtfully built, they turn every terminal into _your terminal_—consistent, efficient, and uniquely yours.
 
 Invest in them now, and they’ll quietly repay you for the rest of your career.
