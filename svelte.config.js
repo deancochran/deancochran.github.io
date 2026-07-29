@@ -11,7 +11,7 @@ import { createHighlighter } from 'shiki'
 import { SITE_ORIGIN } from './site.config.js'
 
 const highlighter = await createHighlighter({
-    themes: ['poimandres'],
+    themes: ['min-light', 'poimandres'],
     langs: [
         'javascript',
         'typescript',
@@ -29,7 +29,13 @@ const mdsvexOptions = {
     highlight: {
         highlighter: async (code, lang = 'text') => {
             const html = escapeSvelte(
-                highlighter.codeToHtml(code, { lang, theme: 'poimandres' })
+                highlighter.codeToHtml(code, {
+                    lang,
+                    themes: {
+                        light: 'min-light',
+                        dark: 'poimandres',
+                    },
+                })
             )
             return `{@html \`${html}\`}`
         },
