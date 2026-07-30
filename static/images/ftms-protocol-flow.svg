@@ -1,0 +1,133 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1200"
+    height="520"
+    viewBox="0 0 1200 520"
+    role="img"
+    aria-labelledby="title desc"
+>
+    <title id="title">FTMS codec design and runtime boundary</title>
+    <desc id="desc">
+        Public FTMS documents provide design rules and provenance to the ftms
+        TypeScript codec, which decodes typed values. A caller-owned application
+        exchanges notification bytes with the codec and receives control bytes
+        from it for its Bluetooth connection.
+    </desc>
+    <defs>
+        <marker
+            id="arrow"
+            viewBox="0 0 10 10"
+            refX="8"
+            refY="5"
+            markerWidth="7"
+            markerHeight="7"
+            orient="auto-start-reverse"
+        >
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
+        </marker>
+    </defs>
+    <rect width="1200" height="520" rx="24" fill="#f8fafc" />
+    <text
+        x="600"
+        y="74"
+        fill="#0f172a"
+        font-family="system-ui, sans-serif"
+        font-size="28"
+        font-weight="700"
+        text-anchor="middle"
+    >
+        FTMS bytes, with a clear application boundary
+    </text>
+    <g font-family="system-ui, sans-serif" text-anchor="middle">
+        <rect
+            x="48"
+            y="164"
+            width="246"
+            height="190"
+            rx="16"
+            fill="#e2e8f0"
+            stroke="#94a3b8"
+            stroke-width="2"
+        />
+        <text x="171" y="231" fill="#0f172a" font-size="21" font-weight="700">
+            Public FTMS documents
+        </text>
+        <text x="171" y="269" fill="#475569" font-size="16">
+            fields, units, flags, errata
+        </text>
+
+        <rect
+            x="334"
+            y="164"
+            width="246"
+            height="190"
+            rx="16"
+            fill="#dbeafe"
+            stroke="#60a5fa"
+            stroke-width="2"
+        />
+        <text x="457" y="231" fill="#0f172a" font-size="21" font-weight="700">
+            @deancochran/ftms
+        </text>
+        <text x="457" y="269" fill="#475569" font-size="16">
+            decode · validate · encode
+        </text>
+
+        <rect
+            x="620"
+            y="164"
+            width="246"
+            height="190"
+            rx="16"
+            fill="#ecfdf5"
+            stroke="#6ee7b7"
+            stroke-width="2"
+        />
+        <text x="743" y="231" fill="#0f172a" font-size="21" font-weight="700">
+            Typed values + warnings
+        </text>
+        <text x="743" y="269" fill="#475569" font-size="16">
+            watts · cadence · truncation
+        </text>
+
+        <rect
+            x="906"
+            y="164"
+            width="246"
+            height="190"
+            rx="16"
+            fill="#fff7ed"
+            stroke="#fdba74"
+            stroke-width="2"
+        />
+        <text x="1029" y="219" fill="#0f172a" font-size="21" font-weight="700">
+            Your app + BLE
+        </text>
+        <text x="1029" y="254" fill="#475569" font-size="16">
+            discover · subscribe ·
+        </text>
+        <text x="1029" y="279" fill="#475569" font-size="16">
+            serialize controls
+        </text>
+        <text x="1029" y="322" fill="#9a3412" font-size="14" font-weight="700">
+            CALLER-OWNED
+        </text>
+    </g>
+    <g
+        font-family="system-ui, sans-serif"
+        fill="#475569"
+        font-size="13"
+        text-anchor="middle"
+    >
+        <text x="308" y="135">design rules + provenance</text>
+        <text x="594" y="135">decode</text>
+        <text x="743" y="386">notification bytes</text>
+        <text x="743" y="477">control bytes</text>
+    </g>
+    <g fill="none" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)">
+        <path d="M 294 150 H 322" />
+        <path d="M 580 150 H 608" />
+        <path d="M 980 354 V 402 H 500 V 354" />
+        <path d="M 414 354 V 452 H 1080 V 354" />
+    </g>
+</svg>
