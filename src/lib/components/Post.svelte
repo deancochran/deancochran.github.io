@@ -1,10 +1,14 @@
 <script lang="ts">
+    import { getPostImage } from '$lib/utils/post-images'
+    import PostImage from './PostImage.svelte'
+
     interface Props {
         post: BlogPostSummary
         variant?: 'featured' | 'archive'
     }
 
     let { post, variant = 'featured' }: Props = $props()
+    const image = $derived(getPostImage(post.image))
 
     const fullDate = new Intl.DateTimeFormat('en-US', {
         day: 'numeric',
@@ -32,10 +36,13 @@
             <div
                 class="overflow-hidden border-b border-[var(--border)] md:border-r md:border-b-0"
             >
-                <img
-                    src={post.image ?? '/images/logo.webp'}
+                <PostImage
+                    image={image.source}
                     class="aspect-video h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] md:aspect-16/10"
-                    alt={post.title}
+                    alt={image.alt ?? post.title}
+                    sizes="(min-width: 1152px) 616px, (min-width: 1024px) calc((100vw - 80px) * 0.575), (min-width: 768px) calc((100vw - 64px) * 0.575), (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)"
+                    loading="eager"
+                    fetchpriority="high"
                     style={`view-transition-name: item-image-${post.relativePath};`}
                 />
             </div>
@@ -78,10 +85,11 @@
             <div
                 class="overflow-hidden rounded-[var(--radius)] bg-[var(--muted)]"
             >
-                <img
-                    src={post.image ?? '/images/logo.webp'}
+                <PostImage
+                    image={image.source}
                     class="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-[1.025]"
-                    alt={post.title}
+                    alt={image.alt ?? post.title}
+                    sizes="(min-width: 768px) 180px, (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)"
                     loading="lazy"
                     style={`view-transition-name: item-image-${post.relativePath};`}
                 />

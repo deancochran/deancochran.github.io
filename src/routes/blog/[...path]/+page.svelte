@@ -2,13 +2,16 @@
     import { page } from '$app/state'
     import Comments from '$lib/components/Comments.svelte'
     import Newsletter from '$lib/components/Newsletter.svelte'
+    import PostImage from '$lib/components/PostImage.svelte'
     import Seo from '$lib/components/Seo.svelte'
+    import { getPostImage } from '$lib/utils/post-images'
     import type { PageData } from './$types'
     interface Props {
         data: PageData
     }
 
     let { data }: Props = $props()
+    const image = $derived(getPostImage(data.meta.image))
 </script>
 
 <Seo
@@ -54,10 +57,12 @@
                 </p>
             </div>
         </div>
-        <img
-            src={data.meta.image}
-            alt={data.meta.title}
+        <PostImage
+            image={image.source}
+            alt={image.alt ?? data.meta.title}
             loading="eager"
+            fetchpriority="high"
+            sizes="(min-width: 1152px) 1072px, (min-width: 1024px) calc(100vw - 80px), (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)"
             class="max-h-[28rem] w-full rounded-[var(--radius)] border border-[var(--border)] object-cover"
             style={`view-transition-name: item-image-${data.relativePath};`}
         />

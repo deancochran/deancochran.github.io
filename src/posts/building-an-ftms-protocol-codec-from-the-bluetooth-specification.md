@@ -2,7 +2,7 @@
 title: 'From Bluetooth Specification to TypeScript: Building an FTMS Protocol Codec'
 slug: building-an-ftms-protocol-codec-from-the-bluetooth-specification
 date: '2026-07-30'
-image: /images/logo.webp
+image: /images/ftms-exercise-bikes.jpg
 description: 'How I turn Bluetooth FTMS bytes into typed values, wire-valid control inputs, and useful warnings.'
 published: true
 ---
