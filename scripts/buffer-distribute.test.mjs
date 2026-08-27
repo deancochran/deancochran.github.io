@@ -108,7 +108,7 @@ test('image asset uses the post title as alt text', () => {
         {
             image: {
                 url: 'https://example.com/image.webp',
-                altText: post.title,
+                metadata: { altText: post.title },
             },
         }
     )
