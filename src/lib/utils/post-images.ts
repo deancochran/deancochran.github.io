@@ -1,5 +1,6 @@
 // WebP is both the interoperable fallback and the only non-AVIF output, keeping
 // the server and client builds on one shared fallback asset set.
+import aiDraft from '$lib/assets/post-images/ai-draft-not-my-work-to-finish.webp?enhanced&format=avif;webp&w=1600;1200;900;640;480'
 import bookReview from '$lib/assets/post-images/designing-ml-systems-book-review.webp?enhanced&format=avif;webp&w=1600;1200;900;640;480'
 import dotfiles from '$lib/assets/post-images/dotfiles-header.webp?enhanced&format=avif;webp&w=1600;1200;900;640;480'
 import ftmsExerciseBikes from '$lib/assets/post-images/ftms-exercise-bikes.jpg?enhanced&format=avif;webp&w=1600;1200;900;640;480'
@@ -14,6 +15,10 @@ interface PostImage {
 }
 
 const postImages: Record<string, PostImage> = {
+    '/images/ai-draft-not-my-work-to-finish.webp': {
+        source: aiDraft,
+        alt: 'Weathered red stop sign in a sunlit grassy field, with distant mountains under a blue sky',
+    },
     '/images/designing-ml-systems-book-review.webp': {
         source: bookReview,
     },
