@@ -3,7 +3,7 @@ title: 'Your AI Draft Is Not My Work to Finish'
 description: 'Fluent output is not finished work. The person who generates it still owns review, verification, and integration.'
 date: '2026-08-26'
 image: /images/ai-draft-not-my-work-to-finish.webp
-published: false
+published: true
 ---
 
 ## Contents
