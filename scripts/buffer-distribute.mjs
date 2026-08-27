@@ -220,7 +220,7 @@ export function composePostText(post, canonicalUrl) {
 }
 
 export function composeImageAsset(post, imageUrl) {
-    return { image: { url: imageUrl, altText: post.title } }
+    return { image: { url: imageUrl, metadata: { altText: post.title } } }
 }
 
 function retryAfterSeconds(response) {
