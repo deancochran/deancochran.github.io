@@ -10,6 +10,8 @@ published: false
 
 **_“You didn’t review it. You liked how it made you feel, mistook that feeling for finished work, and shared it. You should have asked for help.”_**
 
+_Header photo by [Grace Galligan on Unsplash](https://unsplash.com/photos/a-red-stop-sign-sitting-on-top-of-a-lush-green-field-dMZeRFGVC-M)._
+
 AI can produce a document that looks finished before anyone has done the work required to finish it.
 
 The headings are clean. The tone is confident. The recommendations sound specific. There may even be a table, an implementation plan, and a reassuring conclusion. It creates the emotional experience of progress.

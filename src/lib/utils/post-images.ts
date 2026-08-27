@@ -17,7 +17,7 @@ interface PostImage {
 const postImages: Record<string, PostImage> = {
     '/images/ai-draft-not-my-work-to-finish.webp': {
         source: aiDraft,
-        alt: 'Cream, black, and red editorial graphic reading “UNREVIEWED OUTPUT,” “YOUR AI DRAFT IS NOT MY WORK TO FINISH,” “DRAFT,” and “GENERATION != ACCEPTANCE”',
+        alt: 'Weathered red stop sign in a sunlit grassy field, with distant mountains under a blue sky',
     },
     '/images/designing-ml-systems-book-review.webp': {
         source: bookReview,
