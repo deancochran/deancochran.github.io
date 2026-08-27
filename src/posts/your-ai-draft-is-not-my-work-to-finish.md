@@ -12,74 +12,81 @@ published: false
 
 _Header photo by [Grace Galligan on Unsplash](https://unsplash.com/photos/a-red-stop-sign-sitting-on-top-of-a-lush-green-field-dMZeRFGVC-M)._
 
-AI can produce a document that looks finished before anyone has done the work required to finish it.
+AI can make a document look done before anyone has done the work to finish it.
 
-The headings are clean. The tone is confident. The recommendations sound specific. There may even be a table, an implementation plan, and a reassuring conclusion. It creates the emotional experience of progress.
+The headings are clean. The tone sounds sure. There may be a table, a plan, and a neat conclusion. It feels like progress.
 
-Then somebody who understands the problem opens it.
+Then somebody who knows the subject opens it.
 
-The assumptions are unstated. The terminology does not match the organization. The proposed controls do not fit the system. Sources are missing, stale, or weaker than the prose suggests. The hard tradeoffs have been rounded into bullet points. Now that person must reconstruct the prompt, recover the context, verify every claim, identify what is usable, and explain what has to change.
+The terms are wrong. The plan does not fit the real system. Sources are missing or weak. The hard choices have been turned into friendly bullet points. Now that person has to rebuild the context, check every claim, and figure out what can be saved.
 
-That was not a handoff. It was work reassignment with nicer typography.
+> When you skip the review, you do not save work. You move it to somebody else.
 
-## Fluent is not finished
+## Looks done is not done
 
-Generative AI is exceptionally good at early-stage output: outlines, options, first passes, summaries, scaffolding, and plausible language. That is useful. It is also easy to confuse with completion because fluency hides uncertainty.
+AI is great at first passes. It can make outlines, list options, summarize notes, sketch code, and clean up rough language. I use it for all of that.
 
-A rough human draft usually advertises its roughness. It has gaps, notes to self, awkward transitions, and visible questions. A generated draft can smooth over those signals. The uncertainty remains, but the presentation makes it less obvious.
+Here’s the trap: fluent writing hides uncertainty.
 
-That difference matters. A polished surface changes how people evaluate the artifact. Instead of asking, “What remains unknown?” they ask, “Does this look impressive?” Instead of checking whether the recommendation fits reality, they react to how decisively it is written.
+A rough human draft usually looks rough. It has gaps, awkward lines, and notes like “check this.” An AI draft can smooth those signs away. The gaps are still there. They are just harder to see.
 
-The draft becomes dangerous when the generator stops being its first reviewer.
+Before you share AI-assisted work, ask yourself:
 
-Before sharing AI-assisted work, the person sharing it should be able to answer:
+- Did I read the whole thing?
+- Which claims did I check?
+- What did the model assume?
+- What is still unclear or unfinished?
+- What do I actually want from the person receiving it?
 
-- What did I ask the model to do, and what context did I withhold?
-- Which claims did I verify against primary or authoritative sources?
-- Which assumptions are mine, and which did the model invent?
-- What decisions does this artifact make, and who has authority to make them?
-- What is incomplete, uncertain, or intentionally out of scope?
-- What do I want from the recipient: review, a decision, subject-matter help, or implementation?
+If you cannot answer those questions, call it exploration or a rough draft. That is fine. Just do not call it finished.
 
-If you cannot answer those questions, label the artifact as exploration. Do not present it as finished work.
+## Sometimes the draft is the ask
 
-## The hidden request for help
+An unreviewed AI draft can be a hidden request for help.
 
-Sometimes an unreviewed AI artifact is really a request for help from somebody who does not want to ask directly.
+Picture a general, composite enterprise security example. This is not about my current employer, a specific company, or a real identifiable system.
 
-Imagine a generalized, composite enterprise security scenario. This is not an account of my current employer, any particular company, or one identifiable system. Someone generates an assessment-style document about a complicated environment and forwards it to a specialist. It contains broad concerns, generic remediation language, and confident priorities. The specialist is expected to determine which statements are true, supply the missing environment context, correct the recommendations, and turn the document into something actionable.
+Someone generates an assessment, gives it a quick skim, and sends it to a specialist. The concerns sound serious. The fixes sound reasonable. But the draft does not know the environment.
 
-The sender may believe they contributed a useful head start. The recipient received an unbounded research and review task.
+The specialist now has to find out what is true, add the missing context, fix the advice, and turn it into a real plan. The sender thinks they gave them a head start. What they really sent was a wide-open review job.
 
-If what you need is expertise, say so:
+If you need help, ask for it plainly. A DM, note, or email works:
 
-> I used AI to organize my initial thoughts, but I do not know whether the technical assumptions are sound. Could you help me frame this? I have not treated the draft as a recommendation.
+> I used AI to organize my first thoughts, but I have not checked the technical assumptions. Could you help me frame the problem? I am not treating this as a recommendation yet.
 
-That message is honest. A DM, note, or email can establish the question, the uncertainty, the desired outcome, and the amount of help being requested. It gives the other person a chance to accept, decline, narrow, or redirect the work.
+That is honest. It tells the other person what you know, what you do not know, and what kind of help you want. They can say yes, say no, or narrow the question.
 
-Asking directly is not a weakness. Disguising the request as a completed artifact is.
+> Asking for help is not the problem. Hiding the ask inside a polished draft is.
 
-## Generation is cheap; acceptance is not
+## The cheap part is not the whole job
 
-The cost of producing words, code, diagrams, and plans has fallen. The cost of being responsible for them has not.
+AI made it cheap to produce words, code, diagrams, and plans. It did not make it cheap to trust them.
 
-Acceptance means deciding that an artifact is fit for its intended purpose. Verification means checking it against evidence and actual constraints. Integration means making it coexist with people, systems, code, policies, and timelines. Maintenance means owning what happens after the artifact meets reality. Judgment connects all four.
+Someone still has to:
 
-Those costs often increase with generated output because AI lets us create more candidates than we can responsibly evaluate. Ten plausible approaches are not automatically better than two understood ones. A large patch produced in minutes can still take hours to review because the reviewer must build a mental model the generator never had. A confident plan can impose days of discovery on the people asked to implement it.
+- check the facts;
+- decide whether the work fits the real goal;
+- merge it with existing systems and plans;
+- maintain it after the first handoff; and
+- own the result.
 
-This is the accounting error behind “AI did most of the work.” It may have done most of the generation. That is not the same unit.
+More output can create more review, not less. Ten plausible options are not better than two understood ones. A large patch written in minutes may still take hours to review. A confident plan may create days of discovery for the people asked to carry it out.
 
-Research does not support one universal productivity slogan either. In a 2025 randomized study, [METR observed 16 experienced open-source developers working in their own repositories](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) take 19% longer on the studied tasks when AI tools were allowed, even though they believed the tools had sped them up. METR explicitly limited that result to its setting and now labels it historical. Its [2026 follow-up](https://metr.org/blog/2026-02-24-uplift-update/) found signs that newer tools may help more, but the researchers said selection effects and time-measurement problems made the newer estimate unreliable.
+> Generation got cheap. Judgment did not.
 
-That is the useful lesson: the feeling of acceleration is not sufficient evidence, and the effect depends on the people, tools, tasks, and definition of done.
+Research does not give us one simple productivity slogan. In a 2025 randomized study, [METR studied 16 experienced open-source developers working in repositories they knew well](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/). On the tasks studied, they took 19% longer when AI tools were allowed, even though they thought AI had sped them up. METR limits that finding to that setting and now calls it historical.
 
-Microsoft Research reached a related but distinct conclusion in a [survey of 319 knowledge workers](https://www.microsoft.com/en-us/research/publication/the-impact-of-generative-ai-on-critical-thinking-self-reported-reductions-in-cognitive-effort-and-confidence-effects-from-a-survey-of-knowledge-workers/). Higher confidence in generative AI was associated with less reported critical thinking, while respondents described critical thinking shifting toward verification, integration, and task stewardship. It was a survey, not a productivity experiment, so I would not use it to claim that AI makes everyone think less. I would use it as a reminder that oversight changes shape rather than disappearing.
+METR's [2026 follow-up](https://metr.org/blog/2026-02-24-uplift-update/) saw signs that newer tools might help more. But the researchers said selection bias and problems measuring time made the newer estimate unreliable. The honest answer is that results depend on the people, tools, tasks, and what counts as done.
 
-## I use AI deeply
+A [Microsoft Research survey of 319 knowledge workers](https://www.microsoft.com/en-us/research/publication/the-impact-of-generative-ai-on-critical-thinking-self-reported-reductions-in-cognitive-effort-and-confidence-effects-from-a-survey-of-knowledge-workers/) found that higher confidence in AI was linked with less reported critical thinking. People also described spending more of their thinking on checking responses, fitting them into the work, and overseeing the task. It was a survey, not a productivity experiment. It does not prove AI makes everyone think less. It does show that review does not disappear. It changes.
 
-This argument is not anti-AI. I use AI deeply in my engineering work. [Gradient Peak](https://github.com/deancochran/gradientpeak), the product repository, is public. The orchestration around my local checkouts is a separate arrangement I maintain; the public repository link is not documentation for that control plane.
+## I use AI a lot
 
-Locally, I keep the coordination root outside Git and make product changes in linked worktrees. [Git's official documentation](https://git-scm.com/docs/git-worktree) describes how one repository can support multiple working trees with separate per-worktree state. I reserve `main` for inspection and integration, use `dev` for normal implementation, and create task worktrees for bounded changes:
+This is not an anti-AI argument. I use AI deeply in my engineering work.
+
+[Gradient Peak](https://github.com/deancochran/gradientpeak) is my public product repository. Around my local checkouts, I run a separate control plane. That local setup is mine; the public repo link is not proof or documentation of it.
+
+I keep the control-plane root outside Git. Product changes happen in linked worktrees. [Git documents](https://git-scm.com/docs/git-worktree) how one repository can have multiple working trees with their own working state. In my setup, `main` is for inspection and integration, `dev` is for normal implementation, and task worktrees isolate bounded changes:
 
 ```text
 GradientPeak/
@@ -90,53 +97,51 @@ GradientPeak/
     └── task-*/     # isolated bounded changes
 ```
 
-I assign specialized roles instead of giving every agent the same job: a coordinator; bounded, quick, deep, and max workers; read-only reviewers; a strategist; and a database generator. Domain skills cover authentication and security, backend and database work, web and mobile frontends, testing, observability, integrations, and the UI and core packages. This uses documented [OpenCode agents](https://opencode.ai/docs/agents/), [permissions](https://opencode.ai/docs/permissions/), and [on-demand skills](https://opencode.ai/docs/skills/) to keep authority explicit.
+The agents have different jobs. There is a coordinator; bounded, quick, deep, and max workers; read-only reviewers; a strategist; and a database generator. Skills give them focused guidance for auth and security, backend and databases, web and mobile, tests, observability, integrations, UI, and core code. [OpenCode agents](https://opencode.ai/docs/agents/), [permissions](https://opencode.ai/docs/permissions/), and [skills](https://opencode.ai/docs/skills/) help me limit who can do what.
 
-For outside context, I connect Context7 documentation, Supabase, Sentry, and PostHog through the [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro). Those sources inform the work; they do not make the decision. OpenCode's [MCP documentation](https://opencode.ai/docs/mcp-servers/) also warns that connected tools add context and should be enabled deliberately.
+For outside context, I connect Context7 docs, Supabase, Sentry, and PostHog through the [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro). Those tools bring in information. They do not make the call. OpenCode's [MCP guide](https://opencode.ai/docs/mcp-servers/) makes a similar point: every connected tool adds context, so enable them with care.
 
-A worktree-guard plugin protects the coordination root, `main`, other agents' worktrees, and tool-owned generated outputs. Worktrunk installs dependencies for a new lane and runs `pnpm quality:agent` before merge. Prompt-behavior and compaction evaluations cover correction precedence, read-only audits, dirty-overlap stops, generator safeguards, verification evidence, and preservation of authority and checkout state. Persistent orchestration exists but stays dormant by default; ordinary work is supervised and interactive.
+There are guardrails too. A worktree-guard plugin keeps agents out of the control root, `main`, other agents' worktrees, and generated files they do not own. Worktrunk installs dependencies and runs `pnpm quality:agent` before a merge. Prompt and compaction tests check things like corrections taking priority, reviewers staying read-only, agents stopping on dirty overlaps, and verification evidence surviving long sessions.
 
-That is a lot of machinery for a silver bullet.
+Persistent automation exists, but it is off by default. Most work is interactive and supervised.
 
-## The agent finishing is not me finishing
+That is a lot of setup for something people call a silver bullet.
 
-When an agent says it is done, I am usually not done.
+## Done according to whom?
 
-I inspect the status and diff. I read the changed code. I check whether it stayed within its assigned paths. I run the relevant validation. I compare the result with the acceptance criteria. I look for assumptions that were convenient for the agent and wrong for the product. I may send corrections, narrow the change, or discard it.
+> The agent finishing is not me finishing.
 
-Then there is integration. A locally correct change can conflict with another lane, violate a package boundary, degrade the user experience, or create maintenance I do not want. Automated checks can reject known bad states. They cannot decide whether the change is worth owning.
+I still inspect the status and diff. I read the code. I check the assigned paths. I run the checks. I compare the result with what I asked for. Sometimes I send it back. Sometimes I narrow the change. Sometimes I throw it away.
 
-I continue working on projects for a long time after agents finish. The agents shorten parts of implementation, research, and review. They also create new supervision work: specifying boundaries, assembling context, evaluating evidence, and deciding what enters the product.
+A change can work alone and still be wrong for the product. It may clash with another change, cross a package boundary, hurt the user experience, or create upkeep I do not want.
 
-That trade can be excellent. It is still a trade.
+I often work on a project long after the agents stop. They speed up research, coding, and review. In return, I spend time setting boundaries, giving context, checking results, and deciding what gets in.
 
-## A better handoff
+That can be a great trade. It is still a trade.
 
-You do not need my control plane to share AI-assisted work responsibly. You need ownership and labels.
+## Make the handoff honest
 
-Before sending the artifact:
+You do not need a control plane to share AI-assisted work well. You need to own what you send.
 
-1. **Read all of it.** Not the summary. Not the first screen. All of it.
-2. **Verify consequential claims.** Follow links, inspect source material, and separate evidence from inference.
-3. **Add the missing context.** Replace generic assumptions with the constraints that actually govern the work.
-4. **State the maturity.** Call it notes, exploration, a draft, a proposal, or a reviewed recommendation accurately.
-5. **Name the ask.** Say whether you need feedback, expertise, approval, editing, or execution.
-6. **Own the next step.** Do not make the recipient discover that accepting your document means rebuilding it.
+Before you hit Share:
 
-If the artifact is not ready, that is fine. Early-stage work is valuable when it is honestly presented. “I generated this to explore the space, reviewed these sections, and need help with these two questions” is a useful handoff.
+1. **Read all of it.** Not just the summary.
+2. **Check the important claims.** Follow the links and look at the source.
+3. **Add the real context.** Replace generic guesses with actual limits.
+4. **Label it honestly.** Notes, rough draft, proposal, or reviewed plan all mean different things.
+5. **Name the ask.** Feedback? Expertise? Approval? Editing? Say it.
+6. **Own the next step.** Do not make the recipient discover that your handoff needs a rebuild.
 
-“Here is the finished plan” is not, when what you mean is, “Please figure out whether any of this is true.”
+Early work is useful when it is presented as early work. A simple note such as “I used AI to explore this, checked these parts, and need help with these two questions” is enough.
 
-AI is an accelerator. It can help a careful person explore faster, implement faster, and test more possibilities. It can also help an incurious person create a larger burden with greater confidence.
+AI is an accelerator, not a silver bullet. It can help a careful person move faster. It can also help someone create a bigger mess with more confidence.
 
-The difference is not the model. It is whether the person pressing Share accepts responsibility for what happens next.
+The difference is whether the person pressing Share owns what happens next.
 
 ## Further reading
 
-- [OpenCode: Agents](https://opencode.ai/docs/agents/) explains specialized primary agents and subagents, including read-only roles.
-- [OpenCode: Permissions](https://opencode.ai/docs/permissions/) documents allow, ask, and deny controls for agent actions.
-- [OpenCode: Agent Skills](https://opencode.ai/docs/skills/) describes reusable instructions loaded on demand.
-- [Model Context Protocol: Introduction](https://modelcontextprotocol.io/docs/getting-started/intro) defines MCP as an open standard connecting AI applications with external systems.
-- [Git: `git-worktree`](https://git-scm.com/docs/git-worktree) documents linked working trees and their separate per-worktree state.
-- [METR's 2025 study](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) and [2026 methodology update](https://metr.org/blog/2026-02-24-uplift-update/) show why AI productivity results need narrow interpretation and current context.
-- [Microsoft Research on critical thinking in AI-assisted knowledge work](https://www.microsoft.com/en-us/research/publication/the-impact-of-generative-ai-on-critical-thinking-self-reported-reductions-in-cognitive-effort-and-confidence-effects-from-a-survey-of-knowledge-workers/) reports associations among confidence, critical-thinking effort, verification, integration, and stewardship.
+- OpenCode [agents](https://opencode.ai/docs/agents/), [permissions](https://opencode.ai/docs/permissions/), and [skills](https://opencode.ai/docs/skills/) are the building blocks for specialized, limited roles.
+- [MCP's introduction](https://modelcontextprotocol.io/docs/getting-started/intro) explains how AI tools connect to outside systems.
+- [Git's worktree guide](https://git-scm.com/docs/git-worktree) explains linked working trees.
+- [METR's 2025 study](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) and [2026 update](https://metr.org/blog/2026-02-24-uplift-update/) show why productivity claims need context.
+- [Microsoft Research's knowledge-worker survey](https://www.microsoft.com/en-us/research/publication/the-impact-of-generative-ai-on-critical-thinking-self-reported-reductions-in-cognitive-effort-and-confidence-effects-from-a-survey-of-knowledge-workers/) covers confidence, review, and critical thinking with AI.
