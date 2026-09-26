@@ -11,7 +11,7 @@ published: true
 
 ## What the package does
 
-![A flow from FTMS specification tables through TypeScript codecs and diagnostics to an application-owned Bluetooth connection](/images/ftms-protocol-flow.svg)
+![Two flows show that the application manages Bluetooth: it passes machine data to the FTMS package to read, and it sends command bytes built by the package to the machine.](/images/ftms-protocol-flow.svg)
 
 I built [`@deancochran/ftms`](https://github.com/deancochran/ftms) to read and write Fitness Machine Service (FTMS) bytes as TypeScript values. This kind of translation is the job of a codec.
 
