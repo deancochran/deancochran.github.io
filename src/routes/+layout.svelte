@@ -38,6 +38,7 @@
         return path
             .replaceAll('-', ' ')
             .replace(/\b\w/g, (letter) => letter.toUpperCase())
+            .replace(/\bFtms\b/g, 'FTMS')
     }
 
     async function detectServiceWorkerUpdates() {
