@@ -1,6 +1,6 @@
 ---
 title: 'My FTMS Package'
-slug: building-an-ftms-protocol-codec-from-the-bluetooth-specification
+slug: my-ftms-package
 date: '2026-07-30'
 image: /images/ftms-exercise-bikes.jpg
 description: 'Read fitness machine data and build control commands with TypeScript.'
