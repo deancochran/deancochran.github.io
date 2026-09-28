@@ -3,65 +3,38 @@ title: 'My FTMS Package'
 slug: my-ftms-package
 date: '2026-07-30'
 image: /images/ftms-exercise-bikes.jpg
-description: 'Read fitness machine data and build control commands with TypeScript.'
+description: 'Making FTMS easier to use across languages.'
 published: true
 ---
-
-## Contents
 
 ## What is FTMS?
 
 Fitness Machine Service, or FTMS, is a Bluetooth standard used by exercise equipment such as indoor bikes and cross trainers. It gives apps a common way to receive things like speed, cadence, and power from a machine.
 
-The Bluetooth details are still a little fiddly. Machines send compact byte data, while an app usually wants useful values it can display or act on. That is the gap [`@deancochran/ftms`](https://github.com/deancochran/ftms) is meant to fill.
+The Bluetooth part can still be fiddly. Machines send compact byte data, while an app usually wants useful values it can display or act on. My [FTMS project](https://github.com/deancochran/ftms) is about translating between those two worlds.
 
-## What the package handles
+## A bigger goal than one package
 
-The package turns raw FTMS data into TypeScript values. Give it the bytes from a machine measurement and it can return values such as speed in metres per second, cadence in RPM, and power in watts.
+I started with TypeScript, but I do not want FTMS support to depend on one language or one Bluetooth library. The same translation should be useful to an app, a native tool, or equipment and simulator software.
 
-It can also build the bytes for supported control commands. That is useful when an app wants to ask a machine to do something, such as set a target power.
+For example, an app could use decoded measurements for a ride screen. A simulator could use the same rules to create measurements for another app to read.
 
-The package is not a Bluetooth client. Your app still finds the machine, subscribes to its updates, sends commands, and decides when a command is appropriate. It also owns the safety and user-experience decisions around controlling equipment.
+## Encode and decode
 
-For the details behind the format, the [official FTMS specification](https://www.bluetooth.com/specifications/specs/fitness-machine-service-1-0/) is the source to consult.
+Decoding means taking the bytes from a machine and turning them into useful values. Encoding turns values and commands back into FTMS bytes.
 
-## Reading a measurement
+Keeping both directions together matters. It makes the rules easier to share between software that reads FTMS data and software that creates it.
 
-A measurement can contain different values depending on what the machine reports. The decoder takes care of pulling the available values out of the raw data, so the calling code can work with something more familiar.
+## Shared rules, different languages
 
-```typescript
-import { parseFtmsIndoorBikeMeasurement } from '@deancochran/ftms'
+I am building shared, language-neutral rules and examples so independent implementations can agree on what the same bytes mean. That gives each project room to use its own language and Bluetooth stack.
 
-const measurement = parseFtmsIndoorBikeMeasurement(
-    Uint8Array.of(0x44, 0x00, 0xe8, 0x03, 0xb4, 0x00, 0xfa, 0x00)
-)
+This is especially useful outside Node. The C implementation can be used from C or C++ without bringing in a Node dependency. The app still owns the Bluetooth connection and decides when it is appropriate to send a control request.
 
-measurement.metrics.speedMps // about 2.78
-measurement.metrics.cadenceRpm // 90
-measurement.metrics.powerWatts // 250
-```
+## Where it is today
 
-In a real app, those values might update the ride screen, feed a workout record, or help drive another part of the experience. The package keeps the byte parsing in one place instead of making every caller repeat it.
+So far, I have implemented FTMS encoding and decoding in TypeScript and C. The TypeScript package is available on [npm](https://www.npmjs.com/package/@deancochran/ftms), although the newest bidirectional work is not released there yet. The C work is also an unreleased source candidate.
 
-## Building a control command
+Swift and Kotlin are future work. .NET and Python are longer-term possibilities. I am keeping the project focused on making the shared translation understandable and reusable as it grows.
 
-When an app needs to control a compatible machine, it can ask the package to build a command instead of assembling the bytes by hand.
-
-```typescript
-import { tryEncodeFtmsControlRequest } from '@deancochran/ftms'
-
-const encoded = tryEncodeFtmsControlRequest({
-    op: 'setTargetPower',
-    powerWatts: 250,
-})
-
-if (encoded.ok) {
-    console.log([...encoded.value]) // [0x05, 0xfa, 0x00]
-}
-```
-
-That result can be passed to the Bluetooth code in your app. Before it sends a command, the app needs control or permission from the machine. It should send one request at a time and wait for the machine's response before sending another. It also needs to check what the machine supports, make sure the request makes sense for the user, and handle the connection when anything goes wrong.
-
-## Keeping the boundary simple
-
-The package focuses on translating FTMS bytes to and from useful TypeScript values. Your app handles the Bluetooth connection and the decisions that come with using a real fitness machine. Keeping those jobs separate makes the code easier to understand and gives the app control where it matters.
+The [project README](https://github.com/deancochran/ftms#readme) has the current details. The goal is to let you use FTMS in the language that fits your project.
