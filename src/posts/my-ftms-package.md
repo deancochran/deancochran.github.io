@@ -33,7 +33,15 @@ This is especially useful outside Node. The C implementation can be used from C 
 
 ## Where it is today
 
-So far, I have implemented FTMS encoding and decoding in TypeScript and C. The TypeScript package is available on [npm](https://www.npmjs.com/package/@deancochran/ftms), although the newest bidirectional work is not released there yet. The C work is also an unreleased source candidate.
+So far, I have implemented FTMS encoding and decoding in TypeScript and C. The TypeScript package is available on [npm](https://www.npmjs.com/package/@deancochran/ftms), and the [C source release](https://github.com/deancochran/ftms/releases/tag/c-v0.2.0) is a C99 library that can also be used from C++.
+
+## Trying it with trainer data
+
+I also tried the decoders with [data captured from a Wahoo KICKR CORE](https://github.com/deancochran/ftms/blob/main/docs/equipment-results/2026-09-29-kickr-core-linux.md) on Linux. TypeScript and C produced matching results from the same measurements.
+
+So far, this test only covers reading data. I have not tested sending commands to the trainer or checked its readings against a separate reference. I am also improving how the package handles unexpected data.
+
+## What comes next
 
 Swift and Kotlin are future work. .NET and Python are longer-term possibilities. I am keeping the project focused on making the shared translation understandable and reusable as it grows.
 
