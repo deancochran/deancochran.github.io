@@ -3,46 +3,42 @@ title: 'My FTMS Package'
 slug: my-ftms-package
 date: '2026-07-30'
 image: /images/ftms-exercise-bikes.jpg
-description: 'Making FTMS easier to use across languages.'
+description: 'Open-source FTMS libraries for fitness apps, devices, and tools.'
 published: true
 ---
 
+I've put a lot of work into my FTMS project recently. It began as a TypeScript package. Now it includes libraries for several languages and a <a href="https://deancochran.github.io/ftms/" rel="external">documentation site</a> to make them easier to use.
+
+The point is straightforward: give fitness apps, devices, and tools a reusable way to work with FTMS without making every project start from packet parsing.
+
 ## What is FTMS?
 
-Fitness Machine Service, or FTMS, is a Bluetooth standard used by exercise equipment such as indoor bikes and cross trainers. It gives apps a common way to receive things like speed, cadence, and power from a machine.
+Fitness Machine Service, or FTMS, is a Bluetooth standard used by equipment such as indoor bikes, treadmills, and cross trainers. It gives software a common way to receive things like speed, cadence, power, and machine status.
 
-The Bluetooth part can still be fiddly. Machines send compact byte data, while an app usually wants useful values it can display or act on. My [FTMS project](https://github.com/deancochran/ftms) is about translating between those two worlds.
+The standard helps, but it does not remove all the work. Apps still need to turn compact data into useful values. They need to handle optional or missing values too. Repeating that work in every app is easy to get wrong and takes attention away from the actual product.
 
-## A bigger goal than one package
+That is why I am building this project as a set of focused libraries. A workout UI can use decoded measurements to update a ride screen. A firmware tool can inspect the same information. A simulator can create measurements for another application to read.
 
-I started with TypeScript, but I do not want FTMS support to depend on one language or one Bluetooth library. The same translation should be useful to an app, a native tool, or equipment and simulator software.
+## What the libraries handle
 
-For example, an app could use decoded measurements for a ride screen. A simulator could use the same rules to create measurements for another app to read.
+Decoding turns the data sent by a machine into values an application can use. Encoding does the reverse: it turns values or requests into FTMS data.
 
-## Encode and decode
+The libraries handle that translation. The application handles Bluetooth discovery and connections. It also owns decisions about safe control. That lets a project use the Bluetooth stack that fits its platform.
 
-Decoding means taking the bytes from a machine and turning them into useful values. Encoding turns values and commands back into FTMS bytes.
+## Libraries for the language you use
 
-Keeping both directions together matters. It makes the rules easier to share between software that reads FTMS data and software that creates it.
+Each implementation stands on its own. You do not need to install the other language versions. Shared examples and tests help them agree about the same data while fitting their own ecosystems.
 
-## Shared rules, different languages
+- <a href="https://deancochran.github.io/ftms/start/typescript/" rel="external">TypeScript and JavaScript</a> are available as an npm package for web and Node projects.
+- <a href="https://deancochran.github.io/ftms/start/c/" rel="external">C</a> is a portable C99 library that can also be used from C++.
+- <a href="https://deancochran.github.io/ftms/start/swift/" rel="external">Swift</a> is available through SwiftPM for native Apple projects.
+- <a href="https://deancochran.github.io/ftms/start/kotlin/" rel="external">Kotlin and Java</a> are available through Maven Central for Kotlin/JVM, Java, and Android work.
+- <a href="https://deancochran.github.io/ftms/start/python/" rel="external">Python</a> is a published partial alpha. Its API is still evolving. It does not yet include helpers for interpreting what a machine supports.
 
-I am building shared, language-neutral rules and examples so independent implementations can agree on what the same bytes mean. That gives each project room to use its own language and Bluetooth stack.
+## Documentation is part of the project
 
-This is especially useful outside Node. The C implementation can be used from C or C++ without bringing in a Node dependency. The app still owns the Bluetooth connection and decides when it is appropriate to send a control request.
+I've put time into the documentation as well as the code. Each language has a setup guide and examples. The <a href="https://deancochran.github.io/ftms/integration/cookbook/" rel="external">cookbook</a> helps choose APIs and includes task recipes. The <a href="https://deancochran.github.io/ftms/integration/transports/" rel="external">Bluetooth integration recipes</a> show how to use an existing stack.
 
-## Where it is today
+The <a href="https://deancochran.github.io/ftms/integration/troubleshooting/" rel="external">troubleshooting guide</a> covers common questions after installation. I want the documentation to be useful while someone is building, not just when they first download a package.
 
-So far, I have implemented FTMS encoding and decoding in TypeScript and C. The TypeScript package is available on [npm](https://www.npmjs.com/package/@deancochran/ftms), and the [C source release](https://github.com/deancochran/ftms/releases/tag/c-v0.2.0) is a C99 library that can also be used from C++.
-
-## Trying it with trainer data
-
-I also tried the decoders with [data captured from a Wahoo KICKR CORE](https://github.com/deancochran/ftms/blob/main/docs/equipment-results/2026-09-29-kickr-core-linux.md) on Linux. TypeScript and C produced matching results from the same measurements.
-
-So far, this test only covers reading data. I have not tested sending commands to the trainer or checked its readings against a separate reference. I am also improving how the package handles unexpected data.
-
-## What comes next
-
-Swift and Kotlin are future work. .NET and Python are longer-term possibilities. I am keeping the project focused on making the shared translation understandable and reusable as it grows.
-
-The [project README](https://github.com/deancochran/ftms#readme) has the current details. The goal is to let you use FTMS in the language that fits your project.
+Choose a language on the <a href="https://deancochran.github.io/ftms/" rel="external">FTMS documentation site</a> to get started. The [source project](https://github.com/deancochran/ftms) is open source under the MIT license.
