@@ -1,44 +1,58 @@
 ---
-title: 'My FTMS Package'
+title: 'My FTMS Libraries'
 slug: my-ftms-package
 date: '2026-07-30'
 image: /images/ftms-exercise-bikes.jpg
-description: 'Open-source FTMS libraries for fitness apps, devices, and tools.'
+description: 'Open-source FTMS protocol libraries for apps, firmware, and diagnostic tools.'
 published: true
 ---
 
-I've put a lot of work into my FTMS project recently. It began as a TypeScript package. Now it includes libraries for several languages and a <a href="https://deancochran.github.io/ftms/" rel="external">documentation site</a> to make them easier to use.
+What started as my TypeScript package has grown into nine independently distributed FTMS libraries, plus documentation for choosing and integrating them.
 
-The point is straightforward: give fitness apps, devices, and tools a reusable way to work with FTMS without making every project start from packet parsing.
+The goal is still modest: make the protocol work repeatable so an application can spend its effort on the workout screen, device tooling, or firmware around it.
 
-## What is FTMS?
+## FTMS is the protocol, not the whole application
 
-Fitness Machine Service, or FTMS, is a Bluetooth standard used by equipment such as indoor bikes, treadmills, and cross trainers. It gives software a common way to receive things like speed, cadence, power, and machine status.
+Fitness Machine Service (FTMS) is a Bluetooth service used by equipment such as indoor bikes, treadmills, rowers, and cross trainers. It carries measurements, feature declarations, supported ranges, statuses, and control messages.
 
-The standard helps, but it does not remove all the work. Apps still need to turn compact data into useful values. They need to handle optional or missing values too. Repeating that work in every app is easy to get wrong and takes attention away from the actual product.
+The library translates protocol messages into useful values and back again. The application handles the Bluetooth connection and subscriptions, then owns the command lifecycle. Encoding a command does not send it or authorize it; that decision stays with the application.
 
-That is why I am building this project as a set of focused libraries. A workout UI can use decoded measurements to update a ride screen. A firmware tool can inspect the same information. A simulator can create measurements for another application to read.
+## From bytes to a useful screen
 
-## What the libraries handle
+Here is the small, practical path I want these packages to make easier. An application receives an Indoor Bike Measurement notification from the Bluetooth layer:
 
-Decoding turns the data sent by a machine into values an application can use. Encoding does the reverse: it turns values or requests into FTMS data.
+`44 00 10 0e b4 00 fa 00`
 
-The libraries handle that translation. The application handles Bluetooth discovery and connections. It also owns decisions about safe control. That lets a project use the Bluetooth stack that fits its platform.
+The packet is an illustrative example, not a capture from a particular machine. A decoder turns it into a speed of 10 m/s, cadence of 90 rpm, and power of 250 W. A ride screen can render those values, while a logging tool can record them with the time and connection state supplied by its host application.
 
-## Libraries for the language you use
+Just as important, the packet does not contain heart rate. That should remain absent (`null` in a suitable high-level representation), not become zero. If the final byte is removed, the power value is truncated and should not silently become a fresh 250 W reading. The application can show an unavailable value, preserve an explicit diagnostic in a log, or wait for the next complete notification. It owns freshness; the library makes the wire-level condition visible.
 
-Each implementation stands on its own. You do not need to install the other language versions. Shared examples and tests help them agree about the same data while fitting their own ecosystems.
+Features and ranges can make an interface more honest, too. If discovery reports a supported power range of 0–500 W in 10 W increments, a UI could offer values on that grid instead of a free-form field. Missing, unread, or malformed information is different from “unsupported,” so the UI does not need to guess.
 
-- <a href="https://deancochran.github.io/ftms/start/typescript/" rel="external">TypeScript and JavaScript</a> are available as an npm package for web and Node projects.
-- <a href="https://deancochran.github.io/ftms/start/c/" rel="external">C</a> is a portable C99 library that can also be used from C++.
-- <a href="https://deancochran.github.io/ftms/start/swift/" rel="external">Swift</a> is available through SwiftPM for native Apple projects.
-- <a href="https://deancochran.github.io/ftms/start/kotlin/" rel="external">Kotlin and Java</a> are available through Maven Central for Kotlin/JVM, Java, and Android work.
-- <a href="https://deancochran.github.io/ftms/start/python/" rel="external">Python</a> is a published partial alpha. Its API is still evolving. It does not yet include helpers for interpreting what a machine supports.
+For protocol tooling, the reverse direction is useful as well: an example 250 W request encodes as `05 fa 00`, and the synthetic response `80 05 01` decodes as success. Those example bytes can drive a simulator, fixture, or parser test without needing equipment connected.
 
-## Documentation is part of the project
+## Useful places to start
 
-I've put time into the documentation as well as the code. Each language has a setup guide and examples. The <a href="https://deancochran.github.io/ftms/integration/cookbook/" rel="external">cookbook</a> helps choose APIs and includes task recipes. The <a href="https://deancochran.github.io/ftms/integration/transports/" rel="external">Bluetooth integration recipes</a> show how to use an existing stack.
+- A custom workout dashboard can use decoded notifications for the same ride screen on a web or phone application, while its host platform handles Bluetooth.
+- An offline packet analyzer can replay saved notifications to investigate a bug or validate a UI change without needing a bike for every run.
+- A simulator or equipment-side tool can encode measurements and control responses for another application to consume.
 
-The <a href="https://deancochran.github.io/ftms/integration/troubleshooting/" rel="external">troubleshooting guide</a> covers common questions after installation. I want the documentation to be useful while someone is building, not just when they first download a package.
+## Nine ports, different practical homes
 
-Choose a language on the <a href="https://deancochran.github.io/ftms/" rel="external">FTMS documentation site</a> to get started. The [source project](https://github.com/deancochran/ftms) is open source under the MIT license.
+The implementations share protocol fixtures and concepts, but each belongs in its own ecosystem. This release snapshot is current as of September 30, 2026.
+
+- **TypeScript and JavaScript:** <a href="https://deancochran.github.io/ftms/start/typescript/" rel="external"><code>@deancochran/ftms</code> 0.4.0</a> on npm fits a web, Node, or Electron application that already has a Bluetooth transport and needs decoded measurements for a dashboard or session log.
+- **C and C++:** the <a href="https://deancochran.github.io/ftms/start/c/" rel="external">C99 <code>c-v0.2.0</code> source archive</a> is useful where a small native library belongs near firmware, an embedded integration, or a C/C++ diagnostic client. C++ can consume the C interface rather than requiring a separate C++ port.
+- **Swift:** the <a href="https://deancochran.github.io/ftms/start/swift/" rel="external">tag-pinned SwiftPM <code>swift-v0.1.0</code> release</a> gives an Apple-native project protocol values while CoreBluetooth and app lifecycle remain outside the library.
+- **Kotlin and Java:** <a href="https://deancochran.github.io/ftms/start/kotlin/" rel="external"><code>io.github.deancochran:ftms:0.1.0</code></a> is a Maven Central JVM library for Kotlin, Java, and Android-oriented work.
+- **Python:** <a href="https://deancochran.github.io/ftms/start/python/" rel="external"><code>deancochran-ftms</code> 0.1.0a2</a> is an evolving PyPI alpha. It can decode and encode messages, inspect ranges, and interpret declared features and ranges, which is useful for an exploratory decoder or analysis script.
+- **Rust:** <a href="https://deancochran.github.io/ftms/start/rust/" rel="external"><code>ftms</code> 0.1.0</a> is published on crates.io. The released, allocation-free <code>no_std</code> library works with raw wire values, range inspection, feature interpretation, display-ready feature and measurement values, and bounded record assembly—useful building blocks for an embedded or protocol-focused tool. Later display-ready range, control, and status views are not part of that release.
+- **Dart and Flutter:** <a href="https://pub.dev/packages/deancochran_ftms/versions/0.1.0" rel="external"><code>deancochran_ftms</code> 0.1.0</a> on pub.dev can sit behind a Flutter interface, converting transport notifications into values a mobile screen or local workout history can use.
+- **Go:** <a href="https://pkg.go.dev/github.com/deancochran/ftms/packages/go@v0.1.0" rel="external"><code>github.com/deancochran/ftms/packages/go</code> v0.1.0</a> is available through the Go module proxy for a command-line decoder, protocol replay tool, or service-side ingestion experiment. It includes raw codecs, range inspection, and feature interpretation; display-ready measurement views are not released.
+- **C# and .NET:** <a href="https://www.nuget.org/packages/DeanCochran.Ftms/0.1.0-alpha.1" rel="external"><code>DeanCochran.Ftms</code> 0.1.0-alpha.1</a> is a NuGet prerelease for a .NET desktop diagnostic or integration tool. It includes wire codecs, range inspection, feature evidence, and display-ready views, but not record assembly or a Bluetooth implementation.
+
+## Start with the released package you can use
+
+The <a href="https://deancochran.github.io/ftms/project/releases/" rel="external">release matrix</a> is the current record of package versions and what each release includes. Start with the <a href="https://deancochran.github.io/ftms/start/typescript/" rel="external">TypeScript quickstart</a> for the shortest runnable measurement example, or open the linked package for the language that fits your project.
+
+After that, the <a href="https://deancochran.github.io/ftms/integration/cookbook/" rel="external">integration cookbook</a> walks through measurements, capabilities, ranges, diagnostics, and control messages without requiring Bluetooth hardware. The <a href="https://github.com/deancochran/ftms" rel="external">source project</a> is open source under the MIT license.
