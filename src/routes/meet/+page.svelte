@@ -8,7 +8,7 @@
     title="Book a 1:1 with Dean Cochran"
     description="Choose a time for a 30-minute one-on-one meeting with Dean Cochran."
     path={page.url.pathname}
-    image="/images/logo.webp"
+    image="/images/dean-cochran-headshot-social.png"
 />
 
 <div class="mx-auto flex w-full max-w-4xl flex-col gap-8">

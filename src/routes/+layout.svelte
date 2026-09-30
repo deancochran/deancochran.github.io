@@ -77,9 +77,9 @@
             <a
                 href="/"
                 class="flex items-center gap-2 font-semibold tracking-tight"
-                aria-label="Dean's List home"
+                aria-label="Dean Cochran's home"
             >
-                <Avatar size={32} loading="eager" fetchpriority="high" />
+                <Avatar size={32} />
                 <span class="hidden sm:inline">Dean's List</span>
             </a>
 
@@ -182,7 +182,14 @@
         <div
             class="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10"
         >
-            <span class="text-sm font-medium">Dean's List</span>
+            <a
+                href="/"
+                class="flex items-center gap-2 self-start text-sm font-medium sm:self-auto"
+                aria-label="Dean Cochran's home"
+            >
+                <Avatar size={28} />
+                <span>Dean's List</span>
+            </a>
             <nav class="flex items-center gap-1" aria-label="Social links">
                 <a
                     class="ui-button ui-icon-button border-transparent shadow-none"

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <rect width="512" height="512" rx="102" fill="#171717" />
+    <text
+        x="261"
+        y="369"
+        fill="#ffffff"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="370"
+        font-weight="700"
+        text-anchor="middle"
+    ><tspan>D</tspan><tspan dx="0.015em">.</tspan></text>
+</svg>
