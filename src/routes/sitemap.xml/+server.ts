@@ -4,7 +4,7 @@ import { escapeXml } from '$lib/utils/xml'
 
 export const prerender = true
 
-const staticPages = ['/', '/about', '/blog']
+const staticPages = ['/', '/about', '/blog', '/meet']
 
 export const GET = async () => {
     const posts = (await getPosts())

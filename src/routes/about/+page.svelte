@@ -56,5 +56,10 @@
                 href="https://buymeacoffee.com/deancochran">here</a
             >.
         </p>
+
+        <p>
+            Prefer to talk? <a href="/meet">Book a 1:1</a> at a time that works for
+            you.
+        </p>
     </article>
 </div>

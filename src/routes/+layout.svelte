@@ -80,7 +80,7 @@
                 aria-label="Dean's List home"
             >
                 <Logo class="h-7 w-7" />
-                <span>Dean's List</span>
+                <span class="hidden sm:inline">Dean's List</span>
             </a>
 
             <nav
@@ -102,6 +102,14 @@
                     aria-current={data.pathname.startsWith('/blog')
                         ? 'page'
                         : undefined}>Blog</a
+                >
+                <a
+                    class:nav-active={data.pathname === '/meet'}
+                    class="ui-button border-transparent px-2 shadow-none sm:px-3.5"
+                    href="/meet"
+                    aria-current={data.pathname === '/meet'
+                        ? 'page'
+                        : undefined}>Book a 1:1</a
                 >
                 <button
                     class="ui-button ui-icon-button ml-1"
