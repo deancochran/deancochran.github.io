@@ -1,6 +1,6 @@
 <script>
     import { page } from '$app/state'
-    import Logo from '$lib/assets/Logo.svelte'
+    import aboutPortrait from '$lib/assets/dean-cochran-about.jpeg?enhanced&format=avif;webp&w=1600;1200;900;640;480'
     import Seo from '$lib/components/Seo.svelte'
 </script>
 
@@ -8,27 +8,40 @@
     title="About Dean Cochran"
     description="About Dean Cochran, a full-stack software engineer working across data science, machine learning, and cloud computing"
     path={page.url.pathname}
-    image="/images/logo.webp"
+    image={aboutPortrait.img.src}
     type="profile"
 />
 
 <!-- Main -->
 <div class="flex flex-col gap-8">
-    <header
-        class="flex items-center gap-5 border-b border-[var(--border)] pb-8"
-    >
-        <div
-            class="grid h-20 w-20 shrink-0 place-items-center rounded-[var(--radius)] border border-[var(--border)] bg-[var(--muted)]"
-        >
-            <Logo class="h-14 w-14" />
-        </div>
-        <div class="space-y-2">
-            <h1 class="page-title">About</h1>
-            <p class="ui-muted">
-                Full-stack software engineer and lifelong learner.
-            </p>
-        </div>
+    <header class="space-y-2 border-b border-[var(--border)] pb-8">
+        <h1 class="page-title">About</h1>
+        <p class="ui-muted">
+            Full-stack software engineer and lifelong learner.
+        </p>
     </header>
+
+    <figure>
+        <picture>
+            {#each Object.entries(aboutPortrait.sources) as [format, srcset]}
+                <source
+                    {srcset}
+                    sizes="(min-width: 1152px) 1072px, (min-width: 1024px) calc(100vw - 80px), (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)"
+                    type={`image/${format}`}
+                />
+            {/each}
+            <img
+                src={aboutPortrait.img.src}
+                width={aboutPortrait.img.w}
+                height={aboutPortrait.img.h}
+                alt="Dean Cochran in a blue suit and yellow tie"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                class="w-full rounded-[var(--radius)] border border-[var(--border)]"
+            />
+        </picture>
+    </figure>
 
     <article class="prose !max-w-none">
         <p>

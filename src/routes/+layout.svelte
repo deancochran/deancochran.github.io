@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onNavigate } from '$app/navigation'
     import BmcLogo from '$lib/assets/bmc-logo.svelte'
-    import Logo from '$lib/assets/Logo.svelte'
+    import Avatar from '$lib/components/Avatar.svelte'
     import {
         GithubIcon,
         Linkedin,
@@ -79,7 +79,7 @@
                 class="flex items-center gap-2 font-semibold tracking-tight"
                 aria-label="Dean's List home"
             >
-                <Logo class="h-7 w-7" />
+                <Avatar size={32} loading="eager" fetchpriority="high" />
                 <span class="hidden sm:inline">Dean's List</span>
             </a>
 
@@ -182,10 +182,7 @@
         <div
             class="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10"
         >
-            <div class="flex items-center gap-2 text-sm font-medium">
-                <Logo class="h-6 w-6" />
-                <span>Dean's List</span>
-            </div>
+            <span class="text-sm font-medium">Dean's List</span>
             <nav class="flex items-center gap-1" aria-label="Social links">
                 <a
                     class="ui-button ui-icon-button border-transparent shadow-none"

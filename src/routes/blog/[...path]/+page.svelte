@@ -1,5 +1,6 @@
 <script lang="ts">
     import { page } from '$app/state'
+    import Avatar from '$lib/components/Avatar.svelte'
     import Comments from '$lib/components/Comments.svelte'
     import Newsletter from '$lib/components/Newsletter.svelte'
     import PostImage from '$lib/components/PostImage.svelte'
@@ -34,11 +35,7 @@
         </h1>
         <div class="flex items-center gap-3">
             <a href="/about" aria-label="About Dean Cochran">
-                <img
-                    src="/images/headshot.webp"
-                    alt=""
-                    class="h-10 w-10 rounded-full border border-[var(--border)] object-cover"
-                />
+                <Avatar size={40} />
             </a>
             <div class="text-sm leading-5">
                 <a class="font-medium hover:underline" href="/about"
